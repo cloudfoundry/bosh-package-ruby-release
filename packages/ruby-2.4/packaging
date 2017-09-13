@@ -7,7 +7,7 @@ RUBYGEMS_VERSION=2.6.4
 BUNDLER_VERSION=1.15.3
 LIBYAML_VERSION=0.1.7
 
-tar xzf "ruby/yaml-${LIBYAML_VERSION}.tar.gz"
+tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
 (
   set -e
   cd "yaml-${LIBYAML_VERSION}"
@@ -21,7 +21,7 @@ tar xzf "ruby/yaml-${LIBYAML_VERSION}.tar.gz"
   make install
 )
 
-tar xzf "ruby/ruby-${RUBY_VERSION}.tar.gz"
+tar xzf "ruby-${RUBY_VERSION}.tar.gz"
 (
   set -e
   cd "ruby-${RUBY_VERSION}"
@@ -35,7 +35,7 @@ tar xzf "ruby/ruby-${RUBY_VERSION}.tar.gz"
   make install
 )
 
-tar zxvf "ruby/rubygems-${RUBYGEMS_VERSION}.tgz"
+tar zxvf "rubygems-${RUBYGEMS_VERSION}.tgz"
 (
   set -e
   cd "rubygems-${RUBYGEMS_VERSION}"
@@ -48,7 +48,7 @@ tar zxvf "ruby/rubygems-${RUBYGEMS_VERSION}.tgz"
   fi
 )
 
-${BOSH_INSTALL_TARGET}/bin/gem install "ruby/bundler-${BUNDLER_VERSION}.gem" --local --no-ri --no-rdoc
+${BOSH_INSTALL_TARGET}/bin/gem install "bundler-${BUNDLER_VERSION}.gem" --local --no-ri --no-rdoc
 
 mkdir ${BOSH_INSTALL_TARGET}/bosh
 cp compile.env ${BOSH_INSTALL_TARGET}/bosh/compile.env
