@@ -7,3 +7,5 @@ files:
 - yaml-0.1.7.tar.gz
 - compile.env
 - runtime.env
+- config/config.guess
+- config/config.sub
