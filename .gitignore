@@ -1,2 +1,15 @@
+*#
+*.swp
+*~
+.DS_Store
+
+# BOSH
+.dev_builds
+.final_builds/jobs/**/*.tgz
+.final_builds/packages/**/*.tgz
+.idea
+blobs/
 config/private.yml
-blobs/*
+dev_releases/
+releases/**/*.tgz
+releases/*.tgz
