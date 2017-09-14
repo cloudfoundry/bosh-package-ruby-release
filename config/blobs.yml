@@ -2,10 +2,10 @@ bundler-1.15.3.gem:
   size: 336384
   object_id: 8fbd5273-3886-430e-48ba-3d08cf702568
   sha: bd1e1ba80789ea013a11a2909a154dcee118ebbc
-ruby-2.4.1.tar.gz:
-  size: 14174752
-  object_id: bdac079d-a429-4fcc-5558-32b4d645b9ab
-  sha: 47909a0f77ea900573f027d27746960ad6d07d15
+ruby-2.4.2.tar.gz:
+  size: 14187859
+  object_id: 6304ad17-3615-438a-5127-ca37407ec6cf
+  sha: b096124469e31e4fc3d00d2b61b11d36992e6bbd
 rubygems-2.6.4.tgz:
   size: 478582
   object_id: 4b373ed9-21e6-4726-599f-dd3cbc04aa2c
