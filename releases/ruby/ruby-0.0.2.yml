@@ -1,0 +1,10 @@
+name: ruby
+version: 0.0.2
+commit_hash: c2a4f3d
+uncommitted_changes: false
+packages:
+- name: ruby-2.4
+  version: 25e9f7481fac6b13607dbc5180db46a652e43ec7
+  fingerprint: 25e9f7481fac6b13607dbc5180db46a652e43ec7
+  sha1: a64376d326390ebab8d6fbaf035309d47836f4ce
+  dependencies: []
