@@ -19,6 +19,7 @@ them yourself (DRY).
 The above code will add `ruby-2.4` to `magic-release` and introduce a `spec.lock`.
 Blobs will also be uploaded for you.
 
+#### Depedency hooks
 You can now declare packages to depend on `ruby-2.4`; you can use dependency hooks:
 
 ... in a `packaging` script
@@ -39,4 +40,4 @@ This will put `ruby`, `bundler`, `gem` on the PATH for those consuming scripts.
 
 ### Repository Examples
 
-- (BOSH Director)[https://github.com/cloudfoundry/bosh]
+- [BOSH Director](https://github.com/cloudfoundry/bosh)
