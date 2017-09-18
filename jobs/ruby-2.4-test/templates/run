@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -eux
+
+echo "Testing runtime compability"
+source /var/vcap/packages/ruby-2.4/bosh/runtime.env
+ruby -e 'puts "test"'
+
+echo "Testing compile compability"
+source /var/vcap/packages/ruby-2.4-test/bosh/runtime.env
+cd /var/vcap/packages/ruby-2.4-test/
+bundle exec thin start &
+sleep 3
+curl http://localhost:3000 | grep test
+kill -9 $!
