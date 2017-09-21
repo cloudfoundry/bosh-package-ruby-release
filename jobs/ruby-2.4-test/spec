@@ -3,6 +3,7 @@ name: ruby-2.4-test
 
 templates:
   run: bin/run
+  cpi: bin/cpi
 
 packages:
 - ruby-2.4
