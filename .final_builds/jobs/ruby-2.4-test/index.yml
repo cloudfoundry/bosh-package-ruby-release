@@ -1,4 +1,8 @@
 builds:
+  cfd3346c1c816c811ff088e43f918bc05ea400d7:
+    version: cfd3346c1c816c811ff088e43f918bc05ea400d7
+    blobstore_id: 82998f0f-ce44-48d1-721e-0b099309174b
+    sha1: 3fa730a355fdd065655d367be67492c42a6e4a12
   dac046a5565fcb1a59cb5b4a3e9c25f18c3318a9:
     version: dac046a5565fcb1a59cb5b4a3e9c25f18c3318a9
     blobstore_id: 8a564e94-fc94-4117-45c0-28ecd21ea4f4
