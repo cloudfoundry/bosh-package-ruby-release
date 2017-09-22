@@ -1,0 +1,47 @@
+---
+name: complete-cpi
+cloud_provider:
+  properties: {}
+  template:
+    name: ruby-2.4-test
+    release: ruby-release
+
+releases:
+- name: ruby-release
+  url: file://release.tgz
+
+networks:
+- name: default
+  subnets:
+  - cloud_properties: {}
+    dns: []
+    gateway: 192.168.0.1
+    range: 192.168.0.0/24
+    static: []
+  type: manual
+
+instance_groups:
+- instances: 1
+  name: dummy
+  resource_pool: vms
+  networks:
+  - name: default
+    static_ips: []
+  jobs: []
+
+resource_pools:
+- cloud_properties:
+    cpu: 2
+    disk: 40000
+    ram: 4096
+  name: vms
+  network: default
+  stemcell:
+    sha1: e978f09e8e706fbdd8083c52ecd382efad921071
+    url: https://bosh.io/d/stemcells/bosh-aws-xen-hvm-ubuntu-trusty-go_agent?v=3445.11
+
+update:
+  canaries: 1
+  max_in_flight: 1
+  canary_watch_time: 5000-60000
+  update_watch_time: 5000-60000
