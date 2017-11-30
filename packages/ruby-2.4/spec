@@ -3,8 +3,7 @@ name: ruby-2.4
 
 files:
 - ruby-2.4.2.tar.gz
-- rubygems-2.6.4.tgz
-- bundler-1.15.3.gem
+- rubygems-2.7.3.tgz
 - yaml-0.1.7.tar.gz
 - compile.env
 - runtime.env
