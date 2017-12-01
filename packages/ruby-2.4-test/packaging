@@ -3,11 +3,11 @@ set -eux
 PLATFORM=`uname | tr '[:upper:]' '[:lower:]'`
 
 if [[ "$PLATFORM" == "darwin" ]]; then
-  ${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4/bin/gem install nokogiri
+  ${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r3/bin/gem install nokogiri
   exit 0
 fi
 
-source /var/vcap/packages/ruby-2.4/bosh/compile.env
+source /var/vcap/packages/ruby-2.4-r3/bosh/compile.env
 
 cat >${BOSH_INSTALL_TARGET}/config.ru <<EOF
 require_relative 'myapp'

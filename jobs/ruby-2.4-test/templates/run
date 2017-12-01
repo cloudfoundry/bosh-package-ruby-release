@@ -5,7 +5,7 @@ set -eux
 ASSERT_GEM_VERSION=2.7.3
 
 echo "Testing runtime compability"
-source /var/vcap/packages/ruby-2.4/bosh/runtime.env
+source /var/vcap/packages/ruby-2.4-r3/bosh/runtime.env
 ruby -e 'puts "test"'
 
 echo "Testing compile compability"
