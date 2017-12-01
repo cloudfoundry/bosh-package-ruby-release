@@ -1,0 +1,25 @@
+name: ruby
+version: 0.0.5
+commit_hash: 83a2692
+uncommitted_changes: false
+jobs:
+- name: ruby-2.4-test
+  version: cc70b0cf952424fcf16b5109eca5926cc65113f9
+  fingerprint: cc70b0cf952424fcf16b5109eca5926cc65113f9
+  sha1: 1e9f62d9964a500504b4c5c0abf3773e1f4931cf
+packages:
+- name: ruby-2.4-r3
+  version: 8471dec5da9ecc321686b8990a5ad2cc84529254
+  fingerprint: 8471dec5da9ecc321686b8990a5ad2cc84529254
+  sha1: 69575334d0a4a9a0cb963479b0c7c83a017b04e9
+  dependencies: []
+- name: ruby-2.4-test
+  version: 390c0a5453b39df01d536a82ec3ea9dcb1f5e39d
+  fingerprint: 390c0a5453b39df01d536a82ec3ea9dcb1f5e39d
+  sha1: 2d5c8eb1884fec011a43014c8f524020dfd2003c
+  dependencies:
+  - ruby-2.4-r3
+license:
+  version: 6dab264847ea891bf06ea3102ca95e982b9b4d61
+  fingerprint: 6dab264847ea891bf06ea3102ca95e982b9b4d61
+  sha1: 9b38d02a08c61a206bc590592ebb9a6a21a36346
