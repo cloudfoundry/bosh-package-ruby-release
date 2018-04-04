@@ -3,6 +3,7 @@
 set -e
 
 RUBY_VERSION=2.4.2
+RUBY_MINOR_VERSION=2.4
 RUBYGEMS_VERSION=2.7.3
 LIBYAML_VERSION=0.1.7
 
@@ -56,5 +57,5 @@ tar zxvf "rubygems-${RUBYGEMS_VERSION}.tgz"
 )
 
 mkdir ${BOSH_INSTALL_TARGET}/bosh
-cp compile.env ${BOSH_INSTALL_TARGET}/bosh/compile.env
-cp runtime.env ${BOSH_INSTALL_TARGET}/bosh/runtime.env
+cp ${RUBY_MINOR_VERSION}/compile.env ${BOSH_INSTALL_TARGET}/bosh/compile.env
+cp ${RUBY_MINOR_VERSION}/runtime.env ${BOSH_INSTALL_TARGET}/bosh/runtime.env
