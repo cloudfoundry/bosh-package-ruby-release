@@ -15,7 +15,6 @@ Included packages:
 - ruby-2.4-r3 which includes:
   - ruby-2.4.2
   - yaml-0.1.7
-  - bundler-1.15.3
   - rubygems-2.6.4
 
 Included functions in `compile.env`:
