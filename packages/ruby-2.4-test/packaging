@@ -1,24 +1,27 @@
+#!/bin/bash
+
 set -eux
 
-PLATFORM=`uname | tr '[:upper:]' '[:lower:]'`
+PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 
-if [[ "$PLATFORM" == "darwin" ]]; then
-  ${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r3/bin/gem install nokogiri
+if [[ "${PLATFORM}" == "darwin" ]]; then
+  "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.4-r3/bin/gem" install nokogiri
   exit 0
 fi
 
+# shellcheck disable=1091
 source /var/vcap/packages/ruby-2.4-r3/bosh/compile.env
 
-cat >${BOSH_INSTALL_TARGET}/config.ru <<EOF
+cat > "${BOSH_INSTALL_TARGET}/config.ru" <<EOF
 require_relative 'myapp'
 run Myapp
 EOF
 
-cat >${BOSH_INSTALL_TARGET}/myapp.rb <<EOF
+cat > "${BOSH_INSTALL_TARGET}/myapp.rb" <<EOF
 Myapp = lambda { |env| [200, {}, 'test'] }
 EOF
 
-cat >Gemfile <<EOF
+cat > Gemfile <<EOF
 source 'https://rubygems.org'
 gem 'thin'
 EOF
