@@ -3,8 +3,7 @@ name: test
 
 releases:
 - name: ruby
-  version: create
-  url: file://.
+  version: latest
 
 stemcells:
 - alias: default

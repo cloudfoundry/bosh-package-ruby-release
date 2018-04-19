@@ -45,4 +45,4 @@ See [packages/ruby-2.4-test](packages/ruby-2.4-test) and [jobs/ruby-2.4-test](jo
 
 ## Development
 
-To run tests `cd tests/ && BOSH_ENVIRONMENT=vbox ./run.sh`
+To run tests `BOSH_ENVIRONMENT=vbox ./tests/run.sh`
