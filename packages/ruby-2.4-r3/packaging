@@ -6,9 +6,9 @@ RUBY_VERSION=2.4.2
 RUBYGEMS_VERSION=2.7.3
 LIBYAML_VERSION=0.1.7
 
-openssl_version=`PATH=/usr/local/opt/openssl/bin:$PATH openssl version`
-openssl_major_version=`echo $openssl_version | cut -f2 -d\ | cut -f1 -d.`
-if [ $openssl_major_version == 0 ]; then
+openssl_version=$(PATH=/usr/local/opt/openssl/bin:${PATH} openssl version)
+openssl_major_version=$(echo "${openssl_version}" | cut -f2 -d\ | cut -f1 -d.)
+if [ "${openssl_major_version}" == 0 ]; then
   echo "OpenSSL version 1 or greater is required."
   echo "Currently available: ${openssl_version}"
   exit 1
@@ -19,11 +19,11 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
   set -e
   cd "yaml-${LIBYAML_VERSION}"
 
-  if [ "`uname -m`" == "ppc64le" ]; then
-    cp ${BOSH_COMPILE_TARGET}/config/config.{guess,sub} ./tool
+  if [ "$(uname -m)" == "ppc64le" ]; then
+    cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
   fi
 
-  CFLAGS='-fPIC' ./configure --prefix=${BOSH_INSTALL_TARGET} --disable-shared
+  CFLAGS='-fPIC' ./configure --prefix="${BOSH_INSTALL_TARGET}" --disable-shared
   make
   make install
 )
@@ -33,11 +33,11 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
   set -e
   cd "ruby-${RUBY_VERSION}"
 
-  if [ "`uname -m`" == "ppc64le" ]; then
-    cp ${BOSH_COMPILE_TARGET}/config/config.{guess,sub} ./tool
+  if [ "$(uname -m)" == "ppc64le" ]; then
+    cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
   fi
 
-  LDFLAGS="-Wl,-rpath -Wl,${BOSH_INSTALL_TARGET}" CFLAGS='-fPIC' ./configure --prefix=${BOSH_INSTALL_TARGET} --disable-install-doc --with-opt-dir=/usr/local/opt/openssl:${BOSH_INSTALL_TARGET} --without-gmp
+  LDFLAGS="-Wl,-rpath -Wl,${BOSH_INSTALL_TARGET}" CFLAGS='-fPIC' ./configure --prefix="${BOSH_INSTALL_TARGET}" --disable-install-doc --with-opt-dir="/usr/local/opt/openssl:${BOSH_INSTALL_TARGET}" --without-gmp
   make
   make install
 )
@@ -47,14 +47,12 @@ tar zxvf "rubygems-${RUBYGEMS_VERSION}.tgz"
   set -e
   cd "rubygems-${RUBYGEMS_VERSION}"
 
-  ${BOSH_INSTALL_TARGET}/bin/ruby setup.rb --no-ri --no-rdoc
-
-  if [[ $? != 0 ]] ; then
+  if ! "${BOSH_INSTALL_TARGET}/bin/ruby" setup.rb --no-ri --no-rdoc; then
     echo "Cannot install rubygems"
     exit 1
   fi
 )
 
-mkdir ${BOSH_INSTALL_TARGET}/bosh
-cp compile.env ${BOSH_INSTALL_TARGET}/bosh/compile.env
-cp runtime.env ${BOSH_INSTALL_TARGET}/bosh/runtime.env
+mkdir "${BOSH_INSTALL_TARGET}/bosh"
+cp compile.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+cp runtime.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
