@@ -5,17 +5,17 @@ To vendor ruby package into your release, run:
 ```
 $ git clone https://github.com/bosh-packages/ruby-release
 $ cd ~/workspace/your-release
-$ bosh vendor-package ruby-2.4-r3 ~/workspace/ruby-release
+$ bosh vendor-package ruby-2.4-r4 ~/workspace/ruby-release
 ```
 
-The above code will add `ruby-2.4-r3` to `your-release` and introduce a `spec.lock`.
+The above code will add `ruby-2.4-r4` to `your-release` and introduce a `spec.lock`.
 
 Included packages:
 
-- ruby-2.4-r3 which includes:
-  - ruby-2.4.2
+- ruby-2.4-r4 which includes:
+  - ruby-2.4.4
   - yaml-0.1.7
-  - rubygems-2.6.4
+  - rubygems-2.7.6
 
 Included functions in `compile.env`:
 
@@ -26,7 +26,7 @@ To use `ruby-*` package for compilation in your packaging script:
 
 ```bash
 #!/bin/bash -eu
-source /var/vcap/packages/ruby-2.4-r3/bosh/compile.env
+source /var/vcap/packages/ruby-2.4-r4/bosh/compile.env
 ...
 bosh_bundle
 bosh_generate_runtime_env
@@ -36,7 +36,7 @@ To use `ruby-*` package at runtime in your job scripts:
 
 ```bash
 #!/bin/bash -eu
-source /var/vcap/packages/ruby-2.4-r3/bosh/runtime.env
+source /var/vcap/packages/ruby-2.4-r4/bosh/runtime.env
 source /var/vcap/packages/your-package/bosh/runtime.env
 bundle exec ...
 ```

@@ -2,6 +2,6 @@
 name: ruby-2.4-test
 
 dependencies:
-- ruby-2.4-r3
+- ruby-2.4-r4
 
 files: []
