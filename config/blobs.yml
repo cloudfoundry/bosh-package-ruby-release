@@ -1,11 +1,11 @@
-ruby-2.4.4.tar.gz:
-  size: 14225338
-  object_id: e2792eb0-7d14-4fcf-52ed-2ec93191f1ed
-  sha: ec82b0d53bd0adad9b19e6b45e44d54e9ec3f10c
-rubygems-2.7.6.tgz:
-  size: 852486
-  object_id: 0ed98149-e2d9-4119-5185-e0be399d5584
-  sha: 72a14791b96cc05a79d2a649fe7170fd1faf3e0a
+ruby-2.4.5.tar.gz:
+  size: 14232887
+  object_id: 9cc0ae62-6f0a-4447-57f7-25ae0f05403a
+  sha: 4d650f302f1ec00256450b112bb023644b6ab6dd
+rubygems-2.7.8.tgz:
+  size: 920781
+  object_id: 6c7c84d2-67e3-461e-5e93-562c658ce707
+  sha: c2c10ec3305bd82eb12960dbcb5de3d5cd69e636
 yaml-0.1.7.tar.gz:
   size: 527518
   object_id: b327fbb6-37bd-4f57-7a9b-42bf7fd79473
