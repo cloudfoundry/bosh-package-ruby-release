@@ -1,0 +1,15 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: ansd/main-bosh-docker-build-essential
+
+inputs:
+- name: bosh-src
+- name: ruby-release
+- name: stemcell
+
+run:
+  path: ruby-release/ci/tasks/test.sh

@@ -30,7 +30,7 @@ networks:
 
 compilation:
   workers: 2
-  reuse_compilation_vms: true
   az: z1
   vm_type: default
   network: default
+  reuse_compilation_vms: true

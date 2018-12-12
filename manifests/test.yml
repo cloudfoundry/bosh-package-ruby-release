@@ -2,12 +2,12 @@
 name: test
 
 releases:
-- name: ruby
+- name: ruby-release
   version: latest
 
 stemcells:
 - alias: default
-  os: ubuntu-trusty
+  os: ubuntu-xenial
   version: latest
 
 update:
@@ -17,12 +17,12 @@ update:
   update_watch_time: 5000-60000
 
 instance_groups:
-- name: ruby-2.4-test
+- name: ruby-2.4
   azs: [z1]
   instances: 1
   jobs:
   - name: ruby-2.4-test
-    release: ruby
+    release: ruby-release
     properties: {}
   vm_type: default
   stemcell: default
