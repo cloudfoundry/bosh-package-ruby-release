@@ -12,19 +12,7 @@ if [[ "${PLATFORM}" == "darwin" ]]; then
   exit 0
 fi
 
-cat > "${BOSH_INSTALL_TARGET}/config.ru" <<EOF
-require_relative 'myapp'
-run Myapp
-EOF
+cp -r ./test-app/. "${BOSH_INSTALL_TARGET}/"
 
-cat > "${BOSH_INSTALL_TARGET}/myapp.rb" <<EOF
-Myapp = lambda { |env| [200, {}, 'test'] }
-EOF
-
-cat > Gemfile <<EOF
-source 'https://rubygems.org'
-gem 'thin'
-EOF
-
-bosh_bundle_local
+bosh_bundle_local --gemfile="${BOSH_INSTALL_TARGET}/Gemfile"
 bosh_generate_runtime_env

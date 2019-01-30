@@ -4,4 +4,5 @@ name: ruby-2.4-test
 dependencies:
 - ruby-2.4-r5
 
-files: []
+files:
+- test-app/**/*
