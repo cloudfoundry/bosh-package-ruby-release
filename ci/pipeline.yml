@@ -18,7 +18,7 @@ jobs:
   serial: true
   plan:
   - aggregate:
-    - get: ruby
+    - get: ruby-2.4
       trigger: true
     - get: rubygems
       trigger: true
@@ -134,7 +134,7 @@ resources:
        ]
       }'
 
-- name: ruby
+- name: ruby-2.4
   type: dynamic-metalink
   tags: ((worker_tags))
   source:

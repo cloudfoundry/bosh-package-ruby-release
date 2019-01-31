@@ -7,7 +7,7 @@ image_resource:
     repository: ansd/main-bosh-docker-build-essential
 
 inputs:
-- name: ruby
+- name: ruby-2.4
 - name: rubygems
 - name: yaml
 - name: ruby-release
