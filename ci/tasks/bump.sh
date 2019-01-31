@@ -11,9 +11,9 @@ source "${BASE_DIR}/bump-helpers.sh"
 
 function main() {
   declare -a versions=(
-    "ruby-2.4"
-    "rubygems-2.7"
-    "yaml-0.1"
+    "ruby-${RUBY_VERSION}"
+    "rubygems-${RUBYGEMS_VERSION}"
+    "yaml-${LIBYAML_VERSION}"
   )
 
   cd bumped-ruby-release

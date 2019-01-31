@@ -8,8 +8,8 @@ image_resource:
 
 inputs:
 - name: ruby-2.4
-- name: rubygems
-- name: yaml
+- name: rubygems-2.7
+- name: yaml-0.1
 - name: ruby-release
 - name: stemcell
 

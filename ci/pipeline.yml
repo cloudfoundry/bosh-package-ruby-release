@@ -20,9 +20,9 @@ jobs:
   - aggregate:
     - get: ruby-2.4
       trigger: true
-    - get: rubygems
+    - get: rubygems-2.7
       trigger: true
-    - get: yaml
+    - get: yaml-0.1
       trigger: true
     - get: bosh-src
     - get: ruby-release
@@ -82,7 +82,7 @@ resources:
     access_key_id: ((s3_aws_access_key_id))
     secret_access_key: ((s3_aws_secret_access_key))
 
-- name: rubygems
+- name: rubygems-2.7
   type: dynamic-metalink
   tags: ((worker_tags))
   source:
@@ -110,7 +110,7 @@ resources:
        ]
       }'
 
-- name: yaml
+- name: yaml-0.1
   type: dynamic-metalink
   tags: ((worker_tags))
   source:
