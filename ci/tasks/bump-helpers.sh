@@ -2,8 +2,8 @@ function replace_if_necessary() {
   version=$1
   package_name=$2
   blobname=$(basename $(ls ../${package_name}/*))
-  if ! bosh blobs | grep -q ${blobname}; then
-    existing_blob=$(bosh blobs | awk '{print $1}' | grep "${package_name}-${version}" || true)
+  if ! bash -c "bosh blobs | grep -q ${blobname}"; then
+    existing_blob=$(bosh blobs | awk '{print $1}' | grep "${package_name}" || true)
     if [ -n "${existing_blob}" ]; then
       bosh remove-blob ${existing_blob}
     fi
