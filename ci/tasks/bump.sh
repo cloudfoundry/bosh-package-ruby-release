@@ -2,6 +2,10 @@
 
 set -eux
 
+RUBY_VERSION=2.4
+RUBYGEMS_VERSION=2.7
+LIBYAML_VERSION=0.1
+
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source ${script_dir}/bump-helpers.sh
 
@@ -16,10 +20,20 @@ set -x
 git config user.name "CI Bot"
 git config user.email "cf-bosh-eng@pivotal.io"
 
-replace_if_necessary 2.4 ruby
-replace_if_necessary 2.4 rubygems
-replace_if_necessary 2.4 yaml
+replace_if_necessary "${RUBY_VERSION}" ruby
 
 if [[ "$( git status --porcelain )" != "" ]]; then
-  git commit -am "Bump ruby 2.4"
+  git commit -am "Bump ruby ${RUBY_VERSION}"
+fi
+
+replace_if_necessary "${RUBYGEMS_VERSION}" rubygems
+
+if [[ "$( git status --porcelain )" != "" ]]; then
+  git commit -am "Bump rubygems ${RUBYGEMS_VERSION}"
+fi
+
+replace_if_necessary "${LIBYAML_VERSION}" yaml
+
+if [[ "$( git status --porcelain )" != "" ]]; then
+  git commit -am "Bump libyaml ${LIBYAML_VERSION}"
 fi

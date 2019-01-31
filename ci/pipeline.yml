@@ -93,7 +93,7 @@ resources:
        | sed  's/^v//' \
        | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
     metalink_get: |
-      export name="rubygems-${version}.tar.gz"
+      export name="rubygems-${version}.tgz"
       export url="https://rubygems.org/rubygems/rubygems-${version}.tgz"
       export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
       jq -n '
