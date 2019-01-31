@@ -22,3 +22,6 @@ run:
 
 params:
   PRIVATE_YAML: ~
+  RUBY_VERSION: ""
+  RUBYGEMS_VERSION: ""
+  LIBYAML_VERSION: ""

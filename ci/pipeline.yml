@@ -32,6 +32,9 @@ jobs:
     file: ruby-release/ci/tasks/bump.yml
     params:
       PRIVATE_YML: ((s3_private_yml))
+      RUBY_VERSION: "2.4"
+      RUBYGEMS_VERSION: "2.7"
+      LIBYAML_VERSION: "0.1"
   - task: test
     privileged: true
     file: ruby-release/ci/tasks/test.yml
