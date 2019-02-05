@@ -3,12 +3,6 @@ function set_git_config() {
   git config user.email "$2"
 }
 
-function commit_if_changed() {
-  if [[ "$( git status --porcelain )" != "" ]]; then
-    git commit -am "$1"
-  fi
-}
-
 function replace_if_necessary() {
   package_name=$1
   blobname=$(basename $(ls ../${package_name}/*))

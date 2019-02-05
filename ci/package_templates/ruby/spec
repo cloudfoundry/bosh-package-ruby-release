@@ -1,0 +1,13 @@
+---
+name: <PACKAGENAME>
+
+files:
+- compile.env
+- config/config.guess
+- config/config.sub
+- gemrc
+- overwrite_shebang.rb
+- <RUBY_BLOB>
+- <RUBYGEMS_BLOB>
+- runtime.env
+- <YAML_BLOB>
