@@ -6,7 +6,7 @@ exit 0
 
 # invariants
 cp semver/version bumped-semver/version
-cp -rfp ./ruby-release/. finalized-release
+cp -rfp ./bumped-ruby-release/. finalized-release
 
 # finalize
 export FULL_VERSION=$(cat semver/version)

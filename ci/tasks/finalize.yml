@@ -7,6 +7,7 @@ image_resource:
     repository: ansd/main-bosh-docker-build-essential
 
 inputs:
+- name: bumped-ruby-release
 - name: ruby-release
 - name: semver
 

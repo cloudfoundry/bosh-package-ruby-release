@@ -14,8 +14,7 @@ inputs:
 - name: stemcell
 
 outputs:
-- name: ruby-release
-  path: bumped-ruby-release
+- name: bumped-ruby-release
 
 run:
   path: ruby-release/ci/tasks/bump.sh

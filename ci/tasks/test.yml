@@ -9,6 +9,7 @@ image_resource:
 inputs:
 - name: bosh-src
 - name: ruby-release
+- name: bumped-ruby-release
 - name: stemcell
 
 run:
