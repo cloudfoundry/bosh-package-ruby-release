@@ -1,0 +1,48 @@
+## Ruby Release
+
+To vendor ruby package into your release, run:
+
+```
+$ git clone https://github.com/bosh-packages/ruby-release
+$ cd ~/workspace/your-release
+$ bosh vendor-package <%= ruby_packagename %> ~/workspace/ruby-release
+```
+
+The above code will add `<%= ruby_packagename %>` to `your-release` and introduce a `spec.lock`.
+
+Included packages:
+
+- <%= ruby_packagename %> which includes:
+  - ruby-<%= ruby_version %>
+  - yaml-<%= yaml_version %>
+  - rubygems-<%= rubygems_version %>
+
+Included functions in `compile.env`:
+
+- `bosh_bundle` which runs `bundle install ...` targeted at `${BOSH_INSTALL_TARGET}`
+- `bosh_generate_runtime_env` which generates `${BOSH_INSTALL_TARGET}/bosh/runtime.env`
+
+To use `ruby-*` package for compilation in your packaging script:
+
+```bash
+#!/bin/bash -eu
+source /var/vcap/packages/<%= ruby_packagename %>/bosh/compile.env
+...
+bosh_bundle
+bosh_generate_runtime_env
+```
+
+To use `ruby-*` package at runtime in your job scripts:
+
+```bash
+#!/bin/bash -eu
+source /var/vcap/packages/<%= ruby_packagename %>/bosh/runtime.env
+source /var/vcap/packages/your-package/bosh/runtime.env
+bundle exec ...
+```
+
+See [packages/<%= test_packagename %>](packages/<%= test_packagename %>) and [jobs/<%= test_jobname %>](jobs/<%= test_jobname %>) for example.
+
+## Development
+
+To run tests `BOSH_ENVIRONMENT=vbox ./tests/run.sh`

@@ -2,21 +2,19 @@
 
 set -euxo pipefail
 
-: ${RUBY_VERSION:?}
-: ${RUBYGEMS_VERSION:?}
-: ${LIBYAML_VERSION:?}
-
-BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+: "${RUBY_VERSION:?}"
+: "${RUBYGEMS_VERSION:?}"
+: "${LIBYAML_VERSION:?}"
 
 function replace_if_necessary() {
   package_name=$1
   blobname=$2
-  if ! bosh blobs | grep -q ${blobname}; then
+  if ! bosh blobs | grep -q "${blobname}"; then
     existing_blob=$(bosh blobs | awk '{print ${package_name}}' | grep "${package_name}" || true)
     if [ -n "${existing_blob}" ]; then
-      bosh remove-blob ${existing_blob}
+      bosh remove-blob "${existing_blob}"
     fi
-    bosh add-blob --sha2 ../${package_name}/${blobname} ${blobname}
+    bosh add-blob --sha2 "../${package_name}/${blobname}" "${blobname}"
     bosh upload-blobs
   else
     echo "Blob $blobname already exists. Nothing to do."
@@ -56,15 +54,15 @@ mkdir -p "packages/$test_packagename"
 mkdir -p "jobs/$test_packagename/templates"
 
 declare -a template_variables=(
-  ruby_blob=$ruby_blob
-  ruby_version=$ruby_version
-  rubygems_blob=$rubygems_blob
-  rubygems_version=$rubygems_version
-  yaml_blob=$yaml_blob
-  yaml_version=$yaml_version
-  test_packagename=$test_packagename
-  ruby_packagename=$ruby_packagename
-  test_jobname=$test_packagename
+  "ruby_blob=$ruby_blob"
+  "ruby_version=$ruby_version"
+  "rubygems_blob=$rubygems_blob"
+  "rubygems_version=$rubygems_version"
+  "yaml_blob=$yaml_blob"
+  "yaml_version=$yaml_version"
+  "test_packagename=$test_packagename"
+  "ruby_packagename=$ruby_packagename"
+  "test_jobname=$test_packagename"
 )
 
 erb "${template_variables[@]}" "ci/templates/packages/ruby/spec.erb" > "packages/$ruby_packagename/spec"
@@ -81,11 +79,13 @@ erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/spec.erb" > "jobs/$t
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/cpi.erb" > "jobs/$test_packagename/templates/cpi"
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/run.erb" > "jobs/$test_packagename/templates/run"
 
+erb "${template_variables[@]}" "ci/templates/README.md.erb" > README.md
+
 echo "-----> $(date): Creating git commit"
 
 git config user.name "CI Bot"
 git config user.email "cf-bosh-eng@pivotal.io"
-git add packages jobs src
+git add .
 
 git --no-pager diff --cached
 
