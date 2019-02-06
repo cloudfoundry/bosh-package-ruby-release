@@ -5,18 +5,22 @@ set -eux
 # invariants
 cp -rfp ./bumped-ruby-release/. finalized-release
 
+pushd finalized-release
+  commits=$(git log --oneline origin/ci..HEAD | wc -l)
+  if [[ "$commits" == "0" ]]; then
+    :> ../version-tag/tag-name #prevent git-resource to tag HEAD
+    :> ../version-tag/annotate-msg
+    cp ../semver/version ../bumped-semver/version
+    exit 0
+  fi
+popd
+
 # finalize
-FULL_VERSION=$(awk -F. '{$NF+=1; OFS="."; print $0}' < semver/version)
+FULL_VERSION=$(awk -F. 'OFS="."{$NF+=1; print $0}' < semver/version)
 export FULL_VERSION
 
 pushd finalized-release
   git status
-  commits=$(git log --oneline origin/ci..HEAD | wc -l)
-  if [[ "$commits" == "0" ]]; then
-    :> version-tag/tag-name
-    cp semver/version bumped-semver/version
-    exit 0
-  fi
 
   set +x
   echo "$PRIVATE_YML" > config/private.yml
