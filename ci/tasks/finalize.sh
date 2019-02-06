@@ -2,8 +2,6 @@
 
 set -eux
 
-exit 0
-
 # invariants
 cp semver/version bumped-semver/version
 cp -rfp ./bumped-ruby-release/. finalized-release

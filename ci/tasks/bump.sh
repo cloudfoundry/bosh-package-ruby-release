@@ -7,30 +7,28 @@ set -euxo pipefail
 : ${LIBYAML_VERSION:?}
 
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source "${BASE_DIR}/bump-helpers.sh"
 
-declare -a versions=(
-"ruby-${RUBY_VERSION}"
-"rubygems-${RUBYGEMS_VERSION}"
-"yaml-${LIBYAML_VERSION}"
-)
+function replace_if_necessary() {
+  package_name=$1
+  blobname=$2
+  if ! bosh blobs | grep -q ${blobname}; then
+    existing_blob=$(bosh blobs | awk '{print ${package_name}}' | grep "${package_name}" || true)
+    if [ -n "${existing_blob}" ]; then
+      bosh remove-blob ${existing_blob}
+    fi
+    bosh add-blob --sha2 ../${package_name}/${blobname} ${blobname}
+    bosh upload-blobs
+  else
+    echo "Blob $blobname already exists. Nothing to do."
+  fi
+}
 
 cd bumped-ruby-release
 git clone ../ruby-release .
 
-
-
 set +x
 echo "${PRIVATE_YML}" > config/private.yml
 set -x
-
-set_git_config "CI Bot" "cf-bosh-eng@pivotal.io"
-
-for v in "${versions[@]}"
-do
-  replace_if_necessary "$v"
-done
-
 
 ruby_blob=$(basename "$(ls ../"ruby-$RUBY_VERSION"/*)")
 ruby_version="$(echo "$ruby_blob" | sed s/ruby-// | sed s/.tar.gz// )"
@@ -40,6 +38,15 @@ yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
 yaml_version="$(echo "$yaml_blob" | sed s/yaml-// | sed s/.tar.gz// )"
 ruby_packagename=${ruby_blob/.tar.gz/}
 test_packagename="ruby-$RUBY_VERSION-test"
+
+echo "-----> $(date): Updating blobs"
+
+replace_if_necessary "ruby-$RUBY_VERSION" "$ruby_blob"
+replace_if_necessary "rubygems-$RUBYGEMS_VERSION" "$rubygems_blob"
+replace_if_necessary "yaml-$LIBYAML_VERSION" "$yaml_blob"
+
+echo "-----> $(date): Rendering package and job templates"
+
 
 git rm -r packages/*
 git rm -r jobs/*
@@ -74,6 +81,10 @@ erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/spec.erb" > "jobs/$t
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/cpi.erb" > "jobs/$test_packagename/templates/cpi"
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/run.erb" > "jobs/$test_packagename/templates/run"
 
+echo "-----> $(date): Creating git commit"
+
+git config user.name "CI Bot"
+git config user.email "cf-bosh-eng@pivotal.io"
 git add packages jobs src
 
 git --no-pager diff --cached
