@@ -3,18 +3,23 @@
 set -eux
 
 # invariants
-cp semver/version bumped-semver/version
 cp -rfp ./bumped-ruby-release/. finalized-release
 
 # finalize
-FULL_VERSION=$(cat semver/version)
+FULL_VERSION=$(awk -F. '{$NF+=1; OFS="."; print $0}' < semver/version)
 export FULL_VERSION
 
 pushd finalized-release
   git status
+  commits=$(git log --oneline origin/ci..HEAD | wc -l)
+  if [[ "$commits" == "0" ]]; then
+    :> version-tag/tag-name
+    cp semver/version bumped-semver/version
+    exit 0
+  fi
 
   set +x
-  echo "${PRIVATE_YML}" > config/private.yml
+  echo "$PRIVATE_YML" > config/private.yml
   set -x
 
   bosh create-release --tarball=/tmp/ruby-release.tgz --timestamp-version --force
@@ -29,5 +34,6 @@ pushd finalized-release
   git commit -m "Adding final release $FULL_VERSION via concourse"
 popd
 
-echo "v${FULL_VERSION}" > version-tag/tag-name
-echo "Final release ${FULL_VERSION} tagged via concourse" > version-tag/annotate-msg
+echo "$FULL_VERSION" > bumped-semver/version
+echo "v$FULL_VERSION" > version-tag/tag-name
+echo "Final release $FULL_VERSION tagged via concourse" > version-tag/annotate-msg
