@@ -1,8 +1,0 @@
----
-name: <PACKAGENAME>
-
-dependencies:
-- <RUBY_PACKAGENAME>
-
-files:
-- test-app/**/*

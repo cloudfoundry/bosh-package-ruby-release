@@ -1,5 +1,5 @@
 ---
-name: <PACKAGENAME>
+name: <%= ruby_packagename %>
 
 files:
 - compile.env
@@ -7,7 +7,7 @@ files:
 - config/config.sub
 - gemrc
 - overwrite_shebang.rb
-- <RUBY_BLOB>
-- <RUBYGEMS_BLOB>
+- <%= ruby_blob %>
+- <%= rubygems_blob %>
 - runtime.env
-- <YAML_BLOB>
+- <%= yaml_blob %>

@@ -38,23 +38,43 @@ rubygems_blob=$(basename "$(ls ../"rubygems-$RUBYGEMS_VERSION"/*)")
 rubygems_version="$(echo "$rubygems_blob" | sed s/rubygems-// | sed s/.tgz// )"
 yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
 yaml_version="$(echo "$yaml_blob" | sed s/yaml-// | sed s/.tar.gz// )"
-packagename=${ruby_blob/.tar.gz/}
+ruby_packagename=${ruby_blob/.tar.gz/}
+test_packagename="ruby-$RUBY_VERSION-test"
 
 git rm -r packages/*
-mkdir -p "packages/$packagename"
-cat "ci/package_templates/ruby/spec" | sed "s/<RUBY_BLOB>/$ruby_blob/" | sed "s/<RUBYGEMS_BLOB>/$rubygems_blob/" | sed "s/<YAML_BLOB>/$yaml_blob/"| sed "s/<PACKAGENAME>/$packagename/" > "packages/$packagename/spec"
-cat "ci/package_templates/ruby/packaging" | sed "s/<RUBY_VERSION>/$ruby_version/" | sed "s/<RUBYGEMS_VERSION>/$rubygems_version/" | sed "s/<YAML_VERSION>/$yaml_version/" > "packages/$packagename/packaging"
+git rm -r jobs/*
 
-testpackagename="ruby-$RUBY_VERSION-test"
-mkdir -p "packages/$testpackagename"
-cat "ci/package_templates/ruby-test/spec" | sed "s/<RUBY_PACKAGENAME>/$packagename/"| sed "s/<PACKAGENAME>/$testpackagename/" > "packages/$testpackagename/spec"
-cat "ci/package_templates/ruby-test/packaging" | sed "s/<RUBY_PACKAGENAME>/$packagename/" > "packages/$testpackagename/packaging"
+mkdir -p "packages/$ruby_packagename"
+mkdir -p "packages/$test_packagename"
+mkdir -p "jobs/$test_packagename/templates"
 
-cat "ci/package_templates/compile.env" | sed "s/<PACKAGENAME>/$packagename/" > "src/compile.env"
-cat "ci/package_templates/runtime.env" | sed "s/<PACKAGENAME>/$packagename/" > "src/runtime.env"
+declare -a template_variables=(
+  ruby_blob=$ruby_blob
+  ruby_version=$ruby_version
+  rubygems_blob=$rubygems_blob
+  rubygems_version=$rubygems_version
+  yaml_blob=$yaml_blob
+  yaml_version=$yaml_version
+  test_packagename=$test_packagename
+  ruby_packagename=$ruby_packagename
+  test_jobname=$test_packagename
+)
 
-find packages
-git add packages
+erb "${template_variables[@]}" "ci/templates/packages/ruby/spec.erb" > "packages/$ruby_packagename/spec"
+erb "${template_variables[@]}" "ci/templates/packages/ruby/packaging.erb" > "packages/$ruby_packagename/packaging"
+
+erb "${template_variables[@]}" "ci/templates/packages/ruby-test/spec.erb" > "packages/$test_packagename/spec"
+erb "${template_variables[@]}" "ci/templates/packages/ruby-test/packaging.erb" > "packages/$test_packagename/packaging"
+
+erb "${template_variables[@]}" "ci/templates/src/compile.env.erb" > "src/compile.env"
+erb "${template_variables[@]}" "ci/templates/src/runtime.env.erb" > "src/runtime.env"
+
+erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/monit.erb" > "jobs/$test_packagename/monit"
+erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/spec.erb" > "jobs/$test_packagename/spec"
+erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/cpi.erb" > "jobs/$test_packagename/templates/cpi"
+erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/run.erb" > "jobs/$test_packagename/templates/run"
+
+git add packages jobs src
 
 git --no-pager diff --cached
 

@@ -7,18 +7,17 @@ release_dir="${script_dir}/../../../bumped-ruby-release"
 build_dir="${script_dir}/../../.."
 stemcell="${build_dir}/stemcell/stemcell.tgz"
 
-echo "-----> $(date): Starting BOSH"
-"${build_dir}/bosh-src/ci/docker/main-bosh-docker/start-bosh.sh"
-
-source /tmp/local-bosh/director/env
-
-
 echo "-----> $(date): Creating a new release"
 bosh create-release \
   --name ruby-release \
   --tarball "${build_dir}/ruby-release.tgz" \
   --dir "${release_dir}" \
   --force
+
+echo "-----> $(date): Starting BOSH"
+"${build_dir}/bosh-src/ci/docker/main-bosh-docker/start-bosh.sh"
+
+source /tmp/local-bosh/director/env
 
 echo "-----> $(date): Uploading release to director"
 bosh upload-release "${build_dir}/ruby-release.tgz"

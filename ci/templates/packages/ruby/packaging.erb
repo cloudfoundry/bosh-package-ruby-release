@@ -2,9 +2,9 @@
 
 set -e
 
-RUBY_VERSION=<RUBY_VERSION>
-RUBYGEMS_VERSION=<RUBYGEMS_VERSION>
-LIBYAML_VERSION=<YAML_VERSION>
+RUBY_VERSION=<%= ruby_version %>
+RUBYGEMS_VERSION=<%= rubygems_version %>
+LIBYAML_VERSION=<%= yaml_version %>
 
 openssl_version=$(PATH=/usr/local/opt/openssl/bin:${PATH} openssl version)
 openssl_major_version=$(echo "${openssl_version}" | cut -f2 -d\ | cut -f1 -d.)
