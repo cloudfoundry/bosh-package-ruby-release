@@ -3,7 +3,7 @@
 set -euxo pipefail
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-release_dir="${script_dir}/ruby-release"
+release_dir="${script_dir}/../../../bumped-ruby-release"
 build_dir="${script_dir}/../../.."
 stemcell="${build_dir}/stemcell/stemcell.tgz"
 

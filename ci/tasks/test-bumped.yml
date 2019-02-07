@@ -8,8 +8,8 @@ image_resource:
 
 inputs:
 - name: bosh-src
-- name: ruby-release
+- name: bumped-ruby-release
 - name: stemcell
 
 run:
-  path: ruby-release/ci/tasks/test.sh
+  path: ruby-release/ci/tasks/test-bumped.sh

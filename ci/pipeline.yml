@@ -35,9 +35,9 @@ jobs:
       RUBY_VERSION: "2.4"
       RUBYGEMS_VERSION: "2.7"
       LIBYAML_VERSION: "0.1"
-#  - task: test
-#    privileged: true
-#    file: ruby-release/ci/tasks/test.yml
+  - task: test-bumped
+    privileged: true
+    file: ruby-release/ci/tasks/test-bumped.yml
   - task: finalize
     file: ruby-release/ci/tasks/finalize.yml
     params:

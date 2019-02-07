@@ -9,15 +9,17 @@ set -euxo pipefail
 function replace_if_necessary() {
   package_name=$1
   blobname=$2
-  if ! bosh blobs | grep -q "${blobname}"; then
-    existing_blob=$(bosh blobs | awk '{print ${package_name}}' | grep "${package_name}" || true)
+  bosh blobs | grep "${blobname}"
+
+  if [ $? -eq 0 ]; then
+    echo "Blob $blobname already exists. Nothing to do."
+  else
+    existing_blob=$(bosh blobs | awk '{print $1}' | grep "${package_name}" || true)
     if [ -n "${existing_blob}" ]; then
       bosh remove-blob "${existing_blob}"
     fi
     bosh add-blob --sha2 "../${package_name}/${blobname}" "${blobname}"
     bosh upload-blobs
-  else
-    echo "Blob $blobname already exists. Nothing to do."
   fi
 }
 
@@ -39,12 +41,12 @@ test_packagename="ruby-$RUBY_VERSION-test"
 
 echo "-----> $(date): Updating blobs"
 
+bosh blobs
 replace_if_necessary "ruby-$RUBY_VERSION" "$ruby_blob"
 replace_if_necessary "rubygems-$RUBYGEMS_VERSION" "$rubygems_blob"
 replace_if_necessary "yaml-$LIBYAML_VERSION" "$yaml_blob"
 
 echo "-----> $(date): Rendering package and job templates"
-
 
 git rm -r packages/*
 git rm -r jobs/*
