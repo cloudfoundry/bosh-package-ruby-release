@@ -9,17 +9,18 @@ set -euxo pipefail
 function replace_if_necessary() {
   package_name=$1
   blobname=$2
-  bosh blobs | grep "${blobname}"
 
-  if [ $? -eq 0 ]; then
-    echo "Blob $blobname already exists. Nothing to do."
-  else
+  if ! bosh blobs | grep -q ${blobname}; then
     existing_blob=$(bosh blobs | awk '{print $1}' | grep "${package_name}" || true)
     if [ -n "${existing_blob}" ]; then
+      echo "Removing old blob ${existing_blob}"
       bosh remove-blob "${existing_blob}"
     fi
+    echo "Adding new blob ${blobname}"
     bosh add-blob --sha2 "../${package_name}/${blobname}" "${blobname}"
     bosh upload-blobs
+  else
+    echo "Blob $blobname already exists"
   fi
 }
 

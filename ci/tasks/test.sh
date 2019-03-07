@@ -3,8 +3,8 @@
 set -euxo pipefail
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-release_dir="${script_dir}/ruby-release"
 build_dir="${script_dir}/../../.."
+release_dir="${build_dir}/{$RUBY_RELEASE_DIR}"
 stemcell="${build_dir}/stemcell/stemcell.tgz"
 
 echo "-----> $(date): Creating a new release"
