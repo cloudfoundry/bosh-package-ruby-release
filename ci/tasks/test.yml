@@ -15,4 +15,4 @@ run:
   path: ruby-release/ci/tasks/test.sh
 
 params:
-  $RUBY_RELEASE_DIR: ruby-release
+  RUBY_RELEASE_DIR: ""

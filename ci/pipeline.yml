@@ -13,6 +13,8 @@ jobs:
   - task: test
     privileged: true
     file: ruby-release/ci/tasks/test.yml
+    params:
+      RUBY_RELEASE_DIR: ruby-release
 
 - name: bump
   serial: true
@@ -38,6 +40,8 @@ jobs:
   - task: test-bumped
     privileged: true
     file: ruby-release/ci/tasks/test-bumped.yml
+    params:
+      RUBY_RELEASE_DIR: bumped-ruby-release
   - task: finalize
     file: ruby-release/ci/tasks/finalize.yml
     params:

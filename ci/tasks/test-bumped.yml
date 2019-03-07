@@ -15,4 +15,4 @@ run:
   path: bumped-ruby-release/ci/tasks/test.sh
 
 params:
-  $RUBY_RELEASE_DIR: bumped-ruby-release
+  RUBY_RELEASE_DIR: ""
