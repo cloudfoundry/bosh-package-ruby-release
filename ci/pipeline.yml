@@ -67,8 +67,8 @@ resources:
 - name: ruby-release
   type: git
   source:
-    uri: https://github.com/ansd/ruby-release.git
-    branch: ci
+    uri: https://github.com/bosh-packages/ruby-release.git
+    branch: master
     username: openstack-cpi
     password: ((github-token))
 
