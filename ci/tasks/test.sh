@@ -4,7 +4,7 @@ set -euxo pipefail
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 build_dir="${script_dir}/../../.."
-release_dir="${build_dir}/${RUBY_RELEASE_DIR}"
+release_dir="${build_dir}/ruby-release"
 stemcell="${build_dir}/stemcell/stemcell.tgz"
 
 echo "-----> $(date): Creating a new release"
@@ -15,7 +15,7 @@ bosh create-release \
   --force
 
 echo "-----> $(date): Starting BOSH"
-"${build_dir}/bosh-src/ci/docker/main-bosh-docker/start-bosh.sh"
+start-bosh
 
 source /tmp/local-bosh/director/env
 

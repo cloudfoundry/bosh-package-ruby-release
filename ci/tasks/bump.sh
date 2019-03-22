@@ -34,11 +34,11 @@ echo "${PRIVATE_YML}" > config/private.yml
 set -x
 
 ruby_blob=$(basename "$(ls ../"ruby-$RUBY_VERSION"/*)")
-ruby_version="$(echo "$ruby_blob" | sed s/ruby-// | sed s/.tar.gz// )"
+ruby_version="$(cat ../"ruby-$RUBY_VERSION"/.resource/version)"
 rubygems_blob=$(basename "$(ls ../"rubygems-$RUBYGEMS_VERSION"/*)")
-rubygems_version="$(echo "$rubygems_blob" | sed s/rubygems-// | sed s/.tgz// )"
+rubygems_version="$(cat ../"rubygems-$RUBYGEMS_VERSION"/.resource/version)"
 yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
-yaml_version="$(echo "$yaml_blob" | sed s/yaml-// | sed s/.tar.gz// )"
+yaml_version="$(cat ../"yaml-$LIBYAML_VERSION"/.resource/version)"
 ruby_packagename=${ruby_blob/.tar.gz/}
 test_packagename="ruby-$RUBY_VERSION-test"
 

@@ -4,16 +4,14 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: ansd/main-bosh-docker-build-essential
+    repository: bosh/main-bosh-docker
 
 inputs:
-- name: bumped-ruby-release
 - name: ruby-release
 - name: semver
 
 outputs:
 - name: version-tag
-- name: bumped-semver
 - name: finalized-release
 
 params:

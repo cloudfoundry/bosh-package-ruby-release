@@ -7,14 +7,11 @@ jobs:
   - aggregate:
     - get: ruby-release
       trigger: true
-    - get: bosh-src
     - get: stemcell
       trigger: true
   - task: test
     privileged: true
     file: ruby-release/ci/tasks/test.yml
-    params:
-      RUBY_RELEASE_DIR: ruby-release
 
 - name: bump
   serial: true
@@ -26,10 +23,11 @@ jobs:
       trigger: true
     - get: yaml-0.1
       trigger: true
-    - get: bosh-src
     - get: ruby-release
     - get: stemcell
     - get: semver
+      params:
+        bump: minor
   - task: bump
     file: ruby-release/ci/tasks/bump.yml
     params:
@@ -40,8 +38,6 @@ jobs:
   - task: test-bumped
     privileged: true
     file: ruby-release/ci/tasks/test-bumped.yml
-    params:
-      RUBY_RELEASE_DIR: bumped-ruby-release
   - task: finalize
     file: ruby-release/ci/tasks/finalize.yml
     params:
@@ -49,28 +45,22 @@ jobs:
   - aggregate:
     - put: semver
       params:
-        file: bumped-semver/version
+        file: semver/version
     - put: ruby-release
       params:
         rebase: true
         repository: finalized-release
-        tag: version-tag/tag-name
+        tag: semver/version
+        tag_prefix: v
         annotate: version-tag/annotate-msg
 
 resources:
-- name: bosh-src
-  type: git
-  source:
-    uri: https://github.com/cloudfoundry/bosh.git
-    branch: master
-
 - name: ruby-release
   type: git
   source:
-    uri: https://github.com/bosh-packages/ruby-release.git
+    uri: git@github.com:bosh-packages/ruby-release.git
     branch: master
-    username: openstack-cpi
-    password: ((github-token))
+    private_key: ((github_deploy_key))
 
 - name: stemcell
   type: bosh-io-stemcell
@@ -82,7 +72,6 @@ resources:
   source:
     bucket: bosh-packages-ruby-release-blobs
     key: version
-    initial_version: 7.7.7
     access_key_id: ((s3_aws_access_key_id))
     secret_access_key: ((s3_aws_secret_access_key))
 

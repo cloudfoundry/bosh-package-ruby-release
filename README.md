@@ -42,7 +42,3 @@ bundle exec ...
 ```
 
 See [packages/ruby-2.4-test](packages/ruby-2.4-test) and [jobs/ruby-2.4-test](jobs/ruby-2.4-test) for example.
-
-## Development
-
-To run tests `BOSH_ENVIRONMENT=vbox ./tests/run.sh`

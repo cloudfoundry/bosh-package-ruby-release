@@ -10,14 +10,12 @@ pushd finalized-release
   if [[ "$commits" == "0" ]]; then
     :> ../version-tag/tag-name #prevent git-resource to tag HEAD
     :> ../version-tag/annotate-msg
-    cp ../semver/version ../bumped-semver/version
     exit 0
   fi
 popd
 
 # finalize
-FULL_VERSION=$(awk -F. 'OFS="."{$NF+=1; print $0}' < semver/version)
-export FULL_VERSION
+full_version=$( cat semver/version )
 
 pushd finalized-release
   git status
@@ -27,7 +25,7 @@ pushd finalized-release
   set -x
 
   bosh create-release --tarball=/tmp/ruby-release.tgz --timestamp-version --force
-  bosh finalize-release --version "$FULL_VERSION" /tmp/ruby-release.tgz
+  bosh finalize-release --version "$full_version" /tmp/ruby-release.tgz
 
   git add -A
   git status
@@ -35,9 +33,7 @@ pushd finalized-release
   git config user.name "CI Bot"
   git config user.email "cf-bosh-eng@pivotal.io"
 
-  git commit -m "Adding final release $FULL_VERSION via concourse"
+  git commit -m "Adding final release $full_version via concourse"
 popd
 
-echo "$FULL_VERSION" > bumped-semver/version
-echo "v$FULL_VERSION" > version-tag/tag-name
-echo "Final release $FULL_VERSION tagged via concourse" > version-tag/annotate-msg
+echo "Final release $full_version tagged via concourse" > version-tag/annotate-msg
