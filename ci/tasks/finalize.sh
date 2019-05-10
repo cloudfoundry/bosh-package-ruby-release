@@ -3,7 +3,7 @@
 set -eux
 
 # invariants
-cp -rfp ./bumped-ruby-release/. finalized-release
+cp -rfp ./ruby-release/. finalized-release
 
 pushd finalized-release
   commits=$(git log --oneline origin/ci..HEAD | wc -l)
