@@ -33,13 +33,14 @@ set +x
 echo "${PRIVATE_YML}" > config/private.yml
 set -x
 
+bosh_release_version=$( cat ../semver/version )
 ruby_blob=$(basename "$(ls ../"ruby-$RUBY_VERSION"/*)")
 ruby_version="$(cat ../"ruby-$RUBY_VERSION"/.resource/version)"
 rubygems_blob=$(basename "$(ls ../"rubygems-$RUBYGEMS_VERSION"/*)")
 rubygems_version="$(cat ../"rubygems-$RUBYGEMS_VERSION"/.resource/version)"
 yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
 yaml_version="$(cat ../"yaml-$LIBYAML_VERSION"/.resource/version)"
-ruby_packagename=${ruby_blob/.tar.gz/}
+ruby_packagename=${ruby_blob/.tar.gz/}-r${bosh_release_version}
 test_packagename="ruby-$RUBY_VERSION-test"
 
 echo "-----> $(date): Updating blobs"

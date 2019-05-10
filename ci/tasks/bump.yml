@@ -11,6 +11,7 @@ inputs:
 - name: rubygems-2.7
 - name: yaml-0.1
 - name: ruby-release
+- name: semver
 
 outputs:
 - name: ruby-release
