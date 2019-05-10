@@ -1,5 +1,5 @@
 ---
-name: ruby-2.4.6
+name: ruby-2.4.6-r0.4.0
 
 files:
 - compile.env
