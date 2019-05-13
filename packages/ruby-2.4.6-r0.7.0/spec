@@ -1,13 +1,13 @@
 ---
-name: ruby-2.4.6-r0.6.0
+name: ruby-2.4.6-r0.7.0
 
 files:
-- compile.env
+- compile-2.4.6.env
 - config/config.guess
 - config/config.sub
 - gemrc
 - overwrite_shebang.rb
 - ruby-2.4.6.tar.gz
 - rubygems-2.7.9.tgz
-- runtime.env
+- runtime-2.4.6.env
 - yaml-0.1.7.tar.gz
