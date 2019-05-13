@@ -10,5 +10,8 @@ inputs:
 - name: ruby-release
 - name: stemcell
 
+params:
+  RUBY_VERSION:
+
 run:
   path: ruby-release/ci/tasks/test.sh

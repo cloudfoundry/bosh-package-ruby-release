@@ -26,9 +26,9 @@ echo "-----> $(date): Uploading stemcell"
 bosh -n upload-stemcell "${stemcell}"
 
 echo "-----> $(date): Deploy test deployment"
-bosh -n -d test deploy "${release_dir}/manifests/test.yml"
+bosh -n -d test deploy "${release_dir}/manifests/test.yml" -v ruby-test-package=ruby-${RUBY_VERSION}-test
 
 echo "-----> $(date): Run test errand"
-bosh -n -d test run-errand ruby-2.4-test
+bosh -n -d test run-errand ruby-thin-server
 
 echo "-----> $(date): Done"

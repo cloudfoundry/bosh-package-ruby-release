@@ -9,6 +9,7 @@ set -euxo pipefail
 function replace_if_necessary() {
   package_name=$1
   blobname=$2
+  blob_location=${3:-"../${package_name}"}
   set +x
   bosh_blobs=$(bosh blobs 2>&1)
   set -x
@@ -19,7 +20,7 @@ function replace_if_necessary() {
       bosh remove-blob "${existing_blob}"
     fi
     echo "Adding new blob ${blobname}"
-    bosh add-blob --sha2 "../${package_name}/${blobname}" "${blobname}"
+    bosh add-blob --sha2 "${blob_location}/${blobname}" "${blobname}"
     bosh upload-blobs
   else
     echo "Blob $blobname already exists"
@@ -34,8 +35,8 @@ echo "${PRIVATE_YML}" > config/private.yml
 set -x
 
 bosh_release_version=$( cat ../semver/version )
-ruby_blob=$(basename "$(ls ../"ruby-$RUBY_VERSION"/*)")
-ruby_version="$(cat ../"ruby-$RUBY_VERSION"/.resource/version)"
+ruby_blob=$(basename "$(ls ../"ruby"/*)")
+ruby_version="$(cat ../"ruby"/.resource/version)"
 rubygems_blob=$(basename "$(ls ../"rubygems-$RUBYGEMS_VERSION"/*)")
 rubygems_version="$(cat ../"rubygems-$RUBYGEMS_VERSION"/.resource/version)"
 yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
@@ -46,14 +47,15 @@ test_packagename="ruby-$RUBY_VERSION-test"
 echo "-----> $(date): Updating blobs"
 
 bosh blobs
-replace_if_necessary "ruby-$RUBY_VERSION" "$ruby_blob"
+replace_if_necessary "ruby-$RUBY_VERSION" "$ruby_blob" "../ruby"
 replace_if_necessary "rubygems-$RUBYGEMS_VERSION" "$rubygems_blob"
 replace_if_necessary "yaml-$LIBYAML_VERSION" "$yaml_blob"
 
 echo "-----> $(date): Rendering package and job templates"
 
-git rm -r packages/*
-git rm -r jobs/*
+
+git rm -r packages/ruby-${RUBY_VERSION}* && :
+git rm -r jobs/ruby-${RUBY_VERSION}* && :
 
 mkdir -p "packages/$ruby_packagename"
 mkdir -p "packages/$test_packagename"
@@ -85,7 +87,7 @@ erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/spec.erb" > "jobs/$t
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/cpi.erb" > "jobs/$test_packagename/templates/cpi"
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/run.erb" > "jobs/$test_packagename/templates/run"
 
-erb "${template_variables[@]}" "ci/templates/README.md.erb" > README.md
+#erb "${template_variables[@]}" "ci/templates/README.md.erb" > README.md
 
 echo "-----> $(date): Creating git commit"
 
