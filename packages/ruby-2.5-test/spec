@@ -1,0 +1,8 @@
+---
+name: ruby-2.5-test
+
+dependencies:
+- ruby-2.5.5-r0.5.0
+
+files:
+- test-app/**/*
