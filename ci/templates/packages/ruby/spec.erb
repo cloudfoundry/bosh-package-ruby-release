@@ -2,12 +2,12 @@
 name: <%= ruby_packagename %>
 
 files:
-- compile.env
+- compile-<%= ruby_version %>.env
 - config/config.guess
 - config/config.sub
 - gemrc
 - overwrite_shebang.rb
 - <%= ruby_blob %>
 - <%= rubygems_blob %>
-- runtime.env
+- runtime-<%= ruby_version %>.env
 - <%= yaml_blob %>

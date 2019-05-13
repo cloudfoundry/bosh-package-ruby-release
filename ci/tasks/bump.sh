@@ -79,8 +79,8 @@ erb "${template_variables[@]}" "ci/templates/packages/ruby/packaging.erb" > "pac
 erb "${template_variables[@]}" "ci/templates/packages/ruby-test/spec.erb" > "packages/$test_packagename/spec"
 erb "${template_variables[@]}" "ci/templates/packages/ruby-test/packaging.erb" > "packages/$test_packagename/packaging"
 
-erb "${template_variables[@]}" "ci/templates/src/compile.env.erb" > "src/compile.env"
-erb "${template_variables[@]}" "ci/templates/src/runtime.env.erb" > "src/runtime.env"
+erb "${template_variables[@]}" "ci/templates/src/compile.env.erb" > "src/compile-$ruby_version.env"
+erb "${template_variables[@]}" "ci/templates/src/runtime.env.erb" > "src/runtime-$ruby_version.env"
 
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/monit.erb" > "jobs/$test_packagename/monit"
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/spec.erb" > "jobs/$test_packagename/spec"
