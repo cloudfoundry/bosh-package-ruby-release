@@ -15,7 +15,7 @@ pushd finalized-release
 popd
 
 # finalize
-full_version=$( cat semver/version )
+export FULL_VERSION=$(cat semver/version)
 
 pushd finalized-release
   git status
@@ -25,7 +25,7 @@ pushd finalized-release
   set -x
 
   bosh create-release --tarball=/tmp/ruby-release.tgz --timestamp-version --force
-  bosh finalize-release --version "$full_version" /tmp/ruby-release.tgz
+  bosh finalize-release --version "$FULL_VERSION" /tmp/ruby-release.tgz
 
   git add -A
   git status
@@ -33,8 +33,8 @@ pushd finalized-release
   git config user.name "CI Bot"
   git config user.email "cf-bosh-eng@pivotal.io"
 
-  git commit -m "Adding final release $full_version via concourse"
+  git commit -m "Adding final release $FULL_VERSION via concourse"
 popd
 
 echo "v${FULL_VERSION}" > version-tag/tag-name
-echo "Final release $full_version tagged via concourse" > version-tag/annotate-msg
+echo "Final release $FULL_VERSION tagged via concourse" > version-tag/annotate-msg
