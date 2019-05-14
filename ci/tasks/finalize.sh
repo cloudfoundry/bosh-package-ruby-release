@@ -6,7 +6,7 @@ set -eux
 cp -rfp ./ruby-release/. finalized-release
 
 pushd finalized-release
-  commits=$(git log --oneline origin/ci..HEAD | wc -l)
+  commits=$(git log --oneline origin/master..HEAD | wc -l)
   if [[ "$commits" == "0" ]]; then
     :> ../version-tag/tag-name #prevent git-resource to tag HEAD
     :> ../version-tag/annotate-msg
@@ -36,4 +36,5 @@ pushd finalized-release
   git commit -m "Adding final release $full_version via concourse"
 popd
 
+echo "v${FULL_VERSION}" > version-tag/tag-name
 echo "Final release $full_version tagged via concourse" > version-tag/annotate-msg
