@@ -9,7 +9,7 @@ $ bosh vendor-package <RUBY-PACKAGE-VERSION> ~/workspace/ruby-release
 ```
 
 Where RUBY-PACKAGE-VERSION is one of the provided ruby 2.4 or 2.5 package names
-(e.g. `ruby-2.4.6-r0.4.0` or `ruby-2.5.5-r0.5.0`).
+(e.g. `ruby-2.4.6-r0.7.0` or `ruby-2.5.5-r0.8.0`).
 The above code will add a ruby package to `your-release` and introduce a `spec.lock`.
 
 Included packages:
