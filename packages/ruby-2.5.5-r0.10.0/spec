@@ -1,5 +1,5 @@
 ---
-name: ruby-2.5.5-r0.8.0
+name: ruby-2.5.5-r0.10.0
 
 files:
 - compile-2.5.5.env
