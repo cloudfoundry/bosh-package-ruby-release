@@ -4,7 +4,7 @@ jobs:
 - name: test-2.4
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ruby-release
       trigger: true
     - get: stemcell
@@ -18,7 +18,7 @@ jobs:
 - name: test-2.5
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ruby-release
       trigger: true
     - get: stemcell
@@ -32,7 +32,7 @@ jobs:
 - name: bump-2.4
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ruby
       resource: ruby-2.4
       trigger: true
@@ -62,7 +62,7 @@ jobs:
     file: ruby-release/ci/tasks/finalize.yml
     params:
       PRIVATE_YML: ((s3_private_yml))
-  - aggregate:
+  - in_parallel:
     - put: semver
       params:
         file: semver/version
@@ -77,7 +77,7 @@ jobs:
 - name: bump-2.5
   serial: true
   plan:
-  - aggregate:
+  - in_parallel:
     - get: ruby
       resource: ruby-2.5
       trigger: true
@@ -107,7 +107,7 @@ jobs:
     file: ruby-release/ci/tasks/finalize.yml
     params:
       PRIVATE_YML: ((s3_private_yml))
-  - aggregate:
+  - in_parallel:
     - put: semver
       params:
         file: semver/version
