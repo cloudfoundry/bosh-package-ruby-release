@@ -7,7 +7,7 @@ fi
 
 dir=$(dirname $0)
 
-fly -t ${CONCOURSE_TARGET:-production} \
+fly -t ${CONCOURSE_TARGET:-director} \
   sp -p ruby-release \
   -c $dir/pipeline.yml \
   -l <(lpass show --notes 'ruby-release pipeline vars')
