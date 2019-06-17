@@ -1,0 +1,46 @@
+name: ruby
+version: 0.11.0
+commit_hash: 470c20a
+uncommitted_changes: false
+jobs:
+- name: ruby-2.4-test
+  version: e6071c2087431cc03e075e556547c22365ac5c78044b4721dab6b9ad4da4cff2
+  fingerprint: e6071c2087431cc03e075e556547c22365ac5c78044b4721dab6b9ad4da4cff2
+  sha1: sha256:f80f05ab0e95ad65c7db13801aafb8e6967c50d9732595a07278910a601e8f3e
+  packages:
+  - ruby-2.4.6-r0.11.0
+  - ruby-2.4-test
+- name: ruby-2.5-test
+  version: c6a280093cdac701ca65d8f7386b35106e0dee544ca09a0978a0eee3a2b24385
+  fingerprint: c6a280093cdac701ca65d8f7386b35106e0dee544ca09a0978a0eee3a2b24385
+  sha1: sha256:ecb876370cb4579cf3e459e21bf0005fedc177926fc517e4a957fbbf54984427
+  packages:
+  - ruby-2.5.5-r0.10.0
+  - ruby-2.5-test
+packages:
+- name: ruby-2.4-test
+  version: 6dc2d7806f8762f5f4f5c6aabd7ff6dfa87b51025249398603d7e2471979da7d
+  fingerprint: 6dc2d7806f8762f5f4f5c6aabd7ff6dfa87b51025249398603d7e2471979da7d
+  sha1: sha256:192ee7e37673389e7647559b9fa3776a2c9377bb0ba400ce69048fbb5cf5970d
+  dependencies:
+  - ruby-2.4.6-r0.11.0
+- name: ruby-2.4.6-r0.11.0
+  version: a1e381b5031f05a5b7287d4ee8a14f5a2c0bd806c73597274b6dc3edcfc8ce2a
+  fingerprint: a1e381b5031f05a5b7287d4ee8a14f5a2c0bd806c73597274b6dc3edcfc8ce2a
+  sha1: sha256:fdf3bde0a3a604c7c70863b6c2f697489c4c689d355571a37bb55a750cf5cc24
+  dependencies: []
+- name: ruby-2.5-test
+  version: 49f6e2e0628ffc5ef94d45b893eaa5575335c432324fad7d39defd2d7f419f13
+  fingerprint: 49f6e2e0628ffc5ef94d45b893eaa5575335c432324fad7d39defd2d7f419f13
+  sha1: sha256:232c7ebaa6d8c314d8fdeabeac94c36058c716cdf61c544d03c34fce6a4a8a37
+  dependencies:
+  - ruby-2.5.5-r0.10.0
+- name: ruby-2.5.5-r0.10.0
+  version: 836a515cbf2a1756a3e4c82f155dbc0d9920c2b8b3cfab14a501b09089d1d1c3
+  fingerprint: 836a515cbf2a1756a3e4c82f155dbc0d9920c2b8b3cfab14a501b09089d1d1c3
+  sha1: sha256:ea17edcc56edb58d8ea47225887b8e9e8d80cd9ada316af91929964f244eabe0
+  dependencies: []
+license:
+  version: 850893456ab4b5e6be730bbcf0056892bb753e2cba4fba21e5f64035f3fc53db
+  fingerprint: 850893456ab4b5e6be730bbcf0056892bb753e2cba4fba21e5f64035f3fc53db
+  sha1: sha256:c5afce7fa70f93efb3c1fcfc59cab3d9d260292720fd858fa64685820b9c3526
