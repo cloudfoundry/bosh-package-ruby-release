@@ -85,12 +85,10 @@ erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/run.erb" >
 for blob in $(bosh blobs | awk '{print $1}')
 do
   if ! grep -q -R $blob packages; then
-    echo "Removing unused blob "${blob}"
+    echo "Removing unused blob ${blob}"
     bosh remove-blob "${blob}"
   fi
 done
-
-#erb "${template_variables[@]}" "ci/templates/README.md.erb" > README.md
 
 echo "-----> $(date): Creating git commit"
 
