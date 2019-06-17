@@ -14,11 +14,6 @@ function replace_if_necessary() {
   bosh_blobs=$(bosh blobs 2>&1)
   set -x
   if ! echo $bosh_blobs | grep -q "$blobname"; then
-    existing_blob=$(bosh blobs | awk '{print $1}' | grep "${package_name}" || true)
-    if [ -n "${existing_blob}" ]; then
-      echo "Removing old blob ${existing_blob}"
-      bosh remove-blob "${existing_blob}"
-    fi
     echo "Adding new blob ${blobname}"
     bosh add-blob --sha2 "${blob_location}/${blobname}" "${blobname}"
     bosh upload-blobs
@@ -86,6 +81,14 @@ erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/monit.erb" > "jobs/$
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/spec.erb" > "jobs/$test_packagename/spec"
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/cpi.erb" > "jobs/$test_packagename/templates/cpi"
 erb "${template_variables[@]}" "ci/templates/jobs/ruby-test/templates/run.erb" > "jobs/$test_packagename/templates/run"
+
+for blob in $(bosh blobs | awk '{print $1}')
+do
+  if ! grep -q -R $blob packages; then
+    echo "Removing unused blob "${blob}"
+    bosh remove-blob "${blob}"
+  fi
+done
 
 #erb "${template_variables[@]}" "ci/templates/README.md.erb" > README.md
 
