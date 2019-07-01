@@ -1,0 +1,12 @@
+---
+name: ruby-2.6-test
+
+templates:
+  run: bin/run
+  cpi: bin/cpi
+
+packages:
+- ruby-2.6.3-r0.13.0
+- ruby-2.6-test
+
+properties: {}
