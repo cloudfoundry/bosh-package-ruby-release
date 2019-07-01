@@ -32,8 +32,8 @@ set -x
 bosh_release_version=$( cat ../semver/version )
 ruby_blob=$(basename "$(ls ../"ruby"/*)")
 ruby_version="$(cat ../"ruby"/.resource/version)"
-rubygems_blob=$(basename "$(ls ../"rubygems-$RUBYGEMS_VERSION"/*)")
-rubygems_version="$(cat ../"rubygems-$RUBYGEMS_VERSION"/.resource/version)"
+rubygems_blob=$(basename "$(ls ../"rubygems"/*)")
+rubygems_version="$(cat ../"rubygems"/.resource/version)"
 yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
 yaml_version="$(cat ../"yaml-$LIBYAML_VERSION"/.resource/version)"
 ruby_packagename=${ruby_blob/.tar.gz/}-r${bosh_release_version}
@@ -43,7 +43,7 @@ echo "-----> $(date): Updating blobs"
 
 bosh blobs
 replace_if_necessary "ruby-$RUBY_VERSION" "$ruby_blob" "../ruby"
-replace_if_necessary "rubygems-$RUBYGEMS_VERSION" "$rubygems_blob"
+replace_if_necessary "rubygems-$RUBYGEMS_VERSION" "$rubygems_blob" "../rubygems"
 replace_if_necessary "yaml-$LIBYAML_VERSION" "$yaml_blob"
 
 echo "-----> $(date): Rendering package and job templates"
