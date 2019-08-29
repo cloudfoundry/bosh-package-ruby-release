@@ -1,7 +1,7 @@
-ruby-2.4.6.tar.gz:
-  size: 15880585
-  object_id: d4794446-7efc-4f0b-5832-d8953306c109
-  sha: sha256:de0dc8097023716099f7c8a6ffc751511b90de7f5694f401b59f2d071db910be
+ruby-2.4.7.tar.gz:
+  size: 16036496
+  object_id: dd6a3b53-38d3-4653-6f57-a9c4ad88fecf
+  sha: sha256:cd6efc720ca6a622745e2bac79f45e6cd63ab0f5a53ad7eb881545f58ff38b89
 ruby-2.5.6.tar.gz:
   size: 17684288
   object_id: 4cbf1f9d-87b0-49a3-733b-626e24403ca8
