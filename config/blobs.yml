@@ -6,10 +6,10 @@ ruby-2.5.7.tar.gz:
   size: 15669771
   object_id: d79fc3fa-1598-4334-7dd5-b23e4d59fc37
   sha: sha256:0b2d0d5e3451b6ab454f81b1bfca007407c0548dea403f1eba2e429da4add6d4
-ruby-2.6.4.tar.gz:
-  size: 16503137
-  object_id: 48c67952-b460-4bc2-7f7d-2c2e490536c8
-  sha: sha256:4fc1d8ba75505b3797020a6ffc85a8bcff6adc4dabae343b6572bf281ee17937
+ruby-2.6.5.tar.gz:
+  size: 16172159
+  object_id: fc1dc2d0-cf71-41d8-5d0f-d630375a54f5
+  sha: sha256:66976b716ecc1fd34f9b7c3c2b07bbd37631815377a2e3e85a5b194cfdcbed7d
 rubygems-2.7.10.tgz:
   size: 863618
   object_id: 9e014999-f90e-4c63-797a-60b8f31a1caa

@@ -2,7 +2,7 @@
 
 set -e
 
-RUBY_VERSION=2.6.4
+RUBY_VERSION=2.6.5
 RUBYGEMS_VERSION=2.7.10
 LIBYAML_VERSION=0.1.7
 
@@ -44,8 +44,8 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
 
 mkdir "${BOSH_INSTALL_TARGET}/bosh"
 cp gemrc "${BOSH_INSTALL_TARGET}/bosh/gemrc"
-cp compile-2.6.4.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
-cp runtime-2.6.4.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
+cp compile-2.6.5.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+cp runtime-2.6.5.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
