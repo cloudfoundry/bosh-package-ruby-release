@@ -1,0 +1,64 @@
+name: ruby
+version: 0.24.0
+commit_hash: 93b7fc3
+uncommitted_changes: false
+jobs:
+- name: ruby-2.4-test
+  version: 3a926dd47fcf01fdefd0e60f8396cb0c62bc7c67f6fababc08623530b5cf363a
+  fingerprint: 3a926dd47fcf01fdefd0e60f8396cb0c62bc7c67f6fababc08623530b5cf363a
+  sha1: sha256:e596d276a3d12e407e2a5746b8e528782dba9c336d6c49581fad43047be943b2
+  packages:
+  - ruby-2.4.9-r0.24.0
+  - ruby-2.4-test
+- name: ruby-2.5-test
+  version: b8587acfd989f4dbbeb3153e67b3c3f79abce3538f020677f1cf5a9084aef05f
+  fingerprint: b8587acfd989f4dbbeb3153e67b3c3f79abce3538f020677f1cf5a9084aef05f
+  sha1: sha256:a3e3d78df886e2d3c7fe1fd5cdabc235c634daa03d22098493a6ac3f3039739f
+  packages:
+  - ruby-2.5.7-r0.22.0
+  - ruby-2.5-test
+- name: ruby-2.6-test
+  version: 12dc863f1773d9fce2f423f5db8770c85f1afa34ada86ecd21fe9a6d17c86150
+  fingerprint: 12dc863f1773d9fce2f423f5db8770c85f1afa34ada86ecd21fe9a6d17c86150
+  sha1: sha256:b6eeadd5579bea9a7483c92550256682f5aecc4ee225f8581c530c1449cc8c19
+  packages:
+  - ruby-2.6.5-r0.23.0
+  - ruby-2.6-test
+packages:
+- name: ruby-2.4-test
+  version: 1c396663b9152fe503468ed73e5d2624e6cb8689901668d7d77101b38fe4e0f7
+  fingerprint: 1c396663b9152fe503468ed73e5d2624e6cb8689901668d7d77101b38fe4e0f7
+  sha1: sha256:5056fc42ea83eb67cb52a5ffd44a953fe645c00df494a28229251b0c07f8fc62
+  dependencies:
+  - ruby-2.4.9-r0.24.0
+- name: ruby-2.4.9-r0.24.0
+  version: 1959f3d33e21a0a39371d547997179d821373746a274139753ada17acca7a46b
+  fingerprint: 1959f3d33e21a0a39371d547997179d821373746a274139753ada17acca7a46b
+  sha1: sha256:c5884f4596713d22e03b79311fd33f07065f466c37367304c18faed54960b58a
+  dependencies: []
+- name: ruby-2.5-test
+  version: e7e9852675c7608cb7f1fdb47f098831668dfe4aa3807b8629f74000c1393b34
+  fingerprint: e7e9852675c7608cb7f1fdb47f098831668dfe4aa3807b8629f74000c1393b34
+  sha1: sha256:de48f23ce40b348f9f73fa3e5e4964d2d1b6a68b95dfc0f41c8b5cad013f4a4c
+  dependencies:
+  - ruby-2.5.7-r0.22.0
+- name: ruby-2.5.7-r0.22.0
+  version: 52f3ff509d38a0a3be3ba19ea04f34f68bfd8323d8ab82429df54b9e6994eda6
+  fingerprint: 52f3ff509d38a0a3be3ba19ea04f34f68bfd8323d8ab82429df54b9e6994eda6
+  sha1: sha256:cecf73b0be141e89ced5f61b60da731bc52c41a2a095a8c31ded7c773d9bef51
+  dependencies: []
+- name: ruby-2.6-test
+  version: 9be615385ba8e86f659f5da748e9ebc005db97e046265a427d6201b4a6f37e1e
+  fingerprint: 9be615385ba8e86f659f5da748e9ebc005db97e046265a427d6201b4a6f37e1e
+  sha1: sha256:64b2acb576fca7bdcf2a0f2a8c97f04662a76b330978894d47f1549c58a59182
+  dependencies:
+  - ruby-2.6.5-r0.23.0
+- name: ruby-2.6.5-r0.23.0
+  version: 6694d8697a89e3967eb3e46a3da2c2c2a945d3fc1f47d800278d152ac53c25e8
+  fingerprint: 6694d8697a89e3967eb3e46a3da2c2c2a945d3fc1f47d800278d152ac53c25e8
+  sha1: sha256:a5d4b9d9c5088d9eb50bcfb9f8d4662125d1ec5b404af45d35c96c7ebe4209e4
+  dependencies: []
+license:
+  version: 850893456ab4b5e6be730bbcf0056892bb753e2cba4fba21e5f64035f3fc53db
+  fingerprint: 850893456ab4b5e6be730bbcf0056892bb753e2cba4fba21e5f64035f3fc53db
+  sha1: sha256:c5afce7fa70f93efb3c1fcfc59cab3d9d260292720fd858fa64685820b9c3526
