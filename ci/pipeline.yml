@@ -143,7 +143,7 @@ jobs:
       resource: ruby-2.6
       trigger: true
     - get: rubygems
-      resource: rubygems-2.7
+      resource: rubygems-3.0
       trigger: true
     - get: yaml-0.1
       trigger: true
@@ -158,7 +158,7 @@ jobs:
     params:
       PRIVATE_YML: ((s3_private_yml))
       RUBY_VERSION: "2.6"
-      RUBYGEMS_VERSION: "2.7"
+      RUBYGEMS_VERSION: "3.0"
       LIBYAML_VERSION: "0.1"
   - task: test-bumped
     privileged: true
@@ -235,33 +235,32 @@ resources:
        ]
       }'
 
-# keeping around for when we move back to rubygems 3.0
-#- name: rubygems-3.0
-#  type: dynamic-metalink
-#  source:
-#    version: "3.0.x"
-#    version_check: |
-#     git ls-remote --tags https://github.com/rubygems/rubygems.git \
-#       | cut -f2 \
-#       | grep -v '\^{}' \
-#       | grep -E '^refs/tags/.+$' \
-#       | sed  -E 's/^refs\/tags\/(.+)$/\1/'  \
-#       | sed  's/^v//' \
-#       | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
-#    metalink_get: |
-#      export name="rubygems-${version}.tgz"
-#      export url="https://rubygems.org/rubygems/rubygems-${version}.tgz"
-#      export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
-#      jq -n '
-#      {
-#       "files": [
-#        {
-#         "name": env.name,
-#         "urls": [ { "url": env.url } ],
-#         "size": env.size | tonumber
-#        }
-#       ]
-#      }'
+- name: rubygems-3.0
+  type: dynamic-metalink
+  source:
+    version: "3.0.x"
+    version_check: |
+     git ls-remote --tags https://github.com/rubygems/rubygems.git \
+       | cut -f2 \
+       | grep -v '\^{}' \
+       | grep -E '^refs/tags/.+$' \
+       | sed  -E 's/^refs\/tags\/(.+)$/\1/'  \
+       | sed  's/^v//' \
+       | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
+    metalink_get: |
+      export name="rubygems-${version}.tgz"
+      export url="https://rubygems.org/rubygems/rubygems-${version}.tgz"
+      export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
+      jq -n '
+      {
+       "files": [
+        {
+         "name": env.name,
+         "urls": [ { "url": env.url } ],
+         "size": env.size | tonumber
+        }
+       ]
+      }'
 
 - name: yaml-0.1
   type: dynamic-metalink
