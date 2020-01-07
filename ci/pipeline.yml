@@ -143,7 +143,7 @@ jobs:
       resource: ruby-2.6
       trigger: true
     - get: rubygems
-      resource: rubygems-3.0
+      resource: rubygems-3.1
       trigger: true
     - get: yaml-0.1
       trigger: true
@@ -158,7 +158,7 @@ jobs:
     params:
       PRIVATE_YML: ((s3_private_yml))
       RUBY_VERSION: "2.6"
-      RUBYGEMS_VERSION: "3.0"
+      RUBYGEMS_VERSION: "3.1"
       LIBYAML_VERSION: "0.1"
   - task: test-bumped
     privileged: true
@@ -235,10 +235,10 @@ resources:
        ]
       }'
 
-- name: rubygems-3.0
+- name: rubygems-3.1
   type: dynamic-metalink
   source:
-    version: "3.0.x"
+    version: "3.1.x"
     version_check: |
      git ls-remote --tags https://github.com/rubygems/rubygems.git \
        | cut -f2 \
