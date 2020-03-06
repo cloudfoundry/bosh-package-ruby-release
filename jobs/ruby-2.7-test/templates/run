@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -eux
+
+ASSERT_GEM_VERSION=3.1.2
+
+echo "Testing runtime compability"
+
+# shellcheck disable=1091
+source "/var/vcap/packages/ruby-2.7.0-r0.30.0/bosh/runtime.env"
+ruby -e 'puts "test"'
+
+echo "Testing compile compability"
+
+# shellcheck disable=1091
+source "/var/vcap/packages/ruby-2.7-test/bosh/runtime.env"
+cd /var/vcap/packages/ruby-2.7-test/
+bundle exec thin start &
+sleep 3
+curl http://localhost:3000 | grep test
+kill -9 $!
+
+gems_version=$(bundle exec gem -v)
+if [[ $gems_version == *"$ASSERT_GEM_VERSION"* ]]; then
+  echo "found correct rubygems version $gems_version"
+else
+  echo "wrong rubygems version: $gems_version"
+  exit 1
+fi
