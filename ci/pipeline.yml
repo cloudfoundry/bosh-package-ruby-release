@@ -138,21 +138,21 @@ jobs:
 - name: bump-2.7
   serial: true
   plan:
-    - in_parallel:
-        - get: ruby
-          resource: ruby-2.7
-          trigger: true
-        - get: rubygems
-          resource: rubygems-3.1
-          trigger: true
-        - get: yaml-0.1
-          trigger: true
-        - get: ruby-release
-        - get: stemcell
-        - get: bosh-src
-        - get: semver
-          params:
-            bump: minor
+  - in_parallel:
+    - get: ruby
+      resource: ruby-2.7
+      trigger: true
+    - get: rubygems
+      resource: rubygems-3.1
+      trigger: true
+    - get: yaml-0.1
+      trigger: true
+    - get: ruby-release
+    - get: stemcell
+    - get: bosh-src
+    - get: semver
+      params:
+        bump: minor
   - task: bump
     file: ruby-release/ci/tasks/bump.yml
     params:
@@ -170,16 +170,16 @@ jobs:
     params:
       PRIVATE_YML: ((s3_private_yml))
   - in_parallel:
-      - put: semver
-        params:
-          file: semver/version
-      - put: ruby-release
-        params:
-          rebase: true
-          repository: finalized-release
-          tag: semver/version
-          tag_prefix: v
-          annotate: version-tag/annotate-msg
+    - put: semver
+      params:
+        file: semver/version
+    - put: ruby-release
+      params:
+        rebase: true
+        repository: finalized-release
+        tag: semver/version
+        tag_prefix: v
+        annotate: version-tag/annotate-msg
 
 resources:
 - name: bosh-src
