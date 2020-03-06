@@ -29,6 +29,20 @@ jobs:
       RUBY_VERSION: "2.6"
     file: ruby-release/ci/tasks/test.yml
 
+- name: test-2.7
+  serial: true
+  plan:
+  - in_parallel:
+      - get: ruby-release
+        trigger: true
+      - get: stemcell
+        trigger: true
+  - task: test
+    privileged: true
+    params:
+      RUBY_VERSION: "2.7"
+    file: ruby-release/ci/tasks/test.yml
+
 - name: bump-2.5
   serial: true
   plan:
@@ -120,6 +134,52 @@ jobs:
         tag: semver/version
         tag_prefix: v
         annotate: version-tag/annotate-msg
+
+- name: bump-2.7
+  serial: true
+  plan:
+    - in_parallel:
+        - get: ruby
+          resource: ruby-2.7
+          trigger: true
+        - get: rubygems
+          resource: rubygems-3.1
+          trigger: true
+        - get: yaml-0.1
+          trigger: true
+        - get: ruby-release
+        - get: stemcell
+        - get: bosh-src
+        - get: semver
+          params:
+            bump: minor
+  - task: bump
+    file: ruby-release/ci/tasks/bump.yml
+    params:
+      PRIVATE_YML: ((s3_private_yml))
+      RUBY_VERSION: "2.7"
+      RUBYGEMS_VERSION: "3.1"
+      LIBYAML_VERSION: "0.1"
+  - task: test-bumped
+    privileged: true
+    file: ruby-release/ci/tasks/test.yml
+    params:
+      RUBY_VERSION: "2.7"
+  - task: finalize
+    file: ruby-release/ci/tasks/finalize.yml
+    params:
+      PRIVATE_YML: ((s3_private_yml))
+  - in_parallel:
+      - put: semver
+        params:
+          file: semver/version
+      - put: ruby-release
+        params:
+          rebase: true
+          repository: finalized-release
+          tag: semver/version
+          tag_prefix: v
+          annotate: version-tag/annotate-msg
 
 resources:
 - name: bosh-src
@@ -273,6 +333,31 @@ resources:
         }
        ]
       }'
+
+- name: ruby-2.7
+  type: dynamic-metalink
+  source:
+    version: "2.7.x"
+    version_check: |
+      curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/stable.txt
+    metalink_get: |
+      export name="ruby-${version}.tar.gz"
+      export url="http://cache.ruby-lang.org/pub/ruby/2.7/${name}"
+      export sha256="$(curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/checksums.sha256 | grep ruby-${version}.tar.gz | awk {'print $1'})"
+      export size="$(curl --silent --head "$url" | grep -i Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]')"
+      jq -n '
+      {
+       "files": [
+        {
+         "name": env.name,
+         "urls": [ { "url": env.url } ],
+         "hashes": [{ "type": "sha-256", "hash": env.sha256 }],
+         "size": env.size | tonumber
+        }
+       ]
+      }'
+
+
 
 resource_types:
 - name: dynamic-metalink
