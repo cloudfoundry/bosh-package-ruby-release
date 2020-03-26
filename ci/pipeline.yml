@@ -11,6 +11,7 @@ jobs:
       trigger: true
   - task: test
     privileged: true
+    timeout: 15m
     params:
       RUBY_VERSION: "2.5"
     file: ruby-release/ci/tasks/test.yml
@@ -24,6 +25,7 @@ jobs:
     - get: stemcell
       trigger: true
   - task: test
+    timeout: 15m
     privileged: true
     params:
       RUBY_VERSION: "2.6"
@@ -38,6 +40,7 @@ jobs:
       - get: stemcell
         trigger: true
   - task: test
+    timeout: 15m
     privileged: true
     params:
       RUBY_VERSION: "2.7"
