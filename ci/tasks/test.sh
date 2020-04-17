@@ -15,7 +15,7 @@ bosh create-release \
   --force
 
 echo "-----> $(date): Starting BOSH"
-start-bosh
+source start-bosh
 
 source /tmp/local-bosh/director/env
 
