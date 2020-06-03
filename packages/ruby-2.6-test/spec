@@ -2,7 +2,7 @@
 name: ruby-2.6-test
 
 dependencies:
-- ruby-2.6.6-r0.35.0
+- ruby-2.6.6-r0.36.0
 
 files:
 - test-app/**/*

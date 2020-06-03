@@ -1,5 +1,5 @@
 ---
-name: ruby-2.6.6-r0.35.0
+name: ruby-2.6.6-r0.36.0
 
 files:
 - compile-2.6.6.env
@@ -8,6 +8,6 @@ files:
 - gemrc
 - overwrite_shebang.rb
 - ruby-2.6.6.tar.gz
-- rubygems-3.1.3.tgz
+- rubygems-3.1.4.tgz
 - runtime-2.6.6.env
 - yaml-0.1.7.tar.gz
