@@ -2,12 +2,12 @@
 
 set -eux
 
-ASSERT_GEM_VERSION=3.1.3
+ASSERT_GEM_VERSION=3.1.4
 
 echo "Testing runtime compability"
 
 # shellcheck disable=1091
-source "/var/vcap/packages/ruby-2.7.1-r0.34.0/bosh/runtime.env"
+source "/var/vcap/packages/ruby-2.7.1-r0.37.0/bosh/runtime.env"
 ruby -e 'puts "test"'
 
 echo "Testing compile compability"
