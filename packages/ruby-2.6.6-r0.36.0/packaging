@@ -49,7 +49,7 @@ cp runtime-2.6.6.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
-tar zxvf "rubygems-${RUBYGEMS_VERSION}.tgz"
+tar zxvf "rubygems-${RUBYGEMS_VERSION}.tgz" --no-same-owner
 (
   set -e
   cd "rubygems-${RUBYGEMS_VERSION}"
