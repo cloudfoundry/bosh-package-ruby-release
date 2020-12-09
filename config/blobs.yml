@@ -10,10 +10,10 @@ ruby-2.7.2.tar.gz:
   size: 16836767
   object_id: 54f604d0-6628-4cd6-5fc7-f3e9b9d3c8de
   sha: sha256:6e5706d0d4ee4e1e2f883db9d768586b4d06567debea353c796ec45e8321c3d4
-rubygems-2.7.10.tgz:
-  size: 863618
-  object_id: 9e014999-f90e-4c63-797a-60b8f31a1caa
-  sha: sha256:d81dda6d8c54849cda16a95ae0216516deaa0f59ed3c123222128b15723a82ad
+rubygems-2.7.11.tgz:
+  size: 861642
+  object_id: 9d37572e-b98b-414c-6e4c-a9e01a443c2c
+  sha: sha256:732224cc49e82bd4beacbfe6b86384a8a0ed4432f65e7a08a5b2d766059e882f
 rubygems-3.1.4.tgz:
   size: 997835
   object_id: 9369c764-654f-4c33-7d7e-a6c4d6f5ed14
