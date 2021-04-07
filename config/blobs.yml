@@ -6,10 +6,10 @@ ruby-2.6.7.tar.gz:
   size: 16198982
   object_id: e2a27af9-2bdd-4a35-7fc8-36cd8b605e05
   sha: sha256:e4227e8b7f65485ecb73397a83e0d09dcd39f25efd411c782b69424e55c7a99e
-ruby-2.7.2.tar.gz:
-  size: 16836767
-  object_id: 54f604d0-6628-4cd6-5fc7-f3e9b9d3c8de
-  sha: sha256:6e5706d0d4ee4e1e2f883db9d768586b4d06567debea353c796ec45e8321c3d4
+ruby-2.7.3.tar.gz:
+  size: 16912725
+  object_id: 057b1b78-b20e-4621-5f70-cfac081a9d05
+  sha: sha256:8925a95e31d8f2c81749025a52a544ea1d05dad18794e6828709268b92e55338
 rubygems-2.7.11.tgz:
   size: 861642
   object_id: 9d37572e-b98b-414c-6e4c-a9e01a443c2c
@@ -18,6 +18,10 @@ rubygems-3.1.5.tgz:
   size: 995812
   object_id: 93e1458a-df50-4e3a-73c4-c4ee7b8458ec
   sha: sha256:bd4377b0a42b5d299834ef2de7693831f89662356123d3c7a8def237ade15033
+rubygems-3.2.15.tgz:
+  size: 987857
+  object_id: 05704225-707f-49c2-6057-d0bcf1d5be85
+  sha: sha256:110f1c8e0d35b5646559b3d8f66a80b7dfdbef6aa736f532a276d1d2be7cf05c
 yaml-0.1.7.tar.gz:
   size: 527518
   object_id: b327fbb6-37bd-4f57-7a9b-42bf7fd79473
