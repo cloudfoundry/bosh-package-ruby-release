@@ -6,7 +6,7 @@ templates:
   cpi: bin/cpi
 
 packages:
-- ruby-2.7.3-r0.44.0
+- ruby-2.7.3-r0.45.0
 - ruby-2.7-test
 
 properties: {}
