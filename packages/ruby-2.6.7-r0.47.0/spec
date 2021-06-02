@@ -1,5 +1,5 @@
 ---
-name: ruby-2.6.7-r0.42.0
+name: ruby-2.6.7-r0.47.0
 
 files:
 - compile-2.6.7.env
