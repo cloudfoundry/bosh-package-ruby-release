@@ -1,5 +1,5 @@
 ---
-name: ruby-2.7.3-r0.46.0
+name: ruby-2.7.3-r0.49.0
 
 files:
 - compile-2.7.3.env

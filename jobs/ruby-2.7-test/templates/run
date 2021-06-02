@@ -7,7 +7,7 @@ ASSERT_GEM_VERSION=3.2.19
 echo "Testing runtime compability"
 
 # shellcheck disable=1091
-source "/var/vcap/packages/ruby-2.7.3-r0.46.0/bosh/runtime.env"
+source "/var/vcap/packages/ruby-2.7.3-r0.49.0/bosh/runtime.env"
 ruby -e 'puts "test"'
 
 echo "Testing compile compability"
