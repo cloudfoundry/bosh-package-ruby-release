@@ -27,7 +27,8 @@ jobs:
     - get: rubygems
       resource: rubygems-(@= ruby.rubygems @)
       trigger: true
-    - get: yaml-0.1
+    - get: libyaml
+      resource: yaml-(@= ruby.libyaml @)
       trigger: true
     - get: ruby-release
     - get: stemcell
