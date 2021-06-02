@@ -1,0 +1,24 @@
+#@data/values
+---
+rubies:
+- version: "2.5"
+  rubygems: "2.7"
+  libyaml: "0.1"
+- version: "2.6"
+  rubygems: "3.1"
+  libyaml: "0.1"
+- version: "2.7"
+  rubygems: "3.2"
+  libyaml: "0.1"
+- version: "3.0"
+  rubygems: "3.2"
+  libyaml: "0.2"
+
+rubygems:
+- version: "2.7"
+- version: "3.1"
+- version: "3.2"
+
+libyamls:
+- version: "0.1"
+- version: "0.2"

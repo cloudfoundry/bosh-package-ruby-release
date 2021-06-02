@@ -9,7 +9,7 @@ image_resource:
 inputs:
 - name: ruby
 - name: rubygems
-- name: yaml-0.1
+- name: libyaml
 - name: ruby-release
 - name: semver
 

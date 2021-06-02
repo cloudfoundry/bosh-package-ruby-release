@@ -34,8 +34,8 @@ ruby_blob=$(basename "$(ls ../"ruby"/*)")
 ruby_version="$(cat ../"ruby"/.resource/version)"
 rubygems_blob=$(basename "$(ls ../"rubygems"/*)")
 rubygems_version="$(cat ../"rubygems"/.resource/version)"
-yaml_blob=$(basename "$(ls ../"yaml-$LIBYAML_VERSION"/*)")
-yaml_version="$(cat ../"yaml-$LIBYAML_VERSION"/.resource/version)"
+yaml_blob=$(basename "$(ls ../libyaml/*)")
+yaml_version="$(cat ../libyaml/.resource/version)"
 ruby_packagename=${ruby_blob/.tar.gz/}-r${bosh_release_version}
 test_packagename="ruby-$RUBY_VERSION-test"
 

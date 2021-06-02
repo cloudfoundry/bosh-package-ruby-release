@@ -5,9 +5,10 @@ if [[ $(lpass status -q; echo $?) != 0 ]]; then
   exit 1
 fi
 
-dir=$(dirname $0)
+pipeline_config=$(mktemp)
+ytt -f "$(dirname $0)" > $pipeline_config
 
 fly -t ${CONCOURSE_TARGET:-director} \
   sp -p ruby-release \
-  -c $dir/pipeline.yml \
+  -c $pipeline_config \
   -l <(lpass show --notes 'ruby-release pipeline vars')

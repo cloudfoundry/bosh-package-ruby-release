@@ -1,7 +1,8 @@
----
-
+#@ load("@ytt:data", "data")
+#@yaml/text-templated-strings
 jobs:
-- name: test-2.5
+#@ for ruby in data.values.rubies:
+- name: test-(@= ruby.version @)
   serial: true
   plan:
   - in_parallel:
@@ -13,50 +14,21 @@ jobs:
     privileged: true
     timeout: 2h
     params:
-      RUBY_VERSION: "2.5"
+      RUBY_VERSION: "(@= ruby.version @)"
     file: ruby-release/ci/tasks/test.yml
 
-- name: test-2.6
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ruby-release
-      trigger: true
-    - get: stemcell
-      trigger: true
-  - task: test
-    timeout: 2h
-    privileged: true
-    params:
-      RUBY_VERSION: "2.6"
-    file: ruby-release/ci/tasks/test.yml
-
-- name: test-2.7
-  serial: true
-  plan:
-  - in_parallel:
-      - get: ruby-release
-        trigger: true
-      - get: stemcell
-        trigger: true
-  - task: test
-    timeout: 2h
-    privileged: true
-    params:
-      RUBY_VERSION: "2.7"
-    file: ruby-release/ci/tasks/test.yml
-
-- name: bump-2.5
+- name: bump-(@= ruby.version @)
   serial: true
   plan:
   - in_parallel:
     - get: ruby
-      resource: ruby-2.5
+      resource: ruby-(@= ruby.version @)
       trigger: true
     - get: rubygems
-      resource: rubygems-2.7
+      resource: rubygems-(@= ruby.rubygems @)
       trigger: true
-    - get: yaml-0.1
+    - get: libyaml
+      resource: yaml-(@= ruby.libyaml @)
       trigger: true
     - get: ruby-release
     - get: stemcell
@@ -68,14 +40,14 @@ jobs:
     file: ruby-release/ci/tasks/bump.yml
     params:
       PRIVATE_YML: ((s3_private_yml))
-      RUBY_VERSION: "2.5"
-      RUBYGEMS_VERSION: "2.7"
-      LIBYAML_VERSION: "0.1"
+      RUBY_VERSION: "(@= ruby.version @)"
+      RUBYGEMS_VERSION: "(@= ruby.rubygems @)"
+      LIBYAML_VERSION: "(@= ruby.libyaml @)"
   - task: test-bumped
     privileged: true
     file: ruby-release/ci/tasks/test.yml
     params:
-      RUBY_VERSION: "2.5"
+      RUBY_VERSION: "(@= ruby.version @)"
   - task: finalize
     file: ruby-release/ci/tasks/finalize.yml
     params:
@@ -91,99 +63,9 @@ jobs:
         tag: semver/version
         tag_prefix: v
         annotate: version-tag/annotate-msg
+#@ end
 
-- name: bump-2.6
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ruby
-      resource: ruby-2.6
-      trigger: true
-    - get: rubygems
-      resource: rubygems-3.1
-      trigger: true
-    - get: yaml-0.1
-      trigger: true
-    - get: ruby-release
-    - get: stemcell
-    - get: bosh-src
-    - get: semver
-      params:
-        bump: minor
-  - task: bump
-    file: ruby-release/ci/tasks/bump.yml
-    params:
-      PRIVATE_YML: ((s3_private_yml))
-      RUBY_VERSION: "2.6"
-      RUBYGEMS_VERSION: "3.1"
-      LIBYAML_VERSION: "0.1"
-  - task: test-bumped
-    privileged: true
-    file: ruby-release/ci/tasks/test.yml
-    params:
-      RUBY_VERSION: "2.6"
-  - task: finalize
-    file: ruby-release/ci/tasks/finalize.yml
-    params:
-      PRIVATE_YML: ((s3_private_yml))
-  - in_parallel:
-    - put: semver
-      params:
-        file: semver/version
-    - put: ruby-release
-      params:
-        rebase: true
-        repository: finalized-release
-        tag: semver/version
-        tag_prefix: v
-        annotate: version-tag/annotate-msg
-
-- name: bump-2.7
-  serial: true
-  plan:
-  - in_parallel:
-    - get: ruby
-      resource: ruby-2.7
-      trigger: true
-    - get: rubygems
-      resource: rubygems-3.2
-      trigger: true
-    - get: yaml-0.1
-      trigger: true
-    - get: ruby-release
-    - get: stemcell
-    - get: bosh-src
-    - get: semver
-      params:
-        bump: minor
-  - task: bump
-    file: ruby-release/ci/tasks/bump.yml
-    params:
-      PRIVATE_YML: ((s3_private_yml))
-      RUBY_VERSION: "2.7"
-      RUBYGEMS_VERSION: "3.2"
-      LIBYAML_VERSION: "0.1"
-  - task: test-bumped
-    privileged: true
-    file: ruby-release/ci/tasks/test.yml
-    params:
-      RUBY_VERSION: "2.7"
-  - task: finalize
-    file: ruby-release/ci/tasks/finalize.yml
-    params:
-      PRIVATE_YML: ((s3_private_yml))
-  - in_parallel:
-    - put: semver
-      params:
-        file: semver/version
-    - put: ruby-release
-      params:
-        rebase: true
-        repository: finalized-release
-        tag: semver/version
-        tag_prefix: v
-        annotate: version-tag/annotate-msg
-
+#@yaml/text-templated-strings
 resources:
 - name: bosh-src
   type: git
@@ -211,10 +93,11 @@ resources:
     access_key_id: ((s3_aws_access_key_id))
     secret_access_key: ((s3_aws_secret_access_key))
 
-- name: rubygems-2.7
+#@ for rubygems in data.values.rubygems:
+- name: rubygems-(@= rubygems.version @)
   type: dynamic-metalink
   source:
-    version: "2.7.x"
+    version: "(@= rubygems.version @).x"
     version_check: |
      git ls-remote --tags https://github.com/rubygems/rubygems.git \
        | cut -f2 \
@@ -237,65 +120,13 @@ resources:
         }
        ]
       }'
+#@ end
 
-- name: rubygems-3.1
+#@ for libyaml in data.values.libyamls:
+- name: yaml-(@= libyaml.version @)
   type: dynamic-metalink
   source:
-    version: "3.1.x"
-    version_check: |
-     git ls-remote --tags https://github.com/rubygems/rubygems.git \
-       | cut -f2 \
-       | grep -v '\^{}' \
-       | grep -E '^refs/tags/.+$' \
-       | sed  -E 's/^refs\/tags\/(.+)$/\1/'  \
-       | sed  's/^v//' \
-       | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
-    metalink_get: |
-      export name="rubygems-${version}.tgz"
-      export url="https://rubygems.org/rubygems/rubygems-${version}.tgz"
-      export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
-      jq -n '
-      {
-       "files": [
-        {
-         "name": env.name,
-         "urls": [ { "url": env.url } ],
-         "size": env.size | tonumber
-        }
-       ]
-      }'
-
-- name: rubygems-3.2
-  type: dynamic-metalink
-  source:
-    version: "3.2.x"
-    version_check: |
-     git ls-remote --tags https://github.com/rubygems/rubygems.git \
-       | cut -f2 \
-       | grep -v '\^{}' \
-       | grep -E '^refs/tags/.+$' \
-       | sed  -E 's/^refs\/tags\/(.+)$/\1/'  \
-       | sed  's/^v//' \
-       | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
-    metalink_get: |
-      export name="rubygems-${version}.tgz"
-      export url="https://rubygems.org/rubygems/rubygems-${version}.tgz"
-      export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
-      jq -n '
-      {
-       "files": [
-        {
-         "name": env.name,
-         "urls": [ { "url": env.url } ],
-         "size": env.size | tonumber
-        }
-       ]
-      }'
-
-- name: yaml-0.1
-  type: dynamic-metalink
-  source:
-    version: "0.1.x"
+    version: "(@= libyaml.version @).x"
     version_check: |
      git ls-remote --tags https://github.com/yaml/libyaml.git \
        | cut  -f2 \
@@ -317,16 +148,18 @@ resources:
         }
        ]
       }'
+#@ end
 
-- name: ruby-2.5
+#@ for ruby in data.values.rubies:
+- name: ruby-(@= ruby.version @)
   type: dynamic-metalink
   source:
-    version: "2.5.x"
+    version: "(@= ruby.version @).x"
     version_check: |
       curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/stable.txt
     metalink_get: |
       export name="ruby-${version}.tar.gz"
-      export url="http://cache.ruby-lang.org/pub/ruby/2.5/${name}"
+      export url="http://cache.ruby-lang.org/pub/ruby/(@= ruby.version @)/${name}"
       export sha256="$(curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/checksums.sha256 | grep ruby-${version}.tar.gz | awk {'print $1'})"
       export size="$(curl --silent --head "$url" | grep -i Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]')"
       jq -n '
@@ -340,54 +173,7 @@ resources:
         }
        ]
       }'
-
-- name: ruby-2.6
-  type: dynamic-metalink
-  source:
-    version: "2.6.x"
-    version_check: |
-      curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/stable.txt
-    metalink_get: |
-      export name="ruby-${version}.tar.gz"
-      export url="http://cache.ruby-lang.org/pub/ruby/2.6/${name}"
-      export sha256="$(curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/checksums.sha256 | grep ruby-${version}.tar.gz | awk {'print $1'})"
-      export size="$(curl --silent --head "$url" | grep -i Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]')"
-      jq -n '
-      {
-       "files": [
-        {
-         "name": env.name,
-         "urls": [ { "url": env.url } ],
-         "hashes": [{ "type": "sha-256", "hash": env.sha256 }],
-         "size": env.size | tonumber
-        }
-       ]
-      }'
-
-- name: ruby-2.7
-  type: dynamic-metalink
-  source:
-    version: "2.7.x"
-    version_check: |
-      curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/stable.txt
-    metalink_get: |
-      export name="ruby-${version}.tar.gz"
-      export url="http://cache.ruby-lang.org/pub/ruby/2.7/${name}"
-      export sha256="$(curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/checksums.sha256 | grep ruby-${version}.tar.gz | awk {'print $1'})"
-      export size="$(curl --silent --head "$url" | grep -i Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]')"
-      jq -n '
-      {
-       "files": [
-        {
-         "name": env.name,
-         "urls": [ { "url": env.url } ],
-         "hashes": [{ "type": "sha-256", "hash": env.sha256 }],
-         "size": env.size | tonumber
-        }
-       ]
-      }'
-
-
+#@ end
 
 resource_types:
 - name: dynamic-metalink
