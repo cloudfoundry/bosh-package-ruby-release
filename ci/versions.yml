@@ -10,6 +10,9 @@ rubies:
 - version: "2.7"
   rubygems: "3.2"
   libyaml: "0.1"
+- version: "3.0"
+  rubygems: "3.2"
+  libyaml: "0.2"
 
 rubygems:
 - version: "2.7"
@@ -18,3 +21,4 @@ rubygems:
 
 libyamls:
 - version: "0.1"
+- version: "0.2"
