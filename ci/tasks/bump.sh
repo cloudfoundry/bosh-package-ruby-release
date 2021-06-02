@@ -44,7 +44,7 @@ echo "-----> $(date): Updating blobs"
 bosh blobs
 replace_if_necessary "ruby-$RUBY_VERSION" "$ruby_blob" "../ruby"
 replace_if_necessary "rubygems-$RUBYGEMS_VERSION" "$rubygems_blob" "../rubygems"
-replace_if_necessary "yaml-$LIBYAML_VERSION" "$yaml_blob"
+replace_if_necessary "yaml-$LIBYAML_VERSION" "$yaml_blob" "../libyaml"
 
 echo "-----> $(date): Rendering package and job templates"
 
