@@ -1,0 +1,13 @@
+---
+name: ruby-3.0.1-r0.50.0
+
+files:
+- compile-3.0.1.env
+- config/config.guess
+- config/config.sub
+- gemrc
+- overwrite_shebang.rb
+- ruby-3.0.1.tar.gz
+- rubygems-3.2.19.tgz
+- runtime-3.0.1.env
+- yaml-0.2.5.tar.gz
