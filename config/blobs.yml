@@ -2,10 +2,10 @@ ruby-2.5.8.tar.gz:
   size: 15682927
   object_id: 389b4859-ad0c-4912-78e4-ee9aefc3a5f2
   sha: sha256:6c0bdf07876c69811a9e7dc237c43d40b1cb6369f68e0e17953d7279b524ad9a
-ruby-2.6.7.tar.gz:
-  size: 16198982
-  object_id: e2a27af9-2bdd-4a35-7fc8-36cd8b605e05
-  sha: sha256:e4227e8b7f65485ecb73397a83e0d09dcd39f25efd411c782b69424e55c7a99e
+ruby-2.6.8.tar.gz:
+  size: 16202660
+  object_id: c5db7568-6fe6-40dc-60d3-5228b87b0f93
+  sha: sha256:1807b78577bc08596a390e8a41aede37b8512190e05c133b17d0501791a8ca6d
 ruby-2.7.3.tar.gz:
   size: 16912725
   object_id: 057b1b78-b20e-4621-5f70-cfac081a9d05
