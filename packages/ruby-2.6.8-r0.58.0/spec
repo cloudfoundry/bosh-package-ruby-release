@@ -1,5 +1,5 @@
 ---
-name: ruby-2.6.8-r0.54.0
+name: ruby-2.6.8-r0.58.0
 
 files:
 - compile-2.6.8.env
