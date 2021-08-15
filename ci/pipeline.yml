@@ -19,6 +19,8 @@ jobs:
 
 - name: bump-(@= ruby.version @)
   serial: true
+  serial_groups:
+    - bump
   plan:
   - in_parallel:
     - get: ruby
