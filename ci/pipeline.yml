@@ -20,7 +20,8 @@ jobs:
 - name: bump-(@= ruby.version @)
   serial: true
   serial_groups:
-    - bump
+    - rubygems-(@= ruby.rubygems @)
+    - yaml-(@= ruby.libyaml @)
   plan:
   - in_parallel:
     - get: ruby
@@ -85,7 +86,7 @@ resources:
 - name: stemcell
   type: bosh-io-stemcell
   source:
-    name: bosh-warden-boshlite-ubuntu-xenial-go_agent
+    name: bosh-warden-boshlite-ubuntu-bionic-go_agent
 
 - name: semver
   type: semver
