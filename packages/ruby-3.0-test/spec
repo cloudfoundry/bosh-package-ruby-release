@@ -2,7 +2,7 @@
 name: ruby-3.0-test
 
 dependencies:
-- ruby-3.0.2-r0.60.0
+- ruby-3.0.2-r0.61.0
 
 files:
 - test-app/**/*
