@@ -11,3 +11,4 @@ files:
 - rubygems-3.2.28.tgz
 - runtime-3.0.2.env
 - yaml-0.2.5.tar.gz
+- patches/libyaml-0.2.5.patch
