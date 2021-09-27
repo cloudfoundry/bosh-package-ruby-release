@@ -11,3 +11,4 @@ files:
 - <%= rubygems_blob %>
 - runtime-<%= ruby_version %>.env
 - <%= yaml_blob %>
+<%= /^0\.2/ =~ yaml_version ? "- patches/libyaml-#{yaml_version}.patch" : "" %>
