@@ -19,6 +19,8 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
   set -e
   cd "yaml-${LIBYAML_VERSION}"
 
+  <%= /^0\.2/ =~ yaml_version ? "patch -p1 < ../patches/libyaml-#{yaml_version}.patch" : "" %>
+
   if [ "$(uname -m)" == "ppc64le" ]; then
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
   fi
