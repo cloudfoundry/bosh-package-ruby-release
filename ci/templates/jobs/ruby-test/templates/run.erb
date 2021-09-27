@@ -10,6 +10,11 @@ echo "Testing runtime compability"
 source "/var/vcap/packages/<%= ruby_packagename %>/bosh/runtime.env"
 ruby -e 'puts "test"'
 
+if [ $(ruby -e 'require "yaml"; puts({a: "b\n\n\n"}.to_yaml)' | grep "\.\.\.") ]; then
+  echo "Found unpatched libyaml"
+  exit 1
+fi
+
 echo "Testing compile compability"
 
 # shellcheck disable=1091
