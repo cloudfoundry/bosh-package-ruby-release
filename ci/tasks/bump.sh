@@ -39,7 +39,7 @@ ruby_packagename=${ruby_blob/.tar.gz/}-r${bosh_release_version}
 test_packagename="ruby-$RUBY_VERSION-test"
 
 if [ "${LIBYAML_VERSION}" != "0.1" ]; then
-  if [ ! -e ./src/patches/libyaml-${yaml_version}.patch ]
+  if [ ! -e ./src/patches/libyaml-${yaml_version}.patch ]; then
     echo "src/patches/libyaml-${yaml_version}.patch not found! Create patch to revert ... behavior."
     exit 1
   fi
