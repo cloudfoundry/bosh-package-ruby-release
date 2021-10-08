@@ -3,7 +3,7 @@
 set -e
 
 RUBY_VERSION=2.7.4
-RUBYGEMS_VERSION=3.2.28
+RUBYGEMS_VERSION=3.2.29
 LIBYAML_VERSION=0.1.7
 
 openssl_version=$(PATH=/usr/local/opt/openssl/bin:${PATH} openssl version)
@@ -18,6 +18,8 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
 (
   set -e
   cd "yaml-${LIBYAML_VERSION}"
+
+  
 
   if [ "$(uname -m)" == "ppc64le" ]; then
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
