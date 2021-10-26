@@ -14,10 +14,6 @@ rubygems-3.1.5.tgz:
   size: 995812
   object_id: 93e1458a-df50-4e3a-73c4-c4ee7b8458ec
   sha: sha256:bd4377b0a42b5d299834ef2de7693831f89662356123d3c7a8def237ade15033
-rubygems-3.2.29.tgz:
-  size: 1238459
-  object_id: 6d0a1d70-0ea4-4d77-551e-7f1aa90fd10d
-  sha: sha256:878ed074fab60e148401dd8772c4e993d8cd44eadd565e1ce20c91d45eec4850
 rubygems-3.2.30.tgz:
   size: 1241925
   object_id: 4fdc8efa-61fa-42c0-72fb-1653ca9608c9
