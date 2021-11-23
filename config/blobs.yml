@@ -18,6 +18,10 @@ rubygems-3.2.31.tgz:
   size: 1271401
   object_id: ec2ea38d-7536-479d-6354-adaa96351234
   sha: sha256:7c2623aeed99eb30fd38ec1ae81776d6dce33039ebcd94f763a4ab3d45c23fcb
+rubygems-3.2.32.tgz:
+  size: 1271039
+  object_id: f81dfa4e-70de-475f-6bcb-7f3bbeb46fc6
+  sha: sha256:1a8223ad81c442badc4735df35d92a642401419fd107942966d4f0468a500b9c
 yaml-0.1.7.tar.gz:
   size: 527518
   object_id: b327fbb6-37bd-4f57-7a9b-42bf7fd79473

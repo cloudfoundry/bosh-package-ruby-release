@@ -3,7 +3,7 @@
 set -e
 
 RUBY_VERSION=2.7.4
-RUBYGEMS_VERSION=3.2.31
+RUBYGEMS_VERSION=3.2.32
 LIBYAML_VERSION=0.1.7
 
 openssl_version=$(PATH=/usr/local/opt/openssl/bin:${PATH} openssl version)
