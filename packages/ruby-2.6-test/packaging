@@ -5,10 +5,10 @@ set -eux
 PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
 
 # shellcheck disable=1090
-source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.6.8-r0.58.0/bosh/compile.env"
+source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.6.9-r0.77.0/bosh/compile.env"
 
 if [[ "${PLATFORM}" == "darwin" ]]; then
-  "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.6.8-r0.58.0/bin/gem" install nokogiri
+  "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-2.6.9-r0.77.0/bin/gem" install nokogiri
   exit 0
 fi
 

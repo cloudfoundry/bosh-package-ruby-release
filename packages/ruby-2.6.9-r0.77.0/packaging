@@ -2,7 +2,7 @@
 
 set -e
 
-RUBY_VERSION=2.6.8
+RUBY_VERSION=2.6.9
 RUBYGEMS_VERSION=3.1.5
 LIBYAML_VERSION=0.1.7
 
@@ -18,6 +18,8 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
 (
   set -e
   cd "yaml-${LIBYAML_VERSION}"
+
+  
 
   if [ "$(uname -m)" == "ppc64le" ]; then
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
@@ -44,8 +46,8 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
 
 mkdir "${BOSH_INSTALL_TARGET}/bosh"
 cp gemrc "${BOSH_INSTALL_TARGET}/bosh/gemrc"
-cp compile-2.6.8.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
-cp runtime-2.6.8.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
+cp compile-2.6.9.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+cp runtime-2.6.9.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
