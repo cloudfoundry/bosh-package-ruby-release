@@ -1,0 +1,8 @@
+---
+name: ruby-3.1-test
+
+dependencies:
+- ruby-3.1.0-r0.81.0
+
+files:
+- test-app/**/*
