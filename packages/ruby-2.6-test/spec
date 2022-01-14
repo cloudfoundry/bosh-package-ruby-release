@@ -1,8 +1,0 @@
----
-name: ruby-2.6-test
-
-dependencies:
-- ruby-2.6.9-r0.77.0
-
-files:
-- test-app/**/*
