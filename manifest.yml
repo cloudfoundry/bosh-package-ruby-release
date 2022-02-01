@@ -1,0 +1,27 @@
+name: debug
+instance_groups:
+- azs: [az1]
+  instances: 1
+  jobs:
+  - name: ruby-2.7-test
+    release: ruby
+  name: debug
+  networks:
+  - name: default
+  stemcell: default
+  vm_type: default
+releases:
+- name: ruby
+  version: latest
+variables:
+- name: ssh
+  type: ssh
+stemcells:
+- alias: default
+  os: ubuntu-jammy
+  version: latest
+update:
+  canaries: 2
+  canary_watch_time: 5000-60000
+  max_in_flight: 1
+  update_watch_time: 5000-60000
