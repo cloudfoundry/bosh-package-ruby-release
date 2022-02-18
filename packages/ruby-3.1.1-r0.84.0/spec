@@ -1,14 +1,14 @@
 ---
-name: ruby-3.1.0-r0.83.0
+name: ruby-3.1.1-r0.84.0
 
 files:
-- compile-3.1.0.env
+- compile-3.1.1.env
 - config/config.guess
 - config/config.sub
 - gemrc
 - overwrite_shebang.rb
-- ruby-3.1.0.tar.gz
+- ruby-3.1.1.tar.gz
 - rubygems-3.3.7.tgz
-- runtime-3.1.0.env
+- runtime-3.1.1.env
 - yaml-0.2.5.tar.gz
 - patches/libyaml-0.2.5.patch

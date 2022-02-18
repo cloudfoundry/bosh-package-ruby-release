@@ -6,7 +6,7 @@ templates:
   cpi: bin/cpi
 
 packages:
-- ruby-3.1.0-r0.83.0
+- ruby-3.1.1-r0.84.0
 - ruby-3.1-test
 
 properties: {}
