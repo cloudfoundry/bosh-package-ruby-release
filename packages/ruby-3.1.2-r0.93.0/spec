@@ -1,5 +1,5 @@
 ---
-name: ruby-3.1.2-r0.92.0
+name: ruby-3.1.2-r0.93.0
 
 files:
 - compile-3.1.2.env
@@ -8,7 +8,7 @@ files:
 - gemrc
 - overwrite_shebang.rb
 - ruby-3.1.2.tar.gz
-- rubygems-3.3.12.tgz
+- rubygems-3.3.13.tgz
 - runtime-3.1.2.env
 - yaml-0.2.5.tar.gz
 - patches/libyaml-0.2.5.patch
