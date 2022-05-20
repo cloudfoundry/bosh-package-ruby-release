@@ -8,16 +8,12 @@ $ cd ~/workspace/your-release
 $ bosh vendor-package <RUBY-PACKAGE-VERSION> ~/workspace/ruby-release
 ```
 
-Where RUBY-PACKAGE-VERSION is one of the provided ruby 2.5 or 2.6 package names
-(e.g. `ruby-2.6.5-r0.29.0` or `ruby-2.5.7-r0.25.0`).
+Where RUBY-PACKAGE-VERSION is one of the provided ruby package names
 The above code will add a ruby package to `your-release` and introduce a `spec.lock`.
 
-Included packages:
+A Concourse task can be found in `ci/tasks/shared` to automatically bump the package in your bosh release.
 
-- ruby package with the following blobs:
-  - ruby (2.5, or 2.6)
-  - rubygems (2.7, or 3.1)
-  - yaml (0.1)
+### Compile and Runtime functions and scripts
 
 Included functions in `compile.env`:
 
@@ -42,7 +38,3 @@ source /var/vcap/packages/<RUBY-PACKAGE-VERSION>/bosh/runtime.env
 source /var/vcap/packages/your-package/bosh/runtime.env
 bundle exec ...
 ```
-
-See [packages/ruby-2.5-test](packages/ruby-2.5-test) and [jobs/ruby-2.5-test](jobs/ruby-2.5-test) for a ruby 2.5 example.
-
-See [packages/ruby-2.6-test](packages/ruby-2.6-test) and [jobs/ruby-2.6-test](jobs/ruby-2.6-test) for a ruby 2.6 example.

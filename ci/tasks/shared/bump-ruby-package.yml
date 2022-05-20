@@ -1,0 +1,22 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: bosh/golang-release
+
+inputs:
+- name: bosh-release
+- name: ruby-release
+
+outputs:
+- name: bosh-release
+
+run:
+  path: ruby-release/ci/tasks/shared/bump-ruby-package.sh
+
+params:
+  GIT_USER_NAME: CI Bot
+  GIT_USER_EMAIL:
+  PACKAGE:
+  PRIVATE_YML:
