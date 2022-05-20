@@ -20,7 +20,7 @@ run:
   path: ruby-release/ci/tasks/bump.sh
 
 params:
-  PRIVATE_YAML: ~
-  RUBY_VERSION: ""
-  RUBYGEMS_VERSION: ""
-  LIBYAML_VERSION: ""
+  PRIVATE_YML:
+  RUBY_VERSION:
+  RUBYGEMS_VERSION:
+  LIBYAML_VERSION:
