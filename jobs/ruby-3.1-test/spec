@@ -3,10 +3,9 @@ name: ruby-3.1-test
 
 templates:
   run: bin/run
-  cpi: bin/cpi
 
 packages:
-- ruby-3.1.2-r0.94.0
+- ruby-3.1
 - ruby-3.1-test
 
 properties: {}
