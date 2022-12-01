@@ -59,8 +59,8 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
 
 mkdir "${BOSH_INSTALL_TARGET}/bosh"
 cp gemrc "${BOSH_INSTALL_TARGET}/bosh/gemrc"
-envsubst '$BOSH_INSTALL_TARGET' <compile-3.1.env | tee "${BOSH_INSTALL_TARGET}/bosh/compile.env"
-envsubst '$BOSH_INSTALL_TARGET' <runtime-3.1.env | tee "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
+cp compile-3.1.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+cp runtime-3.1.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 

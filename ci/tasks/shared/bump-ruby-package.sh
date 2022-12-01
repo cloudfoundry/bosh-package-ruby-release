@@ -11,7 +11,12 @@ git config --global user.email ${GIT_USER_EMAIL}
 
 echo "${PRIVATE_YML}" > config/private.yml
 
-bosh vendor-package ${PACKAGE} "$task_dir/ruby-release"
+prefix_arg=""
+if [ -n "${PACKAGE_PREFIX}" ]; then
+  prefix_arg="--prefix=${PACKAGE_PREFIX}"
+fi
+
+bosh vendor-package ${prefix_arg} ${PACKAGE} "$task_dir/ruby-release"
 
 if [ -z "$(git status --porcelain)" ]; then
   exit

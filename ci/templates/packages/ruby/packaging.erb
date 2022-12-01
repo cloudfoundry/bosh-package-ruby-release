@@ -59,8 +59,10 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
 
 mkdir "${BOSH_INSTALL_TARGET}/bosh"
 cp gemrc "${BOSH_INSTALL_TARGET}/bosh/gemrc"
-cp compile-<%= ruby_version %>.env "${BOSH_INSTALL_TARGET}/bosh/compile.env"
-cp runtime-<%= ruby_version %>.env "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
+
+export PACKAGE_NAME="$(basename ${BOSH_INSTALL_TARGET})"
+envsubst '${PACKAGE_NAME}' <compile-<%= ruby_version %>.env | tee "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+envsubst '${PACKAGE_NAME}' <runtime-<%= ruby_version %>.env | tee "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
