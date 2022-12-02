@@ -61,8 +61,8 @@ mkdir "${BOSH_INSTALL_TARGET}/bosh"
 cp gemrc "${BOSH_INSTALL_TARGET}/bosh/gemrc"
 
 export PACKAGE_NAME="$(basename ${BOSH_INSTALL_TARGET})"
-envsubst '${PACKAGE_NAME}' <compile-<%= ruby_version %>.env | tee "${BOSH_INSTALL_TARGET}/bosh/compile.env"
-envsubst '${PACKAGE_NAME}' <runtime-<%= ruby_version %>.env | tee "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
+sed "s#\${PACKAGE_NAME}#${PACKAGE_NAME}#" compile-<%= ruby_version %>.env > "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+sed "s#\${PACKAGE_NAME}#${PACKAGE_NAME}#" runtime-<%= ruby_version %>.env > "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
