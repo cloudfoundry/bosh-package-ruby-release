@@ -1,0 +1,11 @@
+---
+name: ruby-3.2-test
+
+templates:
+  run: bin/run
+
+packages:
+- ruby-3.2
+- ruby-3.2-test
+
+properties: {}

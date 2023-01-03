@@ -1,0 +1,8 @@
+---
+name: ruby-3.2-test
+
+dependencies:
+- ruby-3.2
+
+files:
+- test-app/**/*
