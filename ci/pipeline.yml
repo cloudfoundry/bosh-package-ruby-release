@@ -41,7 +41,12 @@ jobs:
   - task: bump
     file: ruby-release/ci/tasks/bump.yml
     params:
-      PRIVATE_YML: ((s3_private_yml))
+      PRIVATE_YML: |
+        ---
+        blobstore:
+          options:
+            access_key_id: ((bosh-packages-ruby-release-uploader_aws_access_key.username))
+            secret_access_key: ((bosh-packages-ruby-release-uploader_aws_access_key.password))
       RUBY_VERSION: "(@= ruby.version @)"
       RUBYGEMS_VERSION: "(@= ruby.rubygems @)"
       LIBYAML_VERSION: "(@= ruby.libyaml @)"
@@ -53,7 +58,12 @@ jobs:
   - task: finalize
     file: ruby-release/ci/tasks/finalize.yml
     params:
-      PRIVATE_YML: ((s3_private_yml))
+      PRIVATE_YML: |
+        ---
+        blobstore:
+          options:
+            access_key_id: ((bosh-packages-ruby-release-uploader_aws_access_key.username))
+            secret_access_key: ((bosh-packages-ruby-release-uploader_aws_access_key.password))
   - in_parallel:
     - put: semver
       params:
@@ -91,8 +101,8 @@ resources:
   source:
     bucket: bosh-packages-ruby-release
     key: version
-    access_key_id: ((s3_aws_access_key_id))
-    secret_access_key: ((s3_aws_secret_access_key))
+    access_key_id: ((bosh-packages-ruby-release-uploader_aws_access_key.username))
+    secret_access_key: ((bosh-packages-ruby-release-uploader_aws_access_key.password))
 
 #@ for rubygems in data.values.rubygems:
 - name: rubygems-(@= rubygems.version @)
