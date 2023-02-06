@@ -3,7 +3,7 @@
 set -e
 
 RUBY_VERSION=2.7.7
-RUBYGEMS_VERSION=3.2.33
+RUBYGEMS_VERSION=3.2.34
 LIBYAML_VERSION=0.1.7
 
 if [ $(uname -s) == "Darwin" ]; then
@@ -61,8 +61,8 @@ mkdir "${BOSH_INSTALL_TARGET}/bosh"
 cp gemrc "${BOSH_INSTALL_TARGET}/bosh/gemrc"
 
 export PACKAGE_NAME="$(basename ${BOSH_INSTALL_TARGET})"
-envsubst '${PACKAGE_NAME}' <compile-2.7.env | tee "${BOSH_INSTALL_TARGET}/bosh/compile.env"
-envsubst '${PACKAGE_NAME}' <runtime-2.7.env | tee "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
+sed "s#\${PACKAGE_NAME}#${PACKAGE_NAME}#" compile-2.7.env > "${BOSH_INSTALL_TARGET}/bosh/compile.env"
+sed "s#\${PACKAGE_NAME}#${PACKAGE_NAME}#" runtime-2.7.env > "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
 source "${BOSH_INSTALL_TARGET}/bosh/runtime.env"
 
