@@ -96,7 +96,7 @@ resources:
 - name: stemcell
   type: bosh-io-stemcell
   source:
-    name: bosh-warden-boshlite-ubuntu-bionic-go_agent
+    name: bosh-warden-boshlite-ubuntu-jammy-go_agent
 
 - name: semver
   type: semver
