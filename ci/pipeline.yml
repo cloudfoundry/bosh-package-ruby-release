@@ -16,6 +16,7 @@ jobs:
     timeout: 2h
     params:
       RUBY_VERSION: "(@= ruby.version @)"
+      STEMCELL: "(@= ruby.stemcell @)"
     file: ruby-release/ci/tasks/test.yml
 
 - name: bump-(@= ruby.version @)
