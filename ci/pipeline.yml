@@ -9,6 +9,7 @@ jobs:
     - get: ruby-release
       trigger: true
     - get: stemcell
+      resource: (@= ruby.stemcell @)
       trigger: true
   - task: test
     privileged: true
@@ -34,6 +35,7 @@ jobs:
       trigger: true
     - get: ruby-release
     - get: stemcell
+      resource: (@= ruby.stemcell @)
     - get: bosh-src
     - get: semver
       params:
@@ -56,6 +58,7 @@ jobs:
     file: ruby-release/ci/tasks/test.yml
     params:
       RUBY_VERSION: "(@= ruby.version @)"
+      STEMCELL: "(@= ruby.stemcell @)"
   - task: finalize
     file: ruby-release/ci/tasks/finalize.yml
     params:
@@ -93,10 +96,15 @@ resources:
     branch: master
     private_key: ((github_deploy_key_ruby-release.private_key))
 
-- name: stemcell
+- name: ubuntu-jammy
   type: bosh-io-stemcell
   source:
     name: bosh-warden-boshlite-ubuntu-jammy-go_agent
+
+- name: ubuntu-bionic
+  type: bosh-io-stemcell
+  source:
+    name: bosh-warden-boshlite-ubuntu-bionic-go_agent
 
 - name: semver
   type: semver

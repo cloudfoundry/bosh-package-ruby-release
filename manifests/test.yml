@@ -7,7 +7,7 @@ releases:
 
 stemcells:
 - alias: default
-  os: ubuntu-jammy
+  os: ((stemcell))
   version: latest
 
 update:

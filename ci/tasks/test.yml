@@ -12,6 +12,7 @@ inputs:
 
 params:
   RUBY_VERSION:
+  STEMCELL:
 
 run:
   path: ruby-release/ci/tasks/test.sh
