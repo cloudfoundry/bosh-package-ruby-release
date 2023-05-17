@@ -112,8 +112,9 @@ resources:
   source:
     bucket: bosh-packages-ruby-release
     key: version
-    access_key_id: ((bosh-packages-ruby-release-uploader_aws_access_key.username))
-    secret_access_key: ((bosh-packages-ruby-release-uploader_aws_access_key.password))
+    access_key_id: ((bosh-packages-ruby-release-uploader_assume_aws_access_key.username))
+    secret_access_key: ((bosh-packages-ruby-release-uploader_assume_aws_access_key.password))
+    assume_role_arn: ((bosh-packages-ruby-release-uploader_assume_aws_access_key.role_arn))
 
 #@ for rubygems in data.values.rubygems:
 - name: rubygems-(@= rubygems.version @)
@@ -202,3 +203,8 @@ resource_types:
   type: docker-image
   source:
     repository: dpb587/dynamic-metalink-resource
+- name: semver
+  type: docker-image
+  source:
+    repository: concourse/semver-resource
+    tag: 1.6
