@@ -82,6 +82,16 @@ jobs:
         tag_prefix: v
         annotate: version-tag/annotate-msg
 #@ end
+- name: build-docker-image
+  plan:
+  - get: ruby-release
+    trigger: true
+  - put: ruby-release-image
+    params:
+      build: "ruby-release"
+      dockerfile: "ruby-release/ci/docker/Dockerfile"
+    get_params:
+      skip_download: true
 
 #@yaml/text-templated-strings
 resources:
@@ -197,6 +207,13 @@ resources:
        ]
       }'
 #@ end
+
+- name: ruby-release-image
+  type: docker-image
+  source:
+    repository: bosh/ruby-release
+    username: ((docker.username))
+    password: ((docker.password))
 
 resource_types:
 - name: dynamic-metalink
