@@ -1,0 +1,23 @@
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: bosh/ruby-release
+
+inputs:
+- name: input-repo
+- name: ruby-release
+
+outputs:
+- name: output-repo
+
+run:
+  path: ruby-release/ci/tasks/shared/bump-gems.sh
+
+params:
+  GEM_DIRS: "."
+  GIT_USER_EMAIL:
+  GIT_USER_NAME: CI Bot
+  PACKAGE:
+  VENDOR: false
