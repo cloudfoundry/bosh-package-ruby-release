@@ -9,6 +9,7 @@ RUN apt-get update && \
         gcc \
         git \
         jq \
+        libssl-dev \
         zlib1g-dev
 
 ADD . /tmp/release
