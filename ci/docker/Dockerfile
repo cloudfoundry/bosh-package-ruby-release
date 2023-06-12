@@ -8,6 +8,7 @@ RUN apt-get update && \
         curl \
         gcc \
         git \
+        git-lfs \
         jq \
         libssl-dev \
         zlib1g-dev
