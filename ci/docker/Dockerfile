@@ -10,6 +10,9 @@ RUN apt-get update && \
         git \
         git-lfs \
         jq \
+        libmysqlclient-dev \
+        libpq-dev \
+        libsqlite3-dev \
         libssl-dev \
         zlib1g-dev
 
