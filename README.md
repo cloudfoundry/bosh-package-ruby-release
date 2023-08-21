@@ -35,6 +35,7 @@ The `bump-gems` task runs `bundle update` on each of your Gemfiles and optionall
 * `GIT_USER_NAME`: Required. The user name that will be used to generate commits.
 * `PACKAGE`: Required. The package you are using in your own BOSH release (e.g. `ruby-3.2`). This ensures that the correct version of bundler will be used to make the updates, preventing issues where the version of bundler in your Gemfile.lock does not get out-of-sync with the version used.
 * `VENDOR`: Optional. Boolean value that specifies you want to run `bundle cache` to vendor in the gems into your repository. Defaults to `false`.
+* `VENDOR_PATH`: Optional. String value that specifies the BUNDLE_CACHE_PATH environment variable to use when vendoring gems. Default to `vendor/package`.
 
 ### Compile and Runtime functions and scripts
 

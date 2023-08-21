@@ -12,7 +12,7 @@ pushd "output-repo" >/dev/null
 
     if [ "$VENDOR" == "true" ]; then
       BUNDLE_GEMFILE="Gemfile" \
-      BUNDLE_CACHE_PATH="vendor/package" \
+      BUNDLE_CACHE_PATH="$VENDOR_PATH" \
       BUNDLE_WITHOUT="development:test" \
       bundle cache \
         --all-platforms \
