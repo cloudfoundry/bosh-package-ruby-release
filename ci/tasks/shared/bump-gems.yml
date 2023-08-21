@@ -21,3 +21,4 @@ params:
   GIT_USER_NAME: CI Bot
   PACKAGE:
   VENDOR: false
+  VENDOR_PATH: vendor/package
