@@ -10,6 +10,10 @@ pushd "output-repo" >/dev/null
     pushd "$dir" >/dev/null
     bundle update
 
+    if [ "$UPDATE_BUNDLER_VERSION" == "true" ]; then
+      gem update bundler
+    fi
+
     if [ "$VENDOR" == "true" ]; then
       BUNDLE_GEMFILE="Gemfile" \
       BUNDLE_CACHE_PATH="$VENDOR_PATH" \
