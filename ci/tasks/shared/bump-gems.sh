@@ -8,11 +8,12 @@ git clone input-repo output-repo
 pushd "output-repo" >/dev/null
   for dir in $GEM_DIRS; do
     pushd "$dir" >/dev/null
-    bundle update
 
     if [ "$UPDATE_BUNDLER_VERSION" == "true" ]; then
       gem update bundler
     fi
+
+    bundle update
 
     if [ "$VENDOR" == "true" ]; then
       BUNDLE_GEMFILE="Gemfile" \
