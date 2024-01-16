@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -eux
+
+PLATFORM=$(uname | tr '[:upper:]' '[:lower:]')
+
+# shellcheck disable=1090
+source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-3.3/bosh/compile.env"
+
+if [[ "${PLATFORM}" == "darwin" ]]; then
+  "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/ruby-3.3/bin/gem" install nokogiri
+  exit 0
+fi
+
+cp -r ./test-app/. "${BOSH_INSTALL_TARGET}/"
+
+cd ${BOSH_INSTALL_TARGET}
+bosh_bundle_local
+bosh_generate_runtime_env
