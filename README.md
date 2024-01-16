@@ -11,6 +11,22 @@ $ bosh vendor-package <RUBY-PACKAGE-VERSION> ~/workspace/bosh-package-ruby-relea
 Where RUBY-PACKAGE-VERSION is one of the provided ruby package names
 The above code will add a ruby package to `your-release` and introduce a `spec.lock`.
 
+### Adding a new Ruby version
+
+Packages for new versions of Ruby can be added by modifying `ci/versions.yml`, then reconfiguring the CI pipeline by running `ci/configure.sh`.
+
+The `ci/versions.yml` configuration requires that you know the following component versions that correspond with the Ruby version:
+* The version of RubyGems
+* The version of libyaml used by the Psych gem
+
+New versions of RubyGems and libyaml must be added to the `rubygems` and `libyamls` top-level keys respsectively. Then, add the Ruby and component versions, as well as the stemcell to test against, as a new entry under the `rubies` key. An example config for Ruby 3.3:
+```yaml
+- version: "3.3"
+  rubygems: "3.5"
+  libyaml: "0.2"
+  stemcell: ubuntu-jammy
+```
+
 ### Shared Concourse tasks
 
 This repository provides a couple helpful Concourse tasks in `ci/tasks/shared` that can help keep the Ruby package vendored in your BOSH release up to date, and bump gem versions.
