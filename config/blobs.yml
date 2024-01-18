@@ -30,10 +30,10 @@ rubygems-3.4.22.tgz:
   size: 1342799
   object_id: f6b8386f-865a-4a11-5bda-acda3d03eb21
   sha: sha256:803fa77776d11d3d1bb563826616c811124425e0331ad1fd983c4144046a6156
-rubygems-3.5.4.tgz:
-  size: 895999
-  object_id: 0849c261-8185-43fe-7063-439796697a8f
-  sha: sha256:bf70fee8dcc11ebea76d31399c3b6eea90590b06c1c587cef1b6e53ec32b0128
+rubygems-3.5.5.tgz:
+  size: 896523
+  object_id: e48f3754-179b-4dad-62da-bd61c77f32c9
+  sha: sha256:12b2ac28c204bece2803c792f6fd4049faa530e24ec5e4d57c203df4021c4e1d
 yaml-0.1.7.tar.gz:
   size: 527518
   object_id: b327fbb6-37bd-4f57-7a9b-42bf7fd79473
