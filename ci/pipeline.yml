@@ -77,10 +77,9 @@ jobs:
     - put: ruby-release
       params:
         rebase: true
-        repository: finalized-release
+        repository: ruby-release
         tag: semver/version
         tag_prefix: v
-        annotate: version-tag/annotate-msg
 #@ end
 - name: build-docker-image
   plan:

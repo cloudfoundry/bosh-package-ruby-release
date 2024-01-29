@@ -11,8 +11,7 @@ inputs:
 - name: semver
 
 outputs:
-- name: version-tag
-- name: finalized-release
+- name: ruby-release
 
 params:
   PRIVATE_YML: ~

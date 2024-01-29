@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
 
-set -eux
+set -eux pipefail
 
-# invariants
-cp -rfp ./ruby-release/. finalized-release
-
-pushd finalized-release
-  commits=$(git log --oneline origin/master..HEAD | wc -l)
+export FULL_VERSION=$(cat semver/version)
+pushd ruby-release
+  commits=$(git rev-list HEAD ^origin/main --pretty=oneline --count)
   if [[ "$commits" == "0" ]]; then
-    :> ../version-tag/tag-name #prevent git-resource to tag HEAD
-    :> ../version-tag/annotate-msg
     exit 0
   fi
-popd
 
-# finalize
-export FULL_VERSION=$(cat semver/version)
-
-pushd finalized-release
+  # finalize
   git status
 
   set +x
@@ -35,6 +27,3 @@ pushd finalized-release
 
   git commit -m "Adding final release $FULL_VERSION via concourse"
 popd
-
-echo "v${FULL_VERSION}" > version-tag/tag-name
-echo "Final release $FULL_VERSION tagged via concourse" > version-tag/annotate-msg
