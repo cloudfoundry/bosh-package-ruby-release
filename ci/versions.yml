@@ -13,11 +13,16 @@ rubies:
   rubygems: "3.4"
   libyaml: "0.2"
   stemcell: ubuntu-jammy
+- version: "3.3"
+  rubygems: "3.5"
+  libyaml: "0.2"
+  stemcell: ubuntu-jammy
 
 rubygems:
 - version: "3.2"
 - version: "3.3"
 - version: "3.4"
+- version: "3.5"
 
 libyamls:
 - version: "0.2"
