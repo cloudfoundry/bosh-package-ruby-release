@@ -3,9 +3,9 @@
 To vendor ruby package into your release, run:
 
 ```
-$ git clone https://github.com/bosh-packages/ruby-release
+$ git clone https://github.com/cloudfoundry/bosh-package-ruby-release
 $ cd ~/workspace/your-release
-$ bosh vendor-package <RUBY-PACKAGE-VERSION> ~/workspace/ruby-release
+$ bosh vendor-package <RUBY-PACKAGE-VERSION> ~/workspace/bosh-package-ruby-release
 ```
 
 Where RUBY-PACKAGE-VERSION is one of the provided ruby package names
