@@ -15,7 +15,7 @@ if [ $(uname -s) == "Darwin" ]; then
 fi
 
 # Use Clang if available; the resulting Ruby is faster
-if [ -x /usr/bin/clang ]; then
+if command -v clang &> /dev/null; then
   export CXX=/usr/bin/clang++ CC=/usr/bin/clang
 fi
 
