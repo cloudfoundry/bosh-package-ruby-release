@@ -15,8 +15,14 @@ if [ $(uname -s) == "Darwin" ]; then
 fi
 
 # Use Clang if available; the resulting Ruby is faster
-if command -v clang &> /dev/null; then
-  export CXX=/usr/bin/clang++ CC=/usr/bin/clang
+if command -v clang &> /dev/null
+then
+	export CC="$(command -v clang)"
+fi
+
+if command -v clang++ &> /dev/null
+then
+	export CXX="$(command -v clang++)"
 fi
 
 openssl_version=$(openssl version)
@@ -31,8 +37,6 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
 (
   set -e
   cd "yaml-${LIBYAML_VERSION}"
-
-
 
   if [ "$(uname -m)" == "ppc64le" ]; then
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
