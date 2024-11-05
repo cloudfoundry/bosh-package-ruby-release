@@ -1,5 +1,5 @@
 name: ruby
 blobstore:
-  provider: s3
+  provider: gcs
   options:
     bucket_name: bosh-packages-ruby-release
