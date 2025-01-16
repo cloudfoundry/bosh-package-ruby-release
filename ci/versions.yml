@@ -1,10 +1,6 @@
 #@data/values
 ---
 rubies:
-- version: "3.0"
-  rubygems: "3.2"
-  libyaml: "0.2"
-  stemcell: ubuntu-bionic
 - version: "3.1"
   rubygems: "3.3"
   libyaml: "0.2"
@@ -17,12 +13,16 @@ rubies:
   rubygems: "3.5"
   libyaml: "0.2"
   stemcell: ubuntu-jammy
+- version: "3.4"
+  rubygems: "3.6"
+  libyaml: "0.2"
+  stemcell: ubuntu-jammy
 
 rubygems:
-- version: "3.2"
 - version: "3.3"
 - version: "3.4"
 - version: "3.5"
+- version: "3.6"
 
 libyamls:
 - version: "0.2"
