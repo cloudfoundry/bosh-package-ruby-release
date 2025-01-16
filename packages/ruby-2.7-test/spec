@@ -1,8 +1,0 @@
----
-name: ruby-2.7-test
-
-dependencies:
-- ruby-2.7
-
-files:
-- test-app/**/*

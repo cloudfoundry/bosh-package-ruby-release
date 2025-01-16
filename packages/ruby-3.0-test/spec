@@ -1,8 +1,0 @@
----
-name: ruby-3.0-test
-
-dependencies:
-- ruby-3.0
-
-files:
-- test-app/**/*
