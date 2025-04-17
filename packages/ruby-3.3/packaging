@@ -44,7 +44,7 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
   fi
 
-  ./configure --prefix="${BOSH_INSTALL_TARGET}" 
+  ./configure --prefix="${BOSH_INSTALL_TARGET}"
   make
   make install
 )
