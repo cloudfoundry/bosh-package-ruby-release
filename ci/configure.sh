@@ -3,6 +3,6 @@
 pipeline_config=$(mktemp)
 ytt -f "$(dirname $0)" > $pipeline_config
 
-fly -t ${CONCOURSE_TARGET:-bosh-ecosystem} \
+fly -t ${CONCOURSE_TARGET:-bosh} \
   sp -p ruby-release \
   -c $pipeline_config
