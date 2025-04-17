@@ -218,8 +218,8 @@ resources:
   type: docker-image
   source:
     repository: bosh/ruby-release
-    username: ((dockerhub_username))
-    password: ((dockerhub_password))
+    username: ((bosh-dockerhub.username))
+    password: ((bosh-dockerhub.password))
 
 resource_types:
 - name: dynamic-metalink
