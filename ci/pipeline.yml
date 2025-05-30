@@ -1,6 +1,42 @@
 #@ load("@ytt:data", "data")
 #@yaml/text-templated-strings
 jobs:
+- name: manually-release
+  serial: true
+  serial_groups:
+    - bump
+  plan:
+  - in_parallel:
+    - get: ruby-release
+    - get: semver
+      params:
+        bump: minor
+    - get: bosh-shared-ci
+  - task: finalize
+    file: bosh-shared-ci/tasks/release/create-final-release.yml
+    input_mapping:
+      release_repo: ruby-release
+      version: semver
+    params:
+      GIT_USER_NAME: CI Bot
+      GIT_USER_EMAIL: bots@cloudfoundry.org
+      PRIVATE_YML: |
+        ---
+        blobstore:
+          provider: gcs
+          options:
+            credentials_source: static
+            json_key: '((gcp_json_key))'
+  - in_parallel:
+    - put: semver
+      params:
+        file: semver/version
+    - put: ruby-release
+      params:
+        rebase: true
+        repository: release_repo
+        tag: release_metadata/tag-name
+
 #@ for ruby in data.values.rubies:
 - name: test-(@= ruby.version @)
   serial: true
