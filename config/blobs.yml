@@ -6,10 +6,10 @@ ruby-3.2.9.tar.gz:
   size: 20560944
   object_id: 1a473821-7eb7-4d39-7cb3-07de8ad98028
   sha: sha256:abbad98db9aeb152773b0d35868e50003b8c467f3d06152577c4dfed9d88ed2a
-ruby-3.3.8.tar.gz:
-  size: 22197497
-  object_id: 86786a09-e316-43b0-6dd5-9657dc1665cf
-  sha: sha256:5ae28a87a59a3e4ad66bc2931d232dbab953d0aa8f6baf3bc4f8f80977c89cab
+ruby-3.3.9.tar.gz:
+  size: 22217076
+  object_id: 4debb905-b953-4744-7ace-fac70cca9fae
+  sha: sha256:d1991690a4e17233ec6b3c7844c1e1245c0adce3e00d713551d0458467b727b1
 ruby-3.4.5.tar.gz:
   size: 23237143
   object_id: 13b36faf-4ba4-482e-7d00-1692aa4c89ba

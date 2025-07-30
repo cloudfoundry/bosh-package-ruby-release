@@ -2,7 +2,7 @@
 
 set -e
 
-RUBY_VERSION=3.3.8
+RUBY_VERSION=3.3.9
 RUBYGEMS_VERSION=3.5.23
 LIBYAML_VERSION=0.2.5
 
@@ -58,7 +58,7 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
   fi
 
-  LDFLAGS="-Wl,-rpath -Wl,${BOSH_INSTALL_TARGET}" ./configure --enable-shared --prefix="${BOSH_INSTALL_TARGET}" --disable-install-doc --with-opt-dir="${BOSH_INSTALL_TARGET}" --without-gmp $with_openssl_dir
+  LDFLAGS="-Wl,-rpath -Wl,${BOSH_INSTALL_TARGET}" ./configure --prefix="${BOSH_INSTALL_TARGET}" --disable-install-doc --with-opt-dir="${BOSH_INSTALL_TARGET}" --without-gmp $with_openssl_dir
   make
   make install
 )
