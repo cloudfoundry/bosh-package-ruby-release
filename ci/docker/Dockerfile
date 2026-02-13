@@ -18,18 +18,20 @@ RUN apt-get update && \
 
 ADD . /tmp/release
 
-RUN set -x && cd /tmp/release && \
-    bosh sync-blobs && \
-    mkdir -p /var/vcap/packages && mkdir -p /var/vcap/data && \
-    for package in $(ls /tmp/release/packages | grep ruby- | grep -v test); do \
-        rm -rf /tmp/workspace && \
-        mkdir /tmp/workspace && \
-        cp -r /tmp/release/src/* /tmp/workspace/ && \
-        cp /tmp/release/blobs/* /tmp/workspace && \
-        chmod +x /tmp/release/packages/$package/packaging && \
-        mkdir -p /var/vcap/packages/$package && \
-        cd /tmp/workspace && \
-        BOSH_INSTALL_TARGET=/var/vcap/packages/$package /tmp/release/packages/$package/packaging && \
-        cd /tmp; \
-    done && \
-    rm -r /tmp/release /tmp/workspace
+RUN set -x \
+    && cd /tmp/release \
+    && bosh sync-blobs \
+    && mkdir -p /var/vcap/packages /var/vcap/data \
+    && for package in $(ls /tmp/release/packages | grep ruby- | grep -v test); do \
+        rm -rf /tmp/workspace \
+        && mkdir /tmp/workspace \
+        && cp -r /tmp/release/src/* /tmp/workspace/ \
+        && cp /tmp/release/blobs/* /tmp/workspace \
+        && chmod +x /tmp/release/packages/${package}/packaging \
+        && mkdir -p /var/vcap/packages/${package} \
+        && cd /tmp/workspace \
+        && BOSH_INSTALL_TARGET=/var/vcap/packages/${package} /tmp/release/packages/${package}/packaging \
+        && cd /tmp; \
+      done \
+    && rm -r /tmp/release /tmp/workspace
+
