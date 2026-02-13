@@ -1,9 +1,11 @@
-FROM ubuntu:jammy
+FROM ubuntu
 
-COPY --from=ghcr.io/cloudfoundry/bosh/integration /usr/bin/bosh /usr/bin/bosh
+ARG BOSH_CLI_VERSION
 
-RUN apt-get update && \
-    apt-get install -y \
+ENV DEBIAN_FRONTEND="noninteractive"
+
+RUN apt-get update \
+    && apt-get install -y \
         build-essential \
         curl \
         gcc \
@@ -15,6 +17,10 @@ RUN apt-get update && \
         libsqlite3-dev \
         libssl-dev \
         zlib1g-dev
+
+RUN curl -sL https://github.com/cloudfoundry/bosh-cli/releases/download/v${BOSH_CLI_VERSION}/bosh-cli-${BOSH_CLI_VERSION}-linux-amd64 \
+      > /usr/bin/bosh \
+    && chmod +x /usr/bin/bosh
 
 ADD . /tmp/release
 
@@ -34,4 +40,3 @@ RUN set -x \
         && cd /tmp; \
       done \
     && rm -r /tmp/release /tmp/workspace
-

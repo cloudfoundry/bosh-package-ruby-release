@@ -1,0 +1,11 @@
+---
+platform: linux
+
+inputs:
+  - name: bosh-cli-github-release
+
+outputs:
+  - name: docker-build-args
+
+run:
+  path: ruby-release/ci/tasks/build-docker-args.sh

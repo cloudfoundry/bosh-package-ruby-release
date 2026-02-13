@@ -124,12 +124,17 @@ jobs:
 #@ end
 - name: build-docker-image
   plan:
-  - get: ruby-release
-    trigger: true
+  - in_parallel:
+    - get: ruby-release
+      trigger: true
+    - task: build-docker-args
+      file: bosh-ecosystem-dockerfile/docker/build-args.yml
+      image: ubuntu-registry-image
   - put: ruby-release-image
     params:
-      build: "ruby-release"
-      dockerfile: "ruby-release/ci/docker/Dockerfile"
+      build: ruby-release
+      dockerfile: ruby-release/ci/docker/Dockerfile
+      build_args_file: docker-build-args/docker-build-args.json
     get_params:
       skip_download: true
 
@@ -249,6 +254,13 @@ resources:
        ]
       }'
 #@ end
+
+- name: ubuntu--registry-image
+  type: registry-image
+  source:
+    repository: ubuntu
+    username: ((docker.username))
+    password: ((docker.password))
 
 - name: ruby-release-image
   type: docker-image
