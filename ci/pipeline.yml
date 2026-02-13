@@ -125,11 +125,12 @@ jobs:
 - name: build-docker-image
   plan:
   - in_parallel:
+    - get: ubuntu-registry-image
     - get: ruby-release
       trigger: true
-    - task: build-docker-args
-      file: bosh-ecosystem-dockerfile/docker/build-args.yml
-      image: ubuntu-registry-image
+  - task: build-docker-args
+    file: ruby-release/ci/tasks/build-docker-args.yml
+    image: ubuntu-registry-image
   - put: ruby-release-image
     params:
       build: ruby-release
@@ -255,12 +256,12 @@ resources:
       }'
 #@ end
 
-- name: ubuntu--registry-image
+- name: ubuntu-registry-image
   type: registry-image
   source:
     repository: ubuntu
-    username: ((docker.username))
-    password: ((docker.password))
+    username: ((bosh-dockerhub.username))
+    password: ((bosh-dockerhub.password))
 
 - name: ruby-release-image
   type: docker-image
