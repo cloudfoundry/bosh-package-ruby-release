@@ -128,6 +128,11 @@ jobs:
     - get: ubuntu-registry-image
     - get: ruby-release
       trigger: true
+    - get: bosh-cli-github-release
+      trigger: true
+      params:
+        globs:
+          - "no-files-needed"
   - task: build-docker-args
     file: ruby-release/ci/tasks/build-docker-args.yml
     image: ubuntu-registry-image
@@ -269,6 +274,13 @@ resources:
     repository: bosh/ruby-release
     username: ((bosh-dockerhub.username))
     password: ((bosh-dockerhub.password))
+
+- name: bosh-cli-github-release
+  type: github-release
+  source:
+    access_token: ((github_public_repo_token))
+    owner: cloudfoundry
+    repository: bosh-cli
 
 resource_types:
 - name: dynamic-metalink
