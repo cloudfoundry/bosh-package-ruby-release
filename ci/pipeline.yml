@@ -47,13 +47,15 @@ jobs:
     - get: stemcell
       resource: (@= ruby.stemcell @)
       trigger: true
+    - get: docker-cpi-image
   - task: test
+    file: ruby-release/ci/tasks/test.yml
+    image: docker-cpi-image
     privileged: true
     timeout: 2h
     params:
       RUBY_VERSION: "(@= ruby.version @)"
       STEMCELL: "(@= ruby.stemcell @)"
-    file: ruby-release/ci/tasks/test.yml
 
 - name: bump-(@= ruby.version @)
   serial: true
@@ -78,8 +80,10 @@ jobs:
       params:
         bump: minor
     - get: bosh-shared-ci
+    - get: docker-cpi-image
   - task: bump
     file: ruby-release/ci/tasks/bump.yml
+    image: docker-cpi-image
     params:
       PRIVATE_YML: |
         ---
@@ -92,8 +96,9 @@ jobs:
       RUBYGEMS_VERSION: "(@= ruby.rubygems @)"
       LIBYAML_VERSION: "(@= ruby.libyaml @)"
   - task: test-bumped
-    privileged: true
     file: ruby-release/ci/tasks/test.yml
+    image: docker-cpi-image
+    privileged: true
     params:
       RUBY_VERSION: "(@= ruby.version @)"
       STEMCELL: "(@= ruby.stemcell @)"
@@ -282,13 +287,21 @@ resources:
     owner: cloudfoundry
     repository: bosh-cli
 
+- name: docker-cpi-image
+  type: docker-image
+  source:
+    repository: ghcr.io/cloudfoundry/bosh/docker-cpi
+    username: ((github_read_write_packages.username))
+    password: ((github_read_write_packages.password))
+
 resource_types:
 - name: dynamic-metalink
   type: docker-image
   source:
     repository: dpb587/dynamic-metalink-resource
+
 - name: semver
   type: docker-image
   source:
     repository: concourse/semver-resource
-    tag: 1.6
+    tag: 1.6 #! TODO remove
