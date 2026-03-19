@@ -1,7 +1,3 @@
-ruby-3.1.7.tar.gz:
-  size: 20811481
-  object_id: ce1c4b21-9435-45db-7142-935f82dcf953
-  sha: sha256:0556acd69f141ddace03fa5dd8d76e7ea0d8f5232edf012429579bcdaab30e7b
 ruby-3.2.10.tar.gz:
   size: 19983731
   object_id: e945b71a-ff17-443b-7fdc-965444913d5c
@@ -14,10 +10,6 @@ ruby-3.4.8.tar.gz:
   size: 23288284
   object_id: 94de93c3-e587-4fa6-4fa5-83a76165e8e1
   sha: sha256:53c4ddad41fbb6189f1f5ee0db57a51d54bd1f87f8755b3d68604156a35b045b
-rubygems-3.3.27.tgz:
-  size: 1304416
-  object_id: 28f72bfd-ce71-4713-702b-628110f48045
-  sha: sha256:dc821bf2a416e9c25a964181a83439209b3ae81cfca1632733ca04da946c0fbd
 rubygems-3.4.22.tgz:
   size: 1342799
   object_id: f6b8386f-865a-4a11-5bda-acda3d03eb21
