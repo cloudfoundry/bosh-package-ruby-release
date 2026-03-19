@@ -169,10 +169,10 @@ resources:
     branch: main
     private_key: ((github_deploy_key_ruby-release.private_key))
 
-- name: ubuntu-jammy
+- name: ubuntu-noble
   type: bosh-io-stemcell
   source:
-    name: bosh-warden-boshlite-ubuntu-jammy-go_agent
+    name: bosh-warden-boshlite-ubuntu-noble
 
 - name: semver
   type: semver

@@ -24,7 +24,7 @@ New versions of RubyGems and libyaml must be added to the `rubygems` and `libyam
 - version: "3.3"
   rubygems: "3.5"
   libyaml: "0.2"
-  stemcell: ubuntu-jammy
+  stemcell: ubuntu-noble
 ```
 
 ### Shared Concourse tasks

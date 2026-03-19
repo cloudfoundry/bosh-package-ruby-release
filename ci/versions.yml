@@ -4,19 +4,19 @@ rubies:
 - version: "3.1"
   rubygems: "3.3"
   libyaml: "0.2"
-  stemcell: ubuntu-jammy
+  stemcell: ubuntu-noble
 - version: "3.2"
   rubygems: "3.4"
   libyaml: "0.2"
-  stemcell: ubuntu-jammy
+  stemcell: ubuntu-noble
 - version: "3.3"
   rubygems: "3.5"
   libyaml: "0.2"
-  stemcell: ubuntu-jammy
+  stemcell: ubuntu-noble
 - version: "3.4"
   rubygems: "3.6"
   libyaml: "0.2"
-  stemcell: ubuntu-jammy
+  stemcell: ubuntu-noble
 
 rubygems:
 - version: "3.3"
