@@ -20,7 +20,7 @@ echo "Testing compile compatibility"
 # shellcheck disable=1091
 source "/var/vcap/packages/<%= test_packagename %>/bosh/runtime.env"
 cd "/var/vcap/packages/<%= test_packagename %>/"
-bundle exec thin start &
+bundle exec puma &
 sleep 3
 curl http://localhost:3000 | grep test
 kill -9 $!

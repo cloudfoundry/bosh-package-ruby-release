@@ -1,3 +1,3 @@
-require_relative 'myapp'
+require_relative 'test_app'
 
-run Myapp
+run TestApp

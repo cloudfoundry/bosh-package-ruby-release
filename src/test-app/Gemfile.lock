@@ -1,19 +1,15 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    daemons (1.4.1)
-    eventmachine (1.2.7)
-    rack (2.2.22)
-    thin (1.8.2)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (>= 1, < 3)
+    nio4r (2.7.5)
+    puma (7.2.0)
+      nio4r (~> 2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  thin
+  puma
 
 BUNDLED WITH
-   2.2.24
+   2.4.19
