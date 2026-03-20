@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 pipeline_config=$(mktemp)
-ytt -f "$(dirname $0)" > $pipeline_config
+ytt -f "$(dirname "${0}")" > "${pipeline_config}"
 
-fly -t ${CONCOURSE_TARGET:-bosh} \
+fly -t "${CONCOURSE_TARGET:-bosh}" \
   sp -p ruby-release \
-  -c $pipeline_config
+  -c "${pipeline_config}"
