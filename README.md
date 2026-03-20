@@ -39,8 +39,8 @@ The `bump-ruby-package` task runs `bosh vendor-package` to automatically update 
 
 * `GIT_USER_EMAIL`: Required. The email that will be used to generate commits.
 * `GIT_USER_NAME`: Required. The user name that will be used to generate commits.
-* `PACKAGE`: Required. Specifies which package from `ruby-release` that will be vendored into your own BOSH release, e.g. the `ruby-3.2` package.
-* `PACKAGE_PREFIX`: Optional. Equivalent to passing `--prefix` to `bosh vendor-package`. For example, specifying a prefix of `myrelease` will vendor in the package as `myrelease-ruby-3.2` instead of just `ruby-3.2`.
+* `PACKAGE`: Required. Specifies which package from `ruby-release` that will be vendored into your own BOSH release, e.g. the `ruby-X.Y` package.
+* `PACKAGE_PREFIX`: Optional. Equivalent to passing `--prefix` to `bosh vendor-package`. For example, specifying a prefix of `myrelease` will vendor in the package as `myrelease-ruby-X.Y` instead of just `ruby-X.Y`.
 * `PRIVATE_YML`: Required. The contents of config/private.yml for your own BOSH release. Necessary to run `bosh vendor-package`.
 * `RUBY_VERSION_PATH`: Optional. Relative path within your release to the `.ruby-version` file. When specified, the `.ruby-version` file will be updated with the exact version number (including patch) for the Ruby package.
 
@@ -51,7 +51,7 @@ The `bump-gems` task runs `bundle update` on each of your Gemfiles and optionall
 * `GEM_DIRS`: Required. A space-separated list of directories that contain a `Gemfile` to run
 * `GIT_USER_EMAIL`: Required. The email that will be used to generate commits.
 * `GIT_USER_NAME`: Required. The user name that will be used to generate commits.
-* `PACKAGE`: Required. The package you are using in your own BOSH release (e.g. `ruby-3.2`). This ensures that the correct version of bundler will be used to make the updates, preventing issues where the version of bundler in your Gemfile.lock does not get out-of-sync with the version used.
+* `PACKAGE`: Required. The package you are using in your own BOSH release (e.g. `ruby-X.Y`). This ensures that the correct version of bundler will be used to make the updates, preventing issues where the version of bundler in your Gemfile.lock does not get out-of-sync with the version used.
 * `VENDOR`: Optional. Boolean value that specifies you want to run `bundle cache` to vendor in the gems into your repository. Defaults to `false`.
 * `VENDOR_PATH`: Optional. String value that specifies the BUNDLE_CACHE_PATH environment variable to use when vendoring gems. Default to `vendor/package`.
 
