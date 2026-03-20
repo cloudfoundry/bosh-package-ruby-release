@@ -6,8 +6,8 @@ task_dir=$PWD
 
 cd bosh-release
 
-git config --global user.name ${GIT_USER_NAME}
-git config --global user.email ${GIT_USER_EMAIL}
+git config --global user.name "${GIT_USER_NAME}"
+git config --global user.email "${GIT_USER_EMAIL}"
 
 echo "${PRIVATE_YML}" > config/private.yml
 
@@ -16,7 +16,7 @@ if [ -n "${PACKAGE_PREFIX}" ]; then
   prefix_arg="--prefix=${PACKAGE_PREFIX}"
 fi
 
-bosh vendor-package ${prefix_arg} ${PACKAGE} "$task_dir/ruby-release"
+bosh vendor-package "${prefix_arg}" "${PACKAGE}" "$task_dir/ruby-release"
 
 package_version=$(cat "$task_dir/ruby-release/packages/${PACKAGE}/version")
 
