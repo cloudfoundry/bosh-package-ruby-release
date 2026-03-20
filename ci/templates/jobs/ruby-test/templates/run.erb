@@ -7,7 +7,7 @@ ASSERT_GEM_VERSION="<%= rubygems_version %>"
 echo "Testing runtime compatibility"
 
 # shellcheck disable=1091
-source "/var/vcap/packages/<%= ruby_packagename %>/bosh/runtime.env"
+source "/var/vcap/packages/<%= ruby_package_name %>/bosh/runtime.env"
 ruby -e 'puts "test"'
 
 if [ $(ruby -e 'require "yaml"; puts({a: "b\n\n\n"}.to_yaml)' | grep "\.\.\.") ]; then
@@ -18,8 +18,8 @@ fi
 echo "Testing compile compatibility"
 
 # shellcheck disable=1091
-source "/var/vcap/packages/<%= test_packagename %>/bosh/runtime.env"
-cd "/var/vcap/packages/<%= test_packagename %>/"
+source "/var/vcap/packages/<%= test_package_name %>/bosh/runtime.env"
+cd "/var/vcap/packages/<%= test_package_name %>/"
 bundle exec puma &
 sleep 3
 curl http://localhost:3000 | grep test
