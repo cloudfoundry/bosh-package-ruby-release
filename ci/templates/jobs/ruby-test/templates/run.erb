@@ -20,9 +20,15 @@ echo "Testing compile compatibility"
 # shellcheck disable=1091
 source "/var/vcap/packages/<%= test_package_name %>/bosh/runtime.env"
 cd "/var/vcap/packages/<%= test_package_name %>/"
-bundle exec puma &
+export PUMA_DEFAULT_PORT=9292
+export CURL_TIMEOUT_SECONDS=5
+
+bundle exec puma --port "${PUMA_DEFAULT_PORT}" &
+
 sleep 3
-curl http://localhost:3000 | grep test
+
+curl --connect-timeout "${CURL_TIMEOUT_SECONDS}" "http://localhost:${PUMA_DEFAULT_PORT}" | grep test
+
 kill -9 $!
 
 gems_version=$(bundle exec gem -v)
