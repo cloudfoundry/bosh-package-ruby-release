@@ -31,6 +31,6 @@ bosh -n -d test deploy "${release_dir}/manifests/test.yml" \
   -v ruby-test-package="ruby-${RUBY_VERSION}-test"
 
 echo "-----> $(date): Run test errand"
-bosh -n -d test run-errand ruby-thin-server
+bosh -n -d test run-errand ruby-server
 
 echo "-----> $(date): Done"

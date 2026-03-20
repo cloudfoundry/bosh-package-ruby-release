@@ -17,7 +17,7 @@ update:
   update_watch_time: 5000-60000
 
 instance_groups:
-- name: ruby-thin-server
+- name: ruby-server
   azs: [z1]
   lifecycle: errand
   instances: 1
