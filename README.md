@@ -27,6 +27,8 @@ New versions of RubyGems and libyaml must be added to the `rubygems` and `libyam
   stemcell: ubuntu-noble
 ```
 
+NOTE: please ensure that any commands used in `ci/templates/src/compile.env.erb` are compatible with the newly added Ruby / RubyGems version.
+
 ### Shared Concourse tasks
 
 This repository provides a couple helpful Concourse tasks in `ci/tasks/shared` that can help keep the Ruby package vendored in your BOSH release up to date, and bump gem versions.
