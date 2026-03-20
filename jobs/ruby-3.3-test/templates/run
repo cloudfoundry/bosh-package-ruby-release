@@ -2,9 +2,9 @@
 
 set -eux
 
-ASSERT_GEM_VERSION=3.5.23
+ASSERT_GEM_VERSION="3.5.23"
 
-echo "Testing runtime compability"
+echo "Testing runtime compatibility"
 
 # shellcheck disable=1091
 source "/var/vcap/packages/ruby-3.3/bosh/runtime.env"
@@ -15,14 +15,20 @@ if [ $(ruby -e 'require "yaml"; puts({a: "b\n\n\n"}.to_yaml)' | grep "\.\.\.") ]
   exit 1
 fi
 
-echo "Testing compile compability"
+echo "Testing compile compatibility"
 
 # shellcheck disable=1091
 source "/var/vcap/packages/ruby-3.3-test/bosh/runtime.env"
-cd /var/vcap/packages/ruby-3.3-test/
-bundle exec thin start &
+cd "/var/vcap/packages/ruby-3.3-test/"
+export PUMA_DEFAULT_PORT=9292
+export CURL_TIMEOUT_SECONDS=5
+
+bundle exec puma --port "${PUMA_DEFAULT_PORT}" &
+
 sleep 3
-curl http://localhost:3000 | grep test
+
+curl --connect-timeout "${CURL_TIMEOUT_SECONDS}" "http://localhost:${PUMA_DEFAULT_PORT}" | grep test
+
 kill -9 $!
 
 gems_version=$(bundle exec gem -v)
