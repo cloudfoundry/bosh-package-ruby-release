@@ -16,7 +16,7 @@ if [ -n "${PACKAGE_PREFIX}" ]; then
   prefix_arg="--prefix=${PACKAGE_PREFIX}"
 fi
 
-bosh vendor-package "${prefix_arg}" "${PACKAGE}" "$task_dir/ruby-release"
+bosh vendor-package ${prefix_arg:+"${prefix_arg}"} "${PACKAGE}" "$task_dir/ruby-release"
 
 package_version=$(cat "$task_dir/ruby-release/packages/${PACKAGE}/version")
 
