@@ -227,8 +227,8 @@ resources:
        | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
     metalink_get: |
       export name="yaml-${version}.tar.gz"
-      export url="http://pyyaml.org/download/libyaml/yaml-${version}.tar.gz"
-      export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
+      export url="https://github.com/yaml/libyaml/releases/download/${version}/yaml-${version}.tar.gz"
+      export size=$( curl --silent --head --location "$url" | grep -i Content-Length | tail -1 | awk '{ print $2 }' | tr -cd '[:digit:]' )
       jq -n '
       {
        "files": [
@@ -247,11 +247,16 @@ resources:
   source:
     version: "(@= ruby.version @).x"
     version_check: |
-      curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/stable.txt
+      curl --silent --location http://cache.ruby-lang.org/pub/ruby/index.txt \
+        | tail -n +2 \
+        | awk '{ print $2 }' \
+        | grep -E '/ruby-[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz$' \
+        | sed -E 's|.*/ruby-([0-9]+\.[0-9]+\.[0-9]+)\.tar\.gz$|\1|'
     metalink_get: |
+      index="$(curl --silent --location http://cache.ruby-lang.org/pub/ruby/index.txt)"
+      export url="$(echo "$index" | awk -v v="${version}" '$2 ~ ("/ruby-" v "\\.tar\\.gz$") { print $2 }')"
+      export sha256="$(echo "$index" | awk -v v="${version}" '$2 ~ ("/ruby-" v "\\.tar\\.gz$") { print $4 }')"
       export name="ruby-${version}.tar.gz"
-      export url="http://cache.ruby-lang.org/pub/ruby/(@= ruby.version @)/${name}"
-      export sha256="$(curl --silent --location https://raw.githubusercontent.com/postmodern/ruby-versions/master/ruby/checksums.sha256 | grep ruby-${version}.tar.gz | awk {'print $1'})"
       export size="$(curl --silent --head "$url" | grep -i Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]')"
       jq -n '
       {
