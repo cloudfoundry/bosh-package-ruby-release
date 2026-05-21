@@ -7,5 +7,6 @@ templates:
 packages:
 - ruby-4.0
 - ruby-4.0-test
+- rust-1-linux
 
 properties: {}

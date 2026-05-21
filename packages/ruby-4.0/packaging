@@ -12,17 +12,25 @@ if [ $(uname -s) == "Darwin" ]; then
     PATH="${brew_prefix_openssl}/bin:$PATH"
     with_openssl_dir="--with-openssl-dir=$brew_prefix_openssl"
   fi
-fi
-
-# Use Clang if available; the resulting Ruby is faster
-if command -v clang &> /dev/null
-then
-  export CC="$(command -v clang)"
-fi
-
-if command -v clang++ &> /dev/null
-then
-  export CXX="$(command -v clang++)"
+else
+  
+  # Set up GCC environment
+  export CC="gcc"
+  export CXX="g++"
+  
+  echo "GCC toolchain setup complete"
+  $CC --version
+  $CXX --version
+  
+  # Now source Rust environment
+  source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/rust-1-linux/bosh/runtime.env"
+  
+  # Let Rust use its internal LLVM - clear any conflicting flags
+  unset RUSTFLAGS
+  
+  # Check Rust version
+  echo "Verifying Rust version (will use internal LLVM)..."
+  rustc --version --verbose
 fi
 
 openssl_version=$(openssl version)
@@ -58,6 +66,9 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
     cp "${BOSH_COMPILE_TARGET}"/config/config.{guess,sub} ./tool
   fi
 
+  # Disable LTO for better compatibility
+  sed -i 's/-C lto=thin/-C lto=no/' common.mk
+  
   LDFLAGS="-Wl,-rpath -Wl,${BOSH_INSTALL_TARGET}" ./configure --prefix="${BOSH_INSTALL_TARGET}" --disable-install-doc --with-opt-dir="${BOSH_INSTALL_TARGET}" --without-gmp $with_openssl_dir
   make
   make install
