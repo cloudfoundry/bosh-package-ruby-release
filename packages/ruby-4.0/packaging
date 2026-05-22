@@ -2,8 +2,8 @@
 
 set -e
 
-RUBY_VERSION=4.0.4
-RUBYGEMS_VERSION=4.0.11
+RUBY_VERSION=4.0.5
+RUBYGEMS_VERSION=4.0.12
 LIBYAML_VERSION=0.2.5
 
 if [ $(uname -s) == "Darwin" ]; then
