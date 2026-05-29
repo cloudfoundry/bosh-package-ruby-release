@@ -138,14 +138,29 @@ jobs:
       params:
         globs:
           - "no-files-needed"
-  - task: build-docker-args
-    file: ruby-release/ci/tasks/build-docker-args.yml
-    image: ubuntu-registry-image
+  - load_var: bosh_cli_version
+    file: bosh-cli-github-release/version
+  - task: build-oci-image
+    privileged: true
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: concourse/oci-build-task
+      inputs:
+        - name: ruby-release
+      outputs:
+        - name: image
+      params:
+        CONTEXT: ruby-release
+        DOCKERFILE: ruby-release/ci/docker/Dockerfile
+        BUILD_ARG_BOSH_CLI_VERSION: "((.:bosh_cli_version))"
+      run:
+        path: build
   - put: ruby-release-image
     params:
-      build: ruby-release
-      dockerfile: ruby-release/ci/docker/Dockerfile
-      build_args_file: docker-build-args/docker-build-args.json
+      image: image/image.tar
     get_params:
       skip_download: true
 
@@ -279,9 +294,10 @@ resources:
     password: ((bosh-dockerhub.password))
 
 - name: ruby-release-image
-  type: docker-image
+  type: registry-image
   source:
     repository: bosh/ruby-release
+    tag: latest
     username: ((bosh-dockerhub.username))
     password: ((bosh-dockerhub.password))
 
