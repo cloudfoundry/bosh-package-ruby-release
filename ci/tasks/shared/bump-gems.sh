@@ -29,7 +29,11 @@ pushd "output-repo" >/dev/null
       git add -A
       git config user.email "${GIT_USER_EMAIL}"
       git config user.name "${GIT_USER_NAME}"
-      git commit -am "Bump gems"
+      commit_message="Bump gems"
+      if [ -n "${GIT_COMMIT_MESSAGE_SUFFIX:-}" ]; then
+        commit_message="${commit_message}${GIT_COMMIT_MESSAGE_SUFFIX}"
+      fi
+      git commit -m "${commit_message}"
     else
       echo "No new gem versions"
     fi
