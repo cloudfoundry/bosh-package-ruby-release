@@ -30,4 +30,8 @@ fi
 
 git add -A
 
-git commit -m "Update ${PACKAGE} package to ${package_version} from ruby-release"
+commit_message="Update ${PACKAGE} package to ${package_version} from ruby-release"
+if [ -n "${GIT_COMMIT_MESSAGE_SUFFIX:-}" ]; then
+  commit_message="${commit_message}${GIT_COMMIT_MESSAGE_SUFFIX}"
+fi
+git commit -m "${commit_message}"
