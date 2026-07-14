@@ -22,6 +22,9 @@ rubygems-4.0.19.tgz:
   size: 985919
   object_id: 64ef7dec-b6d0-485d-697c-fcf0bb040b17
   sha: sha256:c2fa40ca7672b5b86ab5d5c4122fbc69de237da2ef00895a680063e34ab2b116
+rust-1-linux/rust-1.97.0-x86_64-unknown-linux-gnu.tar.gz:
+  size: 384617996
+  sha: sha256:eb89b20287153391c49ebcdb7fd91b683a12438d129bfb92eadcc495545af3a7
 yaml-0.2.5.tar.gz:
   size: 609454
   object_id: b5eeae2b-1496-4bc2-556f-efac50c8bcfa
