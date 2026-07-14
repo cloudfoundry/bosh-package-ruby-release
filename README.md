@@ -60,6 +60,7 @@ The `bump-gems` task runs `bundle update` on each of your Gemfiles and optionall
 Included functions in `compile.env`:
 
 - `bosh_bundle` which runs `bundle install ...` targeted at `${BOSH_INSTALL_TARGET}`
+- `bosh_bundle_local` which runs `bosh_bundle --local ...` targeted at `${BOSH_INSTALL_TARGET}`
 - `bosh_generate_runtime_env` which generates `${BOSH_INSTALL_TARGET}/bosh/runtime.env`
 
 To use `ruby-*` package for compilation in your packaging script:
