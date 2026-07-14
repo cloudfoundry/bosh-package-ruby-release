@@ -1,6 +1,9 @@
 ---
 name: ruby-3.3
 
+dependencies:
+- rust-1-linux
+
 files:
 - compile-3.3.env
 - gemrc

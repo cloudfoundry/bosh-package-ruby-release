@@ -12,17 +12,21 @@ if [ "$(uname -s)" == "Darwin" ]; then
     PATH="${brew_prefix_openssl}/bin:$PATH"
     with_openssl_dir="--with-openssl-dir=$brew_prefix_openssl"
   fi
-fi
+else
+  export CC="gcc"
+  export CXX="g++"
 
-# Use Clang if available; the resulting Ruby is faster
-if command -v clang &> /dev/null
-then
-  export CC="$(command -v clang)"
-fi
+  echo "GCC version:"
+  $CC --version
 
-if command -v clang++ &> /dev/null
-then
-  export CXX="$(command -v clang++)"
+  # Extract the prefix by stripping out ruby-${RUBY_VERSION}
+  VENDOR_PREFIX=${BOSH_PACKAGE_NAME%ruby-<%= ruby_version %>}
+
+  # shellcheck disable=SC1090
+  source "${BOSH_PACKAGES_DIR:-/var/vcap/packages}/${VENDOR_PREFIX}rust-1-linux/bosh/compile.env"
+
+  echo "Rust version:"
+  rustc --version --verbose
 fi
 
 openssl_version=$(openssl version)
@@ -49,6 +53,12 @@ tar xzf "ruby-${RUBY_VERSION}.tar.gz"
 (
   set -e
   cd "ruby-${RUBY_VERSION}"
+
+  if [ "$(uname -s)" != "Darwin" ]; then
+    # GNU ld cannot handle LLVM bitcode objects produced by thin LTO; disable it
+    # so Rust emits plain native objects that GCC can link without issues.
+    sed -i 's/-C lto=thin/-C lto=no/g' common.mk
+  fi
 
   LDFLAGS="-Wl,-rpath -Wl,${BOSH_INSTALL_TARGET}" ./configure --prefix="${BOSH_INSTALL_TARGET}" --disable-install-doc --with-opt-dir="${BOSH_INSTALL_TARGET}" --without-gmp $with_openssl_dir
   make

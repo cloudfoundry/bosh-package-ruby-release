@@ -127,6 +127,95 @@ jobs:
         repository: release_repo
         tag: release_metadata/tag-name
 #@ end
+- name: bump-rust-1-linux
+  serial: true
+  serial_groups:
+    - bump
+  plan:
+  - in_parallel:
+    - get: rust-release
+      trigger: true
+    - get: ruby-release
+    - get: stemcell
+      resource: ubuntu-noble
+    - get: bosh-src
+    - get: semver
+      params:
+        bump: minor
+    - get: bosh-shared-ci
+    - get: docker-cpi-image
+  - task: bump-rust-package
+    file: rust-release/ci/tasks/shared/bump-rust-package/task.yml
+    image: docker-cpi-image
+    input_mapping:
+      release-repo: ruby-release
+    params:
+      GIT_USER_NAME: CI Bot
+      GIT_USER_EMAIL: bots@cloudfoundry.org
+      PACKAGE: rust-1-linux
+      PRIVATE_YML: |
+        ---
+        blobstore:
+          provider: gcs
+          options:
+            credentials_source: static
+            json_key: '((gcp_json_key))'
+  - in_parallel:
+    - task: test-3.3
+      file: ruby-release/ci/tasks/test.yml
+      image: docker-cpi-image
+      privileged: true
+      timeout: 2h
+      input_mapping:
+        ruby-release: release-repo
+      params:
+        RUBY_VERSION: "3.3"
+        STEMCELL: ubuntu-noble
+    - task: test-3.4
+      file: ruby-release/ci/tasks/test.yml
+      image: docker-cpi-image
+      privileged: true
+      timeout: 2h
+      input_mapping:
+        ruby-release: release-repo
+      params:
+        RUBY_VERSION: "3.4"
+        STEMCELL: ubuntu-noble
+    - task: test-4.0
+      file: ruby-release/ci/tasks/test.yml
+      image: docker-cpi-image
+      privileged: true
+      timeout: 2h
+      input_mapping:
+        ruby-release: release-repo
+      params:
+        RUBY_VERSION: "4.0"
+        STEMCELL: ubuntu-noble
+  - task: finalize
+    file: bosh-shared-ci/tasks/release/create-final-release.yml
+    input_mapping:
+      release_repo: release-repo
+      version: semver
+    params:
+      GIT_USER_NAME: CI Bot
+      GIT_USER_EMAIL: bots@cloudfoundry.org
+      PRIVATE_YML: |
+        ---
+        blobstore:
+          provider: gcs
+          options:
+            credentials_source: static
+            json_key: '((gcp_json_key))'
+  - in_parallel:
+    - put: semver
+      params:
+        file: semver/version
+    - put: ruby-release
+      params:
+        rebase: true
+        repository: release_repo
+        tag: release_metadata/tag-name
+
 - name: build-docker-image
   plan:
   - in_parallel:
@@ -176,6 +265,14 @@ resources:
   type: git
   source:
     uri: https://github.com/cloudfoundry/bosh.git
+
+- name: rust-release
+  type: git
+  source:
+    uri: https://github.com/cloudfoundry/bosh-package-rust-release.git
+    branch: main
+    paths:
+      - .final_builds/packages/rust-1-linux/index.yml
 
 - name: ruby-release
   type: git

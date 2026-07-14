@@ -1,6 +1,9 @@
 ---
 name: ruby-4.0
 
+dependencies:
+- rust-1-linux
+
 files:
 - compile-4.0.env
 - gemrc
