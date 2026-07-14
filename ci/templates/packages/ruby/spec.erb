@@ -1,6 +1,9 @@
 ---
 name: <%= ruby_package_name %>
 
+dependencies:
+- rust-1-linux
+
 files:
 - compile-<%= ruby_version %>.env
 - gemrc
