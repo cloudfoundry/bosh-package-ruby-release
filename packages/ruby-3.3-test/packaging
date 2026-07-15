@@ -14,6 +14,6 @@ fi
 
 cp -r ./test-app/. "${BOSH_INSTALL_TARGET}/"
 
-cd ${BOSH_INSTALL_TARGET}
+cd "${BOSH_INSTALL_TARGET}"
 bosh_bundle_local
 bosh_generate_runtime_env
