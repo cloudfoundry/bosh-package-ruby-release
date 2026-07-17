@@ -38,3 +38,21 @@ else
   echo "wrong rubygems version: $gems_version"
   exit 1
 fi
+
+echo "Testing that Ruby was compiled with Rust (YJIT support)"
+
+if ruby -e 'exit(1) unless defined?(RubyVM::YJIT)'; then
+  echo "YJIT is compiled into Ruby"
+else
+  echo "ERROR: YJIT is NOT compiled into Ruby. Was Rust available during compilation?"
+  exit 1
+fi
+
+echo "Testing that YJIT can be enabled at runtime"
+
+if ruby --yjit -e 'RubyVM::YJIT.enable; raise "YJIT not enabled" unless RubyVM::YJIT.enabled?; puts "YJIT enabled successfully"'; then
+  echo "YJIT is functional"
+else
+  echo "ERROR: YJIT could not be enabled"
+  exit 1
+fi
