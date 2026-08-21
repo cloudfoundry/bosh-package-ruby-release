@@ -27,6 +27,14 @@ ADD . /tmp/release
 RUN set -x \
     && cd /tmp/release \
     && bosh sync-blobs \
+    && bosh create-release --tarball=/tmp/release.tgz --force \
+    && mkdir -p /tmp/release-tarball \
+    && tar -xzf /tmp/release.tgz -C /tmp/release-tarball \
+    && mkdir -p /tmp/rust-workspace /var/vcap/packages/rust-1-linux \
+    && tar -xzf /tmp/release-tarball/packages/rust-1-linux.tgz -C /tmp/rust-workspace \
+    && (cd /tmp/rust-workspace && chmod +x packaging \
+    && BOSH_INSTALL_TARGET=/var/vcap/packages/rust-1-linux ./packaging) \
+    && rm -rf /tmp/rust-workspace /tmp/release.tgz /tmp/release-tarball \
     && mkdir -p /var/vcap/packages /var/vcap/data \
     && for package in $(ls /tmp/release/packages | grep ruby- | grep -v test); do \
         rm -rf /tmp/workspace \
