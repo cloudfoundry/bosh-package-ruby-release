@@ -6,10 +6,10 @@ ruby-3.4.10.tar.gz:
   size: 22476870
   object_id: 9edebeb5-2963-4067-4274-5a20419ec579
   sha: sha256:ecee2d072a14f2d14347dd56dfd8fe5c3130abf5117bfaacbda0f4ef9cc429ec
-ruby-4.0.6.tar.gz:
-  size: 23904779
-  object_id: 7696756e-8d46-47d3-6de9-1e4c0f1e99b2
-  sha: sha256:837d299e8f7ddf2be31a229a7a7e019d354979825117989acb3b32b1a9be262a
+ruby-4.0.7.tar.gz:
+  size: 23937964
+  object_id: b6b8f1fb-3f01-4855-67a6-19b740d4a802
+  sha: sha256:911ace20f90d068ca0e4dda6d0e4f0f81e52e52f2dd4f4004c721e253412e82d
 rubygems-3.5.23.tgz:
   size: 960343
   object_id: 453d8361-b53c-429f-5361-7d85e118d891
