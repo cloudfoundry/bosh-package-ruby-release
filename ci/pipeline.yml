@@ -359,13 +359,13 @@ resources:
   source:
     version: "(@= ruby.version @).x"
     version_check: |
-      curl --silent --location http://cache.ruby-lang.org/pub/ruby/index.txt \
+      curl --silent --fail --location https://cache.ruby-lang.org/pub/ruby/index.txt \
         | tail -n +2 \
         | awk '{ print $2 }' \
         | grep -E '/ruby-[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz$' \
         | sed -E 's|.*/ruby-([0-9]+\.[0-9]+\.[0-9]+)\.tar\.gz$|\1|'
     metalink_get: |
-      index="$(curl --silent --location http://cache.ruby-lang.org/pub/ruby/index.txt)"
+      index="$(curl --silent --fail --location https://cache.ruby-lang.org/pub/ruby/index.txt)"
       export url="$(echo "$index" | awk -v v="${version}" '$2 ~ ("/ruby-" v "\\.tar\\.gz$") { print $2 }')"
       export sha256="$(echo "$index" | awk -v v="${version}" '$2 ~ ("/ruby-" v "\\.tar\\.gz$") { print $4 }')"
       export name="ruby-${version}.tar.gz"
