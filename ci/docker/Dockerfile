@@ -1,6 +1,7 @@
 FROM ubuntu
 
 ARG BOSH_CLI_VERSION
+ARG BOSH_CLI_SHA256
 
 ENV DEBIAN_FRONTEND="noninteractive"
 
@@ -18,8 +19,11 @@ RUN apt-get update \
         libssl-dev \
         zlib1g-dev
 
-RUN curl -sL https://github.com/cloudfoundry/bosh-cli/releases/download/v${BOSH_CLI_VERSION}/bosh-cli-${BOSH_CLI_VERSION}-linux-amd64 \
-      > /usr/bin/bosh \
+RUN test -n "${BOSH_CLI_SHA256}" \
+    && curl --fail --silent --show-error --location \
+         "https://github.com/cloudfoundry/bosh-cli/releases/download/v${BOSH_CLI_VERSION}/bosh-cli-${BOSH_CLI_VERSION}-linux-amd64" \
+         --output /usr/bin/bosh \
+    && printf '%s  /usr/bin/bosh\n' "${BOSH_CLI_SHA256}" | sha256sum --check - \
     && chmod +x /usr/bin/bosh
 
 ADD . /tmp/release

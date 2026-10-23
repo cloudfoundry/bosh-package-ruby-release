@@ -21,3 +21,13 @@ rubygems:
 
 libyamls:
 - version: "0.2"
+
+#! Reviewed upstream source digest; unknown libyaml versions fail until reviewed.
+#! https://github.com/yaml/libyaml/releases/tag/0.2.5
+libyaml_checksums:
+  yaml-0.2.5.tar.gz: c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
+
+#! https://github.com/cloudfoundry/bosh-cli/releases/tag/v7.11.2
+bosh_cli:
+  version: "7.11.2"
+  sha256: 839a92403901639e0e1f3130e4138c912bfd217bd1579277048fcd6bf5dee28c

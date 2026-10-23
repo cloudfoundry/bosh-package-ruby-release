@@ -81,3 +81,11 @@ source /var/vcap/packages/<RUBY-PACKAGE-VERSION>/bosh/runtime.env
 source /var/vcap/packages/your-package/bosh/runtime.env
 bundle exec ...
 ```
+
+### Source input review
+
+RubyGems downloads require a valid SHA256 digest from the matching official
+GitHub release asset. A missing digest stops the resource fetch. Libyaml source
+hashes are reviewed in `ci/versions.yml`; add a verified digest before allowing a
+new libyaml version. The CLI version and SHA256 in the same file are updated
+together. Render and validate the pipeline after changing these values.

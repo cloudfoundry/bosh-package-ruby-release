@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:json", "json")
 #@yaml/text-templated-strings
 jobs:
 - name: manually-release
@@ -222,13 +223,6 @@ jobs:
     - get: ubuntu-registry-image
     - get: ruby-release
       trigger: true
-    - get: bosh-cli-github-release
-      trigger: true
-      params:
-        globs:
-          - "no-files-needed"
-  - load_var: bosh_cli_version
-    file: bosh-cli-github-release/version
   - task: build-oci-image
     privileged: true
     config:
@@ -244,7 +238,8 @@ jobs:
       params:
         CONTEXT: ruby-release
         DOCKERFILE: ruby-release/ci/docker/Dockerfile
-        BUILD_ARG_BOSH_CLI_VERSION: "((.:bosh_cli_version))"
+        BUILD_ARG_BOSH_CLI_VERSION: "(@= data.values.bosh_cli.version @)"
+        BUILD_ARG_BOSH_CLI_SHA256: "(@= data.values.bosh_cli.sha256 @)"
       run:
         path: build
   - put: ruby-release-image
@@ -310,8 +305,12 @@ resources:
        | sed  's/^v//' \
        | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
     metalink_get: |
+      set -eu
       export name="rubygems-${version}.tgz"
       export url="https://rubygems.org/rubygems/rubygems-${version}.tgz"
+      release="$(curl --silent --show-error --fail --location --header "Authorization: Bearer ((github_public_repo_token))" "https://api.github.com/repos/rubygems/rubygems/releases/tags/v${version}")"
+      sha256="$(printf '%s' "$release" | jq -er --arg name "$name" '.assets[] | select(.name == $name) | .digest | select(type == "string" and test("^sha256:[0-9a-f]{64}$")) | sub("^sha256:"; "")')"
+      export sha256
       export size=$( curl --silent --head "$url" | grep Content-Length | awk '{ print $2 }' | tr -cd '[:digit:]' )
       jq -n '
       {
@@ -319,6 +318,7 @@ resources:
         {
          "name": env.name,
          "urls": [ { "url": env.url } ],
+         "hashes": [{ "type": "sha-256", "hash": env.sha256 }],
          "size": env.size | tonumber
         }
        ]
@@ -338,8 +338,11 @@ resources:
        | sed  -E 's/^refs\/tags\/(.+)$/\1/'  \
        | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$'
     metalink_get: |
+      set -eu
       export name="yaml-${version}.tar.gz"
       export url="https://github.com/yaml/libyaml/releases/download/${version}/yaml-${version}.tar.gz"
+      sha256="$(printf '%s' '(@= json.encode(data.values.libyaml_checksums) @)' | jq -er --arg name "$name" '.[$name] | select(type == "string" and test("^[0-9a-f]{64}$"))')"
+      export sha256
       export size=$( curl --silent --head --location "$url" | grep -i Content-Length | tail -1 | awk '{ print $2 }' | tr -cd '[:digit:]' )
       jq -n '
       {
@@ -347,6 +350,7 @@ resources:
         {
          "name": env.name,
          "urls": [ { "url": env.url } ],
+         "hashes": [{ "type": "sha-256", "hash": env.sha256 }],
          "size": env.size | tonumber
         }
        ]
@@ -397,13 +401,6 @@ resources:
     tag: latest
     username: ((bosh-dockerhub.username))
     password: ((bosh-dockerhub.password))
-
-- name: bosh-cli-github-release
-  type: github-release
-  source:
-    access_token: ((github_public_repo_token))
-    owner: cloudfoundry
-    repository: bosh-cli
 
 - name: docker-cpi-image
   type: docker-image
