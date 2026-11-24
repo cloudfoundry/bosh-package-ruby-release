@@ -1,0 +1,72 @@
+name: ruby
+version: 0.278.0
+commit_hash: 0c2e6cc
+uncommitted_changes: false
+jobs:
+- name: ruby-3.3-test
+  version: 35a717de3549e56e1c5cc211df5ef73f1a84eb322f9912c87570087334847abe
+  fingerprint: 35a717de3549e56e1c5cc211df5ef73f1a84eb322f9912c87570087334847abe
+  sha1: sha256:6ea0f3fe44dfca6d6734528bc28ccde7063218340b9aaa210052a29364e18672
+  packages:
+  - ruby-3.3
+  - ruby-3.3-test
+- name: ruby-3.4-test
+  version: 8755c13acb949a4980b1f2645f4222f5e727fac7c2100c0f48935282be598289
+  fingerprint: 8755c13acb949a4980b1f2645f4222f5e727fac7c2100c0f48935282be598289
+  sha1: sha256:5bb545b995835a2817a59deefe98edc72519a99fb4c4f86c36356a73e363966a
+  packages:
+  - ruby-3.4
+  - ruby-3.4-test
+- name: ruby-4.0-test
+  version: ed27709f84ebade65f02ef636b92338b88f4d6b522a47fce07038cd470407dab
+  fingerprint: ed27709f84ebade65f02ef636b92338b88f4d6b522a47fce07038cd470407dab
+  sha1: sha256:2ef558fb75350be0a92f23c9bc35b8239242325ed7aac26e88f95036d1c773fa
+  packages:
+  - ruby-4.0
+  - ruby-4.0-test
+packages:
+- name: ruby-3.3
+  version: 75f8571a70b1c4a68e073dda3516a788a6d75ee393787acfeccdc59212aa431c
+  fingerprint: 75f8571a70b1c4a68e073dda3516a788a6d75ee393787acfeccdc59212aa431c
+  sha1: sha256:253afb15103c389fea9acff13e885f0c78ef06d9a06177def1722bab1a457577
+  dependencies:
+  - rust-1-linux
+- name: ruby-3.3-test
+  version: 00303e62bef78fcbc46417f2b9a009d3d465c87b66cc44257f1fcb257bea165b
+  fingerprint: 00303e62bef78fcbc46417f2b9a009d3d465c87b66cc44257f1fcb257bea165b
+  sha1: sha256:37dca45688cf25d3197f44ad41f6b38ceb48a1275345b4c1a3cd636101aae9d6
+  dependencies:
+  - ruby-3.3
+- name: ruby-3.4
+  version: aa60526be3bf3d48c3d002714df1177a0c01d17f8a8b33c32b41446bcf6b0887
+  fingerprint: aa60526be3bf3d48c3d002714df1177a0c01d17f8a8b33c32b41446bcf6b0887
+  sha1: sha256:babda13f4bb0599489774111a08b5d6896e4dcb4f4d388dab8cfff6bc226c889
+  dependencies:
+  - rust-1-linux
+- name: ruby-3.4-test
+  version: 9110f1618f59446dd47831f7a3dd8890c5b17c3e4d9a8fa959d9189eda701c4d
+  fingerprint: 9110f1618f59446dd47831f7a3dd8890c5b17c3e4d9a8fa959d9189eda701c4d
+  sha1: sha256:6ccb73fa5ada963f8f9f18e096665e7807493a2d22f4afa4112b007ae31a94c0
+  dependencies:
+  - ruby-3.4
+- name: ruby-4.0
+  version: 5ddd9bd28f2ae3b3723e7663453a8c3e05733c6ada6bd5b06c5634338ece117f
+  fingerprint: 5ddd9bd28f2ae3b3723e7663453a8c3e05733c6ada6bd5b06c5634338ece117f
+  sha1: sha256:c649bd02391a56da5859490fa45f6b6541ef1cfccbce553c6e330d5c17e72c46
+  dependencies:
+  - rust-1-linux
+- name: ruby-4.0-test
+  version: 113e7f747d7975d91f43b1fd9da40aa75f636cc1796027845c9a8b993e8ddcf6
+  fingerprint: 113e7f747d7975d91f43b1fd9da40aa75f636cc1796027845c9a8b993e8ddcf6
+  sha1: sha256:e004f5befa7d8fc2b3110f5fa759fff69d7597a9d78dc0cfe2ca2768faa4fb20
+  dependencies:
+  - ruby-4.0
+- name: rust-1-linux
+  version: e6f5c8c95778555d9eec96891abaa252d36b5542a943d852d69e17a307ee6993
+  fingerprint: e6f5c8c95778555d9eec96891abaa252d36b5542a943d852d69e17a307ee6993
+  sha1: sha256:7865f2bceef52c633f833879c7194d34f1800330cc12920d4a0dc611521cf5be
+  dependencies: []
+license:
+  version: 850893456ab4b5e6be730bbcf0056892bb753e2cba4fba21e5f64035f3fc53db
+  fingerprint: 850893456ab4b5e6be730bbcf0056892bb753e2cba4fba21e5f64035f3fc53db
+  sha1: sha256:c5afce7fa70f93efb3c1fcfc59cab3d9d260292720fd858fa64685820b9c3526
