@@ -4,7 +4,7 @@ set -e
 
 RUBY_VERSION=4.0.10
 RUBYGEMS_VERSION=4.0.24
-LIBYAML_VERSION=0.2.5
+LIBYAML_VERSION=0.2.7
 
 if [ "$(uname -s)" == "Darwin" ]; then
   if brew --prefix openssl; then
@@ -42,7 +42,7 @@ tar xzf "yaml-${LIBYAML_VERSION}.tar.gz"
   set -e
   cd "yaml-${LIBYAML_VERSION}"
 
-  patch -p1 < ../patches/libyaml-0.2.5.patch
+  patch -p1 < ../patches/libyaml-0.2.7.patch
 
   ./configure --prefix="${BOSH_INSTALL_TARGET}"
   make

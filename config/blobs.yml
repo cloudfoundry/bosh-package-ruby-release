@@ -22,10 +22,6 @@ rubygems-4.0.24.tgz:
   size: 978513
   object_id: 1833043c-73c8-4d10-54b5-e5dafc404603
   sha: sha256:09538daea556c642ea3479bef9a3c5f8b1cfec410b0da8a02351b9c3575f1c6e
-yaml-0.2.5.tar.gz:
-  size: 609454
-  object_id: b5eeae2b-1496-4bc2-556f-efac50c8bcfa
-  sha: sha256:c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
 yaml-0.2.7.tar.gz:
   size: 667781
   object_id: a8194a48-bad5-475a-5b0e-b95df7306fc6

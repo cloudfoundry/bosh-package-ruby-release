@@ -11,5 +11,5 @@ files:
 - ruby-4.0.10.tar.gz
 - rubygems-4.0.24.tgz
 - runtime-4.0.env
-- yaml-0.2.5.tar.gz
-- patches/libyaml-0.2.5.patch
+- yaml-0.2.7.tar.gz
+- patches/libyaml-0.2.7.patch
