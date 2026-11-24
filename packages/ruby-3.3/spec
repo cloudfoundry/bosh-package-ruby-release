@@ -11,5 +11,5 @@ files:
 - ruby-3.3.14.tar.gz
 - rubygems-3.5.23.tgz
 - runtime-3.3.env
-- yaml-0.2.5.tar.gz
-- patches/libyaml-0.2.5.patch
+- yaml-0.2.7.tar.gz
+- patches/libyaml-0.2.7.patch
