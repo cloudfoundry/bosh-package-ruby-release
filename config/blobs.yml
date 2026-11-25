@@ -18,10 +18,10 @@ rubygems-3.6.9.tgz:
   size: 967932
   object_id: 7baea5e3-26bb-4ff9-5fe3-5185b1d9e83b
   sha: sha256:ffdd46c6adbecb9dac561cc003666406efd2ed93ca21b5fcc47062025007209d
-rubygems-4.0.24.tgz:
-  size: 978513
-  object_id: 1833043c-73c8-4d10-54b5-e5dafc404603
-  sha: sha256:09538daea556c642ea3479bef9a3c5f8b1cfec410b0da8a02351b9c3575f1c6e
+rubygems-4.0.25.tgz:
+  size: 978968
+  object_id: 920aa08f-0ac4-4d0a-652f-7299843b569c
+  sha: sha256:ac6483970bbf0cf443315a9f34f4bbafd68efaee42658f0ef7ce4334ae001750
 yaml-0.2.7.tar.gz:
   size: 667781
   object_id: a8194a48-bad5-475a-5b0e-b95df7306fc6
